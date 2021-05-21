@@ -48,23 +48,25 @@ public final class CrosshairRenderManager {
         if (isDotEnabled && this.crosshair.style.get() != CrosshairStyle.DEFAULT)
             this.renderManager.drawCircle(x, y, 0.5F, 1.0F, this.crosshair.dotColour.get());
 
-        this.preRotation(x, y);
+        this.preTransformation(x, y);
 
         style.draw(x, y, computedProperties);
 
-        this.postRotation();
+        this.postTransformation();
     }
 
-    private void preRotation(final int x, final int y) {
+    private void preTransformation(final int x, final int y) {
         int rotation = this.crosshair.rotation.get();
+        int scale = this.crosshair.scale.get();
 
         GL11.glPushMatrix();
         GL11.glTranslatef(x, y, 0);
+        GL11.glScalef(scale / 100.0F, scale / 100.0F, 1.0F);
         GL11.glRotatef(rotation, x, y, 8000);
         GL11.glTranslatef(-x, -y, 0);
     }
 
-    private void postRotation() {
+    private void postTransformation() {
         GL11.glPopMatrix();
     }
 
