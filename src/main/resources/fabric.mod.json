@@ -1,0 +1,35 @@
+{
+    "schemaVersion": 1,
+    "id": "custom-crosshair-mod",
+    "version": "${version}",
+
+    "name": "Custom Crosshair Mod",
+    "description": "A dynamic and customisable crosshair.",
+    "authors": [ "Sparkless101" ],
+    "contact": {
+        "homepage": "https://www.curseforge.com/projects/242995/",
+        "sources": ""
+    },
+
+    "license": "CC0-1.0",
+    "icon": "assets/custom-crosshair-mod/icon.png",
+
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.wjbaker.ccm.CustomCrosshairMod"
+        ]
+    },
+    "mixins": [
+        "custom-crosshair-mod.mixins.json"
+    ],
+
+    "depends": {
+        "fabricloader": ">=0.7.4",
+        "fabric": "*",
+        "minecraft": "1.16.x"
+    },
+    "suggests": {
+        "flamingo": "*"
+    }
+}
