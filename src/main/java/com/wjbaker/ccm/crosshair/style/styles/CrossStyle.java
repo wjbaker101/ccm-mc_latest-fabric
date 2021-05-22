@@ -28,13 +28,14 @@ public final class CrossStyle extends AbstractCrosshairStyle {
 
         if (isOutlineEnabled) {
             RGBA outlineColour = this.crosshair.outlineColour.get();
-            float adjustedWidth = width + 0.5F;
-            float adjustedHeight = height + 0.5F;
+            float adjustedWidth = width + 1.0F;
+            float adjustedHeight = height + 1.0F;
+            float adjustedGap = gap - 0.5F;
 
-            this.renderManager.drawBorderedRectangle(x - thickness, y - gap - adjustedHeight, x + thickness, y - gap, 2.0F, outlineColour, baseColour);
-            this.renderManager.drawBorderedRectangle(x - thickness, y + gap, x + thickness, y + gap + adjustedHeight, 2.0F, outlineColour, baseColour);
-            this.renderManager.drawBorderedRectangle(x - gap - adjustedWidth, y - thickness, x - gap, y + thickness, 2.0F, outlineColour, baseColour);
-            this.renderManager.drawBorderedRectangle(x + gap, y - thickness, x + gap + adjustedWidth, y + thickness, 2.0F, outlineColour, baseColour);
+            this.renderManager.drawBorderedRectangle(x - thickness, y - adjustedGap - adjustedHeight, x + thickness, y - adjustedGap, 2.0F, outlineColour, baseColour);
+            this.renderManager.drawBorderedRectangle(x - thickness, y + adjustedGap, x + thickness, y + adjustedGap + adjustedHeight, 2.0F, outlineColour, baseColour);
+            this.renderManager.drawBorderedRectangle(x - adjustedGap - adjustedWidth, y - thickness, x - adjustedGap, y + thickness, 2.0F, outlineColour, baseColour);
+            this.renderManager.drawBorderedRectangle(x + adjustedGap, y - thickness, x + adjustedGap + adjustedWidth, y + thickness, 2.0F, outlineColour, baseColour);
         }
         else {
             float adjustedThickness = thickness - 0.5F;
