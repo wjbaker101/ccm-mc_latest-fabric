@@ -47,7 +47,7 @@ public final class ShapeSettingsGuiPanel extends PanelGuiComponent {
         rotationSlider.bind(crosshair.rotation);
 
         IntegerSliderGuiComponent scaleSlider = new IntegerSliderGuiComponent(
-            this.parentGuiScreen, -1, -1, 250, "Scale", 25, 500, crosshair.scale.get());
+            this.parentGuiScreen, -1, -1, 250, "Scale (%)", 25, 500, crosshair.scale.get());
         scaleSlider.bind(crosshair.scale);
 
         this.addComponent(heading);
