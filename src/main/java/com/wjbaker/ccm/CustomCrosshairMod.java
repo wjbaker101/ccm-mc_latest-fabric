@@ -102,7 +102,7 @@ public final class CustomCrosshairMod implements ModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(e -> {
             if (this.mc.currentScreen == null && editCrosshair.isPressed())
-                this.mc.openScreen(new EditCrosshairGuiScreen());
+                this.mc.openScreen(new EditCrosshairGuiScreen(this.properties.getCrosshair()));
         });
     }
 

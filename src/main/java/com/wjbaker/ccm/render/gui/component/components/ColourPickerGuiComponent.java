@@ -1,5 +1,6 @@
 package com.wjbaker.ccm.render.gui.component.components;
 
+import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.property.RGBAProperty;
 import com.wjbaker.ccm.render.ModTheme;
 import com.wjbaker.ccm.render.gui.component.GuiComponent;
@@ -13,17 +14,20 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
     private final int labelSpacing;
     private final int boxSize;
     private final String label;
+    private final CustomCrosshair crosshair;
 
     private RGBAProperty colour;
     private boolean isMouseOverBox;
 
     public ColourPickerGuiComponent(
         final GuiScreen parentGuiScreen,
+        final CustomCrosshair crosshair,
         final int x,
         final int y,
         final String label) {
 
         super(parentGuiScreen, x, y, -1, 25);
+        this.crosshair = crosshair;
 
         this.labelSpacing = 3;
         this.boxSize = 25;
@@ -83,7 +87,7 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
         if (!this.isMouseDownInside)
             return;
 
-        MinecraftClient.getInstance().openScreen(new EditColourGuiScreen(this.colour));
+        MinecraftClient.getInstance().openScreen(new EditColourGuiScreen(this.crosshair, this.colour));
 
         this.isMouseDownInside = false;
     }

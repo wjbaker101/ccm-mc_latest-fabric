@@ -1,6 +1,5 @@
 package com.wjbaker.ccm.render.gui.screen.screens.editCrosshair.components;
 
-import com.wjbaker.ccm.CustomCrosshairMod;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.render.gui.component.components.CheckBoxGuiComponent;
 import com.wjbaker.ccm.render.gui.component.components.ColourPickerGuiComponent;
@@ -12,14 +11,13 @@ public final class DotSettingsGuiPanel extends PanelGuiComponent {
 
     public DotSettingsGuiPanel(
         final GuiScreen parentGuiScreen,
+        final CustomCrosshair crosshair,
         final int x,
         final int y,
         final int width,
         final int height) {
 
         super(parentGuiScreen, x, y, width, height);
-
-        CustomCrosshair crosshair = CustomCrosshairMod.INSTANCE.properties().getCrosshair();
 
         HeadingGuiComponent heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Dot Settings");
 
@@ -28,7 +26,7 @@ public final class DotSettingsGuiPanel extends PanelGuiComponent {
         isDotEnabledCheckBox.bind(crosshair.isDotEnabled);
 
         ColourPickerGuiComponent dotColourColourPicker = new ColourPickerGuiComponent(
-            this.parentGuiScreen, -1, -1, "Dot Colour");
+            this.parentGuiScreen, crosshair, -1, -1, "Dot Colour");
         dotColourColourPicker.bind(crosshair.dotColour);
 
         this.addComponent(heading);
