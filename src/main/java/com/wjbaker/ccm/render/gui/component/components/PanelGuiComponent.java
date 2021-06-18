@@ -5,6 +5,7 @@ import com.wjbaker.ccm.render.gui.component.GuiComponent;
 import com.wjbaker.ccm.render.gui.component.type.PanelOrientation;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
 import com.wjbaker.ccm.render.type.GuiBounds;
+import net.minecraft.client.util.math.MatrixStack;
 
 import java.util.ArrayList;
 
@@ -63,8 +64,9 @@ public class PanelGuiComponent extends GuiComponent {
     }
 
     @Override
-    public void draw() {
+    public void draw(final MatrixStack matrixStack) {
         this.renderManager.drawBorderedRectangle(
+            matrixStack,
             this.x, this.y,
             this.x + this.width, this.y + this.height,
             2.0F,
@@ -77,13 +79,13 @@ public class PanelGuiComponent extends GuiComponent {
                 () -> this.components
                     .stream()
                     .filter(x -> !this.isComponentOutside(x))
-                    .forEach(GuiComponent::draw));
+                    .forEach(x -> x.draw(matrixStack)));
         }
         else {
             this.components
                 .stream()
                 .filter(x -> !this.isComponentOutside(x))
-                .forEach(GuiComponent::draw);
+                .forEach(x -> x.draw(matrixStack));
         }
     }
 

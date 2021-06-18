@@ -5,6 +5,7 @@ import com.wjbaker.ccm.render.gui.component.event.IGuiComponentEvent;
 import com.wjbaker.ccm.render.gui.component.event.IOnValueChangedEvent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
 import com.wjbaker.ccm.type.RGBA;
+import net.minecraft.client.util.math.MatrixStack;
 
 public abstract class SliderGuiComponent extends GuiComponent {
 
@@ -52,14 +53,15 @@ public abstract class SliderGuiComponent extends GuiComponent {
     }
 
     @Override
-    public void draw() {
-        super.draw();
+    public void draw(final MatrixStack matrixStack) {
+        super.draw(matrixStack);
 
-        this.renderManager.drawText(this.label, this.x, this.y, this.currentTextColour, false);
+        this.renderManager.drawText(matrixStack, this.label, this.x, this.y, this.currentTextColour, false);
 
         int posY = this.y + 8 + this.titleSpacing;
 
         this.renderManager.drawBorderedRectangle(
+            matrixStack,
             this.x, posY + (this.thumbSize / 2.0F) - 2,
             this.x + this.width, posY + (this.thumbSize / 2.0F) - 1 + 3,
             2.0F,
@@ -67,13 +69,14 @@ public abstract class SliderGuiComponent extends GuiComponent {
             this.baseBackgroundColour);
 
         this.renderManager.drawBorderedRectangle(
+            matrixStack,
             this.x + this.thumbPosition, posY,
             this.x + this.thumbPosition + this.thumbSize, posY + this.thumbSize,
             2.0F,
             this.currentBorderColour,
             this.currentThumbColour);
 
-        this.drawLabel();
+        this.drawLabel(matrixStack);
     }
 
     @Override
@@ -132,7 +135,7 @@ public abstract class SliderGuiComponent extends GuiComponent {
     }
 
     protected abstract void calculateValue();
-    protected abstract void drawLabel();
+    protected abstract void drawLabel(final MatrixStack matrixStack);
 
     public void setBaseThumbColour(final RGBA baseThumbColour) {
         this.baseThumbColour = baseThumbColour;

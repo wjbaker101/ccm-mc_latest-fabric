@@ -6,7 +6,7 @@ import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.type.RGBA;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.options.Perspective;
+import net.minecraft.client.option.Perspective;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.mob.Monster;

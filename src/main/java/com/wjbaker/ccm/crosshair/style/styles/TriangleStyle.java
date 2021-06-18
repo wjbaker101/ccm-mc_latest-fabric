@@ -4,11 +4,12 @@ import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.ComputedProperties;
 import com.wjbaker.ccm.crosshair.style.AbstractCrosshairStyle;
 import com.wjbaker.ccm.type.RGBA;
+import net.minecraft.client.util.math.MatrixStack;
 
 public final class TriangleStyle extends AbstractCrosshairStyle {
 
-    public TriangleStyle(final CustomCrosshair crosshair) {
-        super(crosshair);
+    public TriangleStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
+        super(matrixStack, crosshair);
     }
 
     @Override
@@ -23,7 +24,7 @@ public final class TriangleStyle extends AbstractCrosshairStyle {
             RGBA outlineColour = this.crosshair.outlineColour.get();
 
             // Outer
-            this.renderManager.drawLines(new float[] {
+            this.renderManager.drawLines(this.matrixStack, new float[] {
                 x, y - (height / 2.0F) - gap - 0.5F,
                 x + width / 2.0F + gap + 1.0F, y + (height / 2.0F) + gap + 0.5F,
                 x + width / 2.0F + gap + 1.0F, y + (height / 2.0F) + gap + 0.5F,
@@ -33,7 +34,7 @@ public final class TriangleStyle extends AbstractCrosshairStyle {
             }, 2.0F, outlineColour);
 
             // Inner
-            this.renderManager.drawLines(new float[] {
+            this.renderManager.drawLines(this.matrixStack, new float[] {
                 x, y - (height / 2.0F) - gap + 0.5F,
                 x + width / 2.0F + gap - 1.0F, y + (height / 2.0F) + gap - 0.5F,
                 x + width / 2.0F + gap - 1.0F, y + (height / 2.0F) + gap - 0.5F,
@@ -43,7 +44,7 @@ public final class TriangleStyle extends AbstractCrosshairStyle {
             }, 2.0F, outlineColour);
         }
 
-        this.renderManager.drawLines(new float[] {
+        this.renderManager.drawLines(this.matrixStack, new float[] {
             x, y - (height / 2.0F) - gap,
             x + width / 2.0F + gap, y + (height / 2.0F) + gap,
             x + width / 2.0F + gap, y + (height / 2.0F) + gap,

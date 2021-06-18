@@ -1,6 +1,7 @@
 package com.wjbaker.ccm.render.gui.component;
 
 import com.wjbaker.ccm.render.gui.event.IMouseEvents;
+import net.minecraft.client.util.math.MatrixStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +10,8 @@ public abstract class GuiComponentWithComponents extends GuiComponentTheme imple
 
     protected List<GuiComponent> components = new ArrayList<>();
 
-    public void draw() {
-        this.components.forEach(GuiComponent::draw);
+    public void draw(final MatrixStack matrixStack) {
+        this.components.forEach(x -> x.draw(matrixStack));
     }
 
     @Override

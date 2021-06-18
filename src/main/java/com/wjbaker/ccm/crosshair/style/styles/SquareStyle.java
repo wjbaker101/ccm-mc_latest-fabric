@@ -4,11 +4,12 @@ import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.ComputedProperties;
 import com.wjbaker.ccm.crosshair.style.AbstractCrosshairStyle;
 import com.wjbaker.ccm.type.RGBA;
+import net.minecraft.client.util.math.MatrixStack;
 
 public final class SquareStyle extends AbstractCrosshairStyle {
 
-    public SquareStyle(final CustomCrosshair crosshair) {
-        super(crosshair);
+    public SquareStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
+        super(matrixStack, crosshair);
     }
 
     @Override
@@ -25,6 +26,7 @@ public final class SquareStyle extends AbstractCrosshairStyle {
 
             // Inner
             this.renderManager.drawRectangle(
+                this.matrixStack,
                 x - width - gap + 0.5F, y - height - gap + 0.5F,
                 x + width + gap - 0.5F, y + height + gap - 0.5F,
                 2.0F,
@@ -32,6 +34,7 @@ public final class SquareStyle extends AbstractCrosshairStyle {
 
             // Outer
             this.renderManager.drawRectangle(
+                this.matrixStack,
                 x - width - thickness - gap - 0.5F, y - height - thickness - gap - 0.5F,
                 x + width + thickness + gap + 0.5F, y + height + thickness + gap + 0.5F,
                 2.0F,
@@ -40,24 +43,28 @@ public final class SquareStyle extends AbstractCrosshairStyle {
 
         // Top
         this.renderManager.drawFilledRectangle(
+            this.matrixStack,
             x - width - thickness - gap, y - height - thickness - gap,
             x + width + thickness + gap, y - height - gap,
             colour);
 
         // Bottom
         this.renderManager.drawFilledRectangle(
+            this.matrixStack,
             x - width - thickness - gap, y + height + gap,
             x + width + thickness + gap, y + height + thickness + gap,
             colour);
 
         // Left
         this.renderManager.drawFilledRectangle(
+            this.matrixStack,
             x - width - thickness - gap, y - gap - height,
             x - width - gap, y + gap + height,
             colour);
 
         // Right
         this.renderManager.drawFilledRectangle(
+            this.matrixStack,
             x + width + gap, y - gap - height,
             x + width + thickness + gap, y + gap + height,
             colour);

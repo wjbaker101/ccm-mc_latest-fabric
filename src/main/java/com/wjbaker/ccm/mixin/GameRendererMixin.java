@@ -1,9 +1,13 @@
 package com.wjbaker.ccm.mixin;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.CustomCrosshairMod;
 import com.wjbaker.ccm.crosshair.render.CrosshairRenderManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.util.Window;
+import net.minecraft.client.util.math.MatrixStack;
+import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -26,12 +30,10 @@ public class GameRendererMixin {
         if (!CustomCrosshairMod.INSTANCE.properties().getIsModEnabled().get())
             return;
 
-        int width = MinecraftClient.getInstance().getWindow().getScaledWidth();
-        int height = MinecraftClient.getInstance().getWindow().getScaledHeight();
+        Window window = MinecraftClient.getInstance().getWindow();
+        int x = window.getScaledWidth() / 2;
+        int y = window.getScaledHeight() / 2;
 
-        int x = Math.round(width / 2.0F);
-        int y = Math.round(height / 2.0F);
-
-        this.crosshairRenderManager.draw(x, y);
+        this.crosshairRenderManager.draw(new MatrixStack(), x, y);
     }
 }

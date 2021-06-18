@@ -23,9 +23,9 @@ public abstract class GuiScreenAdapter extends Screen implements IGuiScreen {
     }
 
     @Override
-    public void render(final MatrixStack matrices, final int mouseX, final int mouseY, final float delta) {
-        this.draw();
-        super.render(matrices, mouseX, mouseY, delta);
+    public void render(final MatrixStack matrixStack, final int mouseX, final int mouseY, final float delta) {
+        this.draw(matrixStack);
+        super.render(matrixStack, mouseX, mouseY, delta);
     }
 
     @Override

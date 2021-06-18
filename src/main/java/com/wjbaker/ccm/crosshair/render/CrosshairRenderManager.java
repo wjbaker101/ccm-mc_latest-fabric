@@ -1,6 +1,7 @@
 package com.wjbaker.ccm.crosshair.render;
 
 import com.google.common.collect.ImmutableSet;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.style.CrosshairStyle;
 import com.wjbaker.ccm.crosshair.style.CrosshairStyleFactory;
@@ -9,9 +10,13 @@ import com.wjbaker.ccm.render.RenderManager;
 import com.wjbaker.ccm.type.RGBA;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.util.math.Vector3d;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import org.lwjgl.opengl.GL11;
+import net.minecraft.util.math.Quaternion;
+import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.Vector4f;
 
 import java.util.Set;
 
@@ -32,45 +37,48 @@ public final class CrosshairRenderManager {
         this.crosshairStyleFactory = new CrosshairStyleFactory();
     }
 
-    public void draw(final int x, final int y) {
+    public void draw(final MatrixStack matrixStack, final int x, final int y) {
         ComputedProperties computedProperties = new ComputedProperties(this.crosshair);
 
         if (!computedProperties.isVisible())
             return;
 
-        ICrosshairStyle style = this.crosshairStyleFactory.from(this.crosshair.style.get(), this.crosshair);
+        ICrosshairStyle style = this.crosshairStyleFactory.from(matrixStack, this.crosshair.style.get(), this.crosshair);
         boolean isItemCooldownEnabled = this.crosshair.isItemCooldownEnabled.get();
         boolean isDotEnabled = this.crosshair.isDotEnabled.get();
 
         if (isItemCooldownEnabled)
-            this.drawItemCooldownIndicator(computedProperties, x, y);
+            this.drawItemCooldownIndicator(matrixStack, computedProperties, x, y);
 
         if (isDotEnabled && this.crosshair.style.get() != CrosshairStyle.DEFAULT)
-            this.renderManager.drawCircle(x, y, 0.5F, 1.0F, this.crosshair.dotColour.get());
+            this.renderManager.drawCircle(matrixStack, x, y, 0.5F, 1.0F, this.crosshair.dotColour.get());
 
-        this.preTransformation(x, y);
+        this.preTransformation(matrixStack, x, y);
 
-        style.draw(x, y, computedProperties);
+        style.draw(0, 0, computedProperties);
 
-        this.postTransformation();
+        this.postTransformation(matrixStack);
     }
 
-    private void preTransformation(final int x, final int y) {
+    private void preTransformation(final MatrixStack matrixStack, final int x, final int y) {
         int rotation = this.crosshair.rotation.get();
         int scale = this.crosshair.scale.get();
+        float windowScaling = (float)MinecraftClient.getInstance().getWindow().getScaleFactor() / 2.0F;
 
-        GL11.glPushMatrix();
-        GL11.glTranslatef(x, y, 0);
-        GL11.glScalef(scale / 100.0F, scale / 100.0F, 1.0F);
-        GL11.glRotatef(rotation, x, y, 8000);
-        GL11.glTranslatef(-x, -y, 0);
+        matrixStack.push();
+        matrixStack.translate(x, y, 0.0D);
+        matrixStack.scale(scale / 100.0F / windowScaling, scale / 100.0F / windowScaling, 1.0F);
+        matrixStack.multiply(new Quaternion(Vec3f.POSITIVE_Z, rotation, true));
+
+        RenderSystem.applyModelViewMatrix();
     }
 
-    private void postTransformation() {
-        GL11.glPopMatrix();
+    private void postTransformation(final MatrixStack matrixStack) {
+        matrixStack.pop();
     }
 
     private void drawItemCooldownIndicator(
+        final MatrixStack matrixStack,
         final ComputedProperties computedProperties,
         final int x, final int y) {
 
@@ -95,6 +103,7 @@ public final class CrosshairRenderManager {
             int progress = Math.round(360 - (360 * cooldown));
 
             this.renderManager.drawPartialCircle(
+                matrixStack,
                 x, y,
                 computedProperties.gap() + maxSize + offset,
                 0,

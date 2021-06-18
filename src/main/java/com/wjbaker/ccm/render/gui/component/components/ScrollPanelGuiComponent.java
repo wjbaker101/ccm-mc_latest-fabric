@@ -4,6 +4,7 @@ import com.wjbaker.ccm.render.ModTheme;
 import com.wjbaker.ccm.render.gui.component.GuiComponent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
 import com.wjbaker.ccm.render.type.GuiBounds;
+import net.minecraft.client.util.math.MatrixStack;
 
 public final class ScrollPanelGuiComponent extends PanelGuiComponent {
 
@@ -43,13 +44,14 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
     }
 
     @Override
-    public void draw() {
-        super.draw();
+    public void draw(final MatrixStack matrixStack) {
+        super.draw(matrixStack);
 
         if (this.contentHeight < this.height)
             return;
 
         this.renderManager.drawBorderedRectangle(
+            matrixStack,
             this.x + this.width - this.scrollBarWidth, this.y + 1,
             this.x + this.width, this.y + this.height - 1,
             2.0F,
@@ -57,6 +59,7 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
             this.currentBackgroundColour);
 
         this.renderManager.drawBorderedRectangle(
+            matrixStack,
             this.x + this.width - this.scrollBarWidth, this.y + 1 + this.scrollBarPosition,
             this.x + this.width, this.y + this.scrollBarPosition + this.scrollBarSize,
             2.0F,
@@ -65,14 +68,14 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
 
         float thumbCentreX = this.x + this.width - (this.scrollBarWidth / 2.0F);
 
-        this.renderManager.drawLines(new float[] {
+        this.renderManager.drawLines(matrixStack, new float[] {
             thumbCentreX - 2, this.y + this.scrollBarPosition + 6,
             thumbCentreX, this.y + this.scrollBarPosition + 4,
             thumbCentreX, this.y + this.scrollBarPosition + 4,
             thumbCentreX + 2, this.y + this.scrollBarPosition + 6
         }, 2.0F, ModTheme.WHITE);
 
-        this.renderManager.drawLines(new float[] {
+        this.renderManager.drawLines(matrixStack, new float[] {
             thumbCentreX - 2, this.y + this.scrollBarPosition + this.scrollBarSize - 5,
             thumbCentreX, this.y + this.scrollBarPosition + this.scrollBarSize - 3,
             thumbCentreX, this.y + this.scrollBarPosition + this.scrollBarSize - 3,

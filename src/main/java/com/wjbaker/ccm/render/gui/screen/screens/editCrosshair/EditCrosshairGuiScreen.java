@@ -5,6 +5,7 @@ import com.wjbaker.ccm.render.gui.component.components.ScrollPanelGuiComponent;
 import com.wjbaker.ccm.render.gui.component.custom.CrosshairPreviewGuiComponent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
 import com.wjbaker.ccm.render.gui.screen.screens.editCrosshair.components.*;
+import net.minecraft.client.util.math.MatrixStack;
 
 public final class EditCrosshairGuiScreen extends GuiScreen {
 
@@ -66,9 +67,9 @@ public final class EditCrosshairGuiScreen extends GuiScreen {
     }
 
     @Override
-    public void draw() {
-        super.draw();
+    public void draw(final MatrixStack matrixStack) {
+        super.draw(matrixStack);
 
-        this.crosshairPreviewPanel.draw();
+        this.crosshairPreviewPanel.draw(matrixStack);
     }
 }

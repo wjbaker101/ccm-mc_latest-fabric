@@ -4,11 +4,12 @@ import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.ComputedProperties;
 import com.wjbaker.ccm.crosshair.style.AbstractCrosshairStyle;
 import com.wjbaker.ccm.type.RGBA;
+import net.minecraft.client.util.math.MatrixStack;
 
 public final class ArrowStyle extends AbstractCrosshairStyle {
 
-    public ArrowStyle(final CustomCrosshair crosshair) {
-        super(crosshair);
+    public ArrowStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
+        super(matrixStack, crosshair);
     }
 
     @Override
@@ -21,15 +22,15 @@ public final class ArrowStyle extends AbstractCrosshairStyle {
         if (isOutlineEnabled) {
             RGBA outlineColour = this.crosshair.outlineColour.get();
 
-            this.renderManager.drawLines(new float[] {
+            this.renderManager.drawLines(this.matrixStack, new float[] {
                 x - width - 1, y + height + 1, x, y,
                 x, y, x + width + 1, y + height + 1
             }, thickness + 3, outlineColour);
 
-            this.renderManager.drawCircle(x, y, thickness == 1 ? 0.5F : thickness / 5.0F, 1.0F, outlineColour);
+            this.renderManager.drawCircle(this.matrixStack, x, y, thickness == 1 ? 0.5F : thickness / 5.0F, 1.0F, outlineColour);
         }
 
-        this.renderManager.drawLines(new float[] {
+        this.renderManager.drawLines(this.matrixStack, new float[] {
             x - width, y + height, x, y,
             x, y, x + width, y + height
         }, thickness, computedProperties.colour());
