@@ -8,6 +8,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.Perspective;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -135,8 +137,16 @@ public final class ComputedProperties {
 
             return baseGap + Math.round((usageItemDuration - progress) * gapModifier);
         }
-        else if (isDynamicAttackIndicatorEnabled &&
-            this.attackableItems.contains(this.mc.player.getMainHandStack().getItem())) {
+        else if (isDynamicAttackIndicatorEnabled) {
+            var hasAttackSpeedModifier = this.mc.player.getMainHandStack()
+                .getItem()
+                .getAttributeModifiers(EquipmentSlot.MAINHAND)
+                .entries()
+                .stream()
+                .anyMatch(x -> x.getKey().equals(EntityAttributes.GENERIC_ATTACK_SPEED));
+
+            if (!hasAttackSpeedModifier)
+                return baseGap;
 
             float currentAttackUsage = this.mc.player.getAttackCooldownProgress(1.0F);
             float maxAttackUsage = 1.0F;
