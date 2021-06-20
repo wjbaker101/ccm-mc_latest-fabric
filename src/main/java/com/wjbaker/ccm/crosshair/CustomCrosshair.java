@@ -26,6 +26,7 @@ public final class CustomCrosshair {
     public final BooleanProperty isVisibleSpectator;
     public final BooleanProperty isVisibleHoldingRangedWeapon;
     public final BooleanProperty isVisibleHoldingThrowableItem;
+    public final BooleanProperty isVisibleUsingSpyglass;
 
     public final BooleanProperty isOutlineEnabled;
     public final RGBAProperty outlineColour;
@@ -71,6 +72,7 @@ public final class CustomCrosshair {
             this.isVisibleSpectator = new BooleanProperty("visible_spectator", true),
             this.isVisibleHoldingRangedWeapon = new BooleanProperty("visible_holding_ranged_weapon", true),
             this.isVisibleHoldingThrowableItem = new BooleanProperty("visible_holding_throwable_item", true),
+            this.isVisibleUsingSpyglass = new BooleanProperty("visible_holding_spyglass", false),
 
             this.isOutlineEnabled = new BooleanProperty("outline_enabled", true),
             this.outlineColour = new RGBAProperty("outline_colour", ModTheme.BLACK),

@@ -40,13 +40,17 @@ public final class VisibilitySettingsGuiPanel extends PanelGuiComponent {
             this.parentGuiScreen, -1, -1, "Visible in Spectator Mode", crosshair.isVisibleSpectator.get());
         isVisibleSpectatorCheckBox.bind(crosshair.isVisibleSpectator);
 
-        CheckBoxGuiComponent isVisibleHoldingRangedWeapon = new CheckBoxGuiComponent(
+        CheckBoxGuiComponent isVisibleHoldingRangedWeaponCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Visible Holding Ranged Weapon", crosshair.isVisibleHoldingRangedWeapon.get());
-        isVisibleHoldingRangedWeapon.bind(crosshair.isVisibleHoldingRangedWeapon);
+        isVisibleHoldingRangedWeaponCheckBox.bind(crosshair.isVisibleHoldingRangedWeapon);
 
-        CheckBoxGuiComponent isVisibleHoldingThrowableItem = new CheckBoxGuiComponent(
+        CheckBoxGuiComponent isVisibleHoldingThrowableItemCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Visible Holding Throwable Item", crosshair.isVisibleHoldingThrowableItem.get());
-        isVisibleHoldingThrowableItem.bind(crosshair.isVisibleHoldingThrowableItem);
+        isVisibleHoldingThrowableItemCheckBox.bind(crosshair.isVisibleHoldingThrowableItem);
+
+        CheckBoxGuiComponent isVisibleUsingSpyglassCheckBox = new CheckBoxGuiComponent(
+            this.parentGuiScreen, -1, -1, "Visible Using Spyglass", crosshair.isVisibleUsingSpyglass.get());
+        isVisibleUsingSpyglassCheckBox.bind(crosshair.isVisibleUsingSpyglass);
 
         this.addComponent(heading);
         this.addComponent(isVisibleDefaultCheckBox);
@@ -54,8 +58,9 @@ public final class VisibilitySettingsGuiPanel extends PanelGuiComponent {
         this.addComponent(isVisibleDebugCheckBox);
         this.addComponent(isVisibleThirdPersonCheckBox);
         this.addComponent(isVisibleSpectatorCheckBox);
-        this.addComponent(isVisibleHoldingRangedWeapon);
-        this.addComponent(isVisibleHoldingThrowableItem);
+        this.addComponent(isVisibleHoldingRangedWeaponCheckBox);
+        this.addComponent(isVisibleHoldingThrowableItemCheckBox);
+        this.addComponent(isVisibleUsingSpyglassCheckBox);
         this.pack();
     }
 }

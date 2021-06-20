@@ -220,6 +220,9 @@ public final class ComputedProperties {
         if (!this.crosshair.isVisibleHoldingThrowableItem.get() && this.isHoldingItem(this.mc.player, this.throwableItems))
             return false;
 
+        if (!this.crosshair.isVisibleUsingSpyglass.get() && this.mc.player.isUsingSpyglass())
+            return false;
+
         return true;
     }
 
