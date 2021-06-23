@@ -123,19 +123,16 @@ public final class ComputedProperties {
         Entity target = this.mc.targetedEntity;
 
         boolean isHighlightPlayersEnabled = this.crosshair.isHighlightPlayersEnabled.get();
-        if (isHighlightPlayersEnabled && target instanceof PlayerEntity) {
+        if (isHighlightPlayersEnabled && target instanceof PlayerEntity)
             return this.crosshair.highlightPlayersColour.get();
-        }
 
         boolean isHighlightHostilesEnabled = this.crosshair.isHighlightHostilesEnabled.get();
-        if (isHighlightHostilesEnabled && (target instanceof Monster || target instanceof Angerable)) {
+        if (isHighlightHostilesEnabled && (target instanceof Monster || target instanceof Angerable))
             return this.crosshair.highlightHostilesColour.get();
-        }
 
         boolean isHighlightPassivesEnabled = this.crosshair.isHighlightPassivesEnabled.get();
-        if (isHighlightPassivesEnabled && target instanceof PassiveEntity) {
+        if (isHighlightPassivesEnabled && target instanceof PassiveEntity)
             return this.crosshair.highlightPassivesColour.get();
-        }
 
         if (this.crosshair.isRainbowEnabled.get())
             return this.getRainbowColour();
@@ -175,7 +172,7 @@ public final class ComputedProperties {
             return false;
 
         Perspective pov = this.mc.options.getPerspective();
-        boolean isThirdPerson = pov == Perspective.THIRD_PERSON_BACK || pov == Perspective.THIRD_PERSON_FRONT;
+        boolean isThirdPerson = (pov == Perspective.THIRD_PERSON_BACK || pov == Perspective.THIRD_PERSON_FRONT);
         if (!this.crosshair.isVisibleThirdPerson.get() && isThirdPerson)
             return false;
 
