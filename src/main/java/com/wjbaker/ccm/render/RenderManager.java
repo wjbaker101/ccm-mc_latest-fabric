@@ -6,7 +6,6 @@ import com.wjbaker.ccm.render.type.IDrawInsideWindowCallback;
 import com.wjbaker.ccm.type.RGBA;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
-import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.opengl.GL11;
 
@@ -34,7 +33,7 @@ public final class RenderManager {
     }
 
     public void drawLines(final MatrixStack matrixStack, float[] points, final float thickness, final RGBA colour) {
-        BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+        var bufferBuilder = Tessellator.getInstance().getBuffer();
         bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
 
         this.preRender(matrixStack);
@@ -57,7 +56,7 @@ public final class RenderManager {
     public void drawFilledShape(final MatrixStack matrixStack, final float[] points, final RGBA colour) {
         this.setGlProperty(GL11.GL_LINE_SMOOTH, false);
 
-        BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+        var bufferBuilder = Tessellator.getInstance().getBuffer();
         bufferBuilder.begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
 
         this.preRender(matrixStack);
@@ -140,20 +139,20 @@ public final class RenderManager {
 
         this.setGlProperty(GL11.GL_LINE_SMOOTH, true);
 
-        int startAngle = Math.max(0, Math.min(startAngleAt, endAngleAt));
-        int endAngle = Math.min(360, Math.max(startAngleAt, endAngleAt));
+        var startAngle = Math.max(0, Math.min(startAngleAt, endAngleAt));
+        var endAngle = Math.min(360, Math.max(startAngleAt, endAngleAt));
 
         RenderSystem.lineWidth(thickness);
 
-        float ratio = (float)Math.PI / 180.F;
+        var ratio = (float)Math.PI / 180.F;
 
-        BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+        var bufferBuilder = Tessellator.getInstance().getBuffer();
         bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
 
         this.preRender(matrixStack);
 
         for (int i = startAngle; i <= endAngle; ++i) {
-            float radians = (i - 90) * ratio;
+            var radians = (i - 90) * ratio;
 
             bufferBuilder
                 .vertex(matrixStack.peek().getModel(), x + (float)Math.cos(radians) * radius, y + (float)Math.sin(radians) * radius, 0.0F)
@@ -184,9 +183,8 @@ public final class RenderManager {
         final float radius,
         final RGBA colour) {
 
-        float[] points = new float[361 * 2];
-
-        float ratio = (float)Math.PI / 180.F;
+        var points = new float[361 * 2];
+        var ratio = (float)Math.PI / 180.F;
 
         for (int i = 0; i <= 360; ++i) {
             float radians = (i - 90) * ratio;
@@ -207,15 +205,15 @@ public final class RenderManager {
 
         this.setGlProperty(GL11.GL_LINE_SMOOTH, true);
 
-        float ratio = (float)Math.PI / 180.F;
+        var ratio = (float)Math.PI / 180.F;
 
-        BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+        var bufferBuilder = Tessellator.getInstance().getBuffer();
         bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
 
         this.preRender(matrixStack);
 
         for (int i = 0; i <= 360; ++i) {
-            float radians = (i - 90) * ratio;
+            var radians = (i - 90) * ratio;
 
             bufferBuilder
                 .vertex(matrixStack.peek().getModel(), x + (float)Math.cos(radians) * innerRadius, y + (float)Math.sin(radians) * innerRadius, 0.0F)
@@ -237,7 +235,7 @@ public final class RenderManager {
     }
 
     public void drawText(final MatrixStack matrixStack, final String text, final int x, final int y, final RGBA colour, final boolean hasShadow) {
-        int colourAsInt = this.rgbaAsInt(colour);
+        var colourAsInt = this.rgbaAsInt(colour);
 
         if (hasShadow)
             MinecraftClient.getInstance().textRenderer.drawWithShadow(matrixStack, text, x, y, colourAsInt);
@@ -274,8 +272,8 @@ public final class RenderManager {
     public void drawInsideBounds(final GuiBounds bounds, final IDrawInsideWindowCallback callback) {
         this.setGlProperty(GL11.GL_SCISSOR_TEST, true);
 
-        Window window = MinecraftClient.getInstance().getWindow();
-        double scale = window.getScaleFactor();
+        var window = MinecraftClient.getInstance().getWindow();
+        var scale = window.getScaleFactor();
 
         GL11.glScissor(
             (int)Math.round(bounds.x() * scale),

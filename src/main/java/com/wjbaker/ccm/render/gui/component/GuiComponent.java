@@ -1,11 +1,9 @@
 package com.wjbaker.ccm.render.gui.component;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.render.RenderManager;
 import com.wjbaker.ccm.render.gui.component.event.IGuiComponentEvent;
 import com.wjbaker.ccm.render.gui.event.IMouseEvents;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
-import net.minecraft.client.util.math.MatrixStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,7 +68,7 @@ public abstract class GuiComponent extends GuiComponentWithComponents implements
     public void onMouseMove(final int mouseX, final int mouseY) {
         super.onMouseMove(mouseX, mouseY);
 
-        boolean prevIsMouseOver = this.isMouseOver;
+        var prevIsMouseOver = this.isMouseOver;
         this.isMouseOver = this.isInsideComponent(mouseX, mouseY);
 
         if (this.isMouseOver == prevIsMouseOver)

@@ -18,16 +18,16 @@ public final class DynamicSettingsGuiPanel extends PanelGuiComponent {
 
         super(parentGuiScreen, x, y, width, height);
 
-        HeadingGuiComponent heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Dynamic Crosshair Settings");
+        var heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Dynamic Crosshair Settings");
 
-        CheckBoxGuiComponent isDynamicAttackIndicatorEnabledCheckBox = new CheckBoxGuiComponent(
+        var isDynamicAttackIndicatorEnabledCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen,
             -1, -1,
             "Enable Dynamic Attack Indicator",
             crosshair.isDynamicAttackIndicatorEnabled.get());
         isDynamicAttackIndicatorEnabledCheckBox.bind(crosshair.isDynamicAttackIndicatorEnabled);
 
-        CheckBoxGuiComponent isDynamicBowEnabledCheckBox = new CheckBoxGuiComponent(
+        var isDynamicBowEnabledCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen,
             -1, -1,
             "Enable Dynamic Pull Progress",

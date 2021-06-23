@@ -18,15 +18,15 @@ public final class EditCrosshairGuiScreen extends GuiScreen {
 
         this.panelWidth = 300;
 
-        GeneralSettingsGuiPanel generalSettingsPanel = new GeneralSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
-        ShapeSettingsGuiPanel shapeSettingsPanel = new ShapeSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
-        VisibilitySettingsGuiPanel visibilitySettingsPanel = new VisibilitySettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
-        OutlineSettingsGuiPanel outlineSettingsPanel = new OutlineSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
-        DotSettingsGuiPanel dotSettingsPanel = new DotSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
-        DynamicSettingsGuiPanel dynamicSettingsPanel = new DynamicSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
-        HighlightSettingsGuiPanel highlightSettingsPanel = new HighlightSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
-        ItemCooldownSettingsGuiPanel itemCooldownSettingsPanel = new ItemCooldownSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
-        RainbowSettingsGuiPanel rainbowSettingsPanel = new RainbowSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
+        var generalSettingsPanel = new GeneralSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
+        var shapeSettingsPanel = new ShapeSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
+        var visibilitySettingsPanel = new VisibilitySettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
+        var outlineSettingsPanel = new OutlineSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
+        var dotSettingsPanel = new DotSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
+        var dynamicSettingsPanel = new DynamicSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
+        var highlightSettingsPanel = new HighlightSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
+        var itemCooldownSettingsPanel = new ItemCooldownSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
+        var rainbowSettingsPanel = new RainbowSettingsGuiPanel(this, crosshair, -1, -1, this.panelWidth, -1);
 
         this.mainPanel = new ScrollPanelGuiComponent(this, 0, this.headerHeight + 1, 1000, 1000);
         this.mainPanel.addComponent(generalSettingsPanel);

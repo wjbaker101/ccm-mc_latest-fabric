@@ -19,13 +19,13 @@ public final class ItemCooldownSettingsGuiPanel extends PanelGuiComponent {
 
         super(parentGuiScreen, x, y, width, height);
 
-        HeadingGuiComponent heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Item Cooldown Settings");
+        var heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Item Cooldown Settings");
 
-        CheckBoxGuiComponent isItemCooldownEnabledCheckBox = new CheckBoxGuiComponent(
+        var isItemCooldownEnabledCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Enable Item Cooldown Indicator", crosshair.isItemCooldownEnabled.get());
         isItemCooldownEnabledCheckBox.bind(crosshair.isItemCooldownEnabled);
 
-        ColourPickerGuiComponent itemCooldownColourColourPicker = new ColourPickerGuiComponent(
+        var itemCooldownColourColourPicker = new ColourPickerGuiComponent(
             this.parentGuiScreen, crosshair, -1, -1, "Indicator Colour");
         itemCooldownColourColourPicker.bind(crosshair.itemCooldownColour);
 

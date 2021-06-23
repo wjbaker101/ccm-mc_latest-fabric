@@ -69,8 +69,8 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.renderManager.drawFilledRectangle(matrixStack, 0, 0, this.width, this.headerHeight, ModTheme.PRIMARY);
         this.renderManager.drawLine(matrixStack, 0, this.headerHeight, this.width, this.headerHeight, 2.0F, ModTheme.DARK_GREY);
 
-        int titleWidth = this.renderManager.textWidth(CustomCrosshairMod.TITLE);
-        int centreY = (this.headerHeight / 2) - (7 / 2);
+        var titleWidth = this.renderManager.textWidth(CustomCrosshairMod.TITLE);
+        var centreY = (this.headerHeight / 2) - (7 / 2);
 
         this.renderManager.drawText(matrixStack, CustomCrosshairMod.TITLE, 5, centreY, ModTheme.WHITE, true);
 

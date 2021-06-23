@@ -3,7 +3,6 @@ package com.wjbaker.ccm.crosshair.style.styles;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.ComputedProperties;
 import com.wjbaker.ccm.crosshair.style.AbstractCrosshairStyle;
-import com.wjbaker.ccm.type.RGBA;
 import net.minecraft.client.util.math.MatrixStack;
 
 public final class CrossStyle extends AbstractCrosshairStyle {
@@ -14,12 +13,12 @@ public final class CrossStyle extends AbstractCrosshairStyle {
 
     @Override
     public void draw(final int x, final int y, final ComputedProperties computedProperties) {
-        boolean isOutlineEnabled = this.crosshair.isOutlineEnabled.get();
-        RGBA baseColour = computedProperties.colour();
-        int gap = computedProperties.gap();
-        float thickness = this.crosshair.thickness.get();
-        int width = this.crosshair.width.get();
-        int height  = this.crosshair.height.get();
+        var isOutlineEnabled = this.crosshair.isOutlineEnabled.get();
+        var baseColour = computedProperties.colour();
+        var gap = computedProperties.gap();
+        var thickness = this.crosshair.thickness.get();
+        var width = this.crosshair.width.get();
+        var height  = this.crosshair.height.get();
 
         // Order of the orientation of the bars:
         // Left
@@ -28,10 +27,10 @@ public final class CrossStyle extends AbstractCrosshairStyle {
         // Left
 
         if (isOutlineEnabled) {
-            RGBA outlineColour = this.crosshair.outlineColour.get();
-            float adjustedWidth = width + 1.0F;
-            float adjustedHeight = height + 1.0F;
-            float adjustedGap = gap - 0.5F;
+            var outlineColour = this.crosshair.outlineColour.get();
+            var adjustedWidth = width + 1.0F;
+            var adjustedHeight = height + 1.0F;
+            var adjustedGap = gap - 0.5F;
 
             this.renderManager.drawBorderedRectangle(this.matrixStack, x - thickness, y - adjustedGap - adjustedHeight, x + thickness, y - adjustedGap, 2.0F, outlineColour, baseColour);
             this.renderManager.drawBorderedRectangle(this.matrixStack, x - thickness, y + adjustedGap, x + thickness, y + adjustedGap + adjustedHeight, 2.0F, outlineColour, baseColour);
@@ -39,7 +38,7 @@ public final class CrossStyle extends AbstractCrosshairStyle {
             this.renderManager.drawBorderedRectangle(this.matrixStack, x + adjustedGap, y - thickness, x + adjustedGap + adjustedWidth, y + thickness, 2.0F, outlineColour, baseColour);
         }
         else {
-            float adjustedThickness = thickness - 0.5F;
+            var adjustedThickness = thickness - 0.5F;
 
             this.renderManager.drawFilledRectangle(this.matrixStack, x - adjustedThickness, y - gap - height, x + adjustedThickness, y - gap, baseColour);
             this.renderManager.drawFilledRectangle(this.matrixStack, x - adjustedThickness, y + gap, x + adjustedThickness, y + gap + height, baseColour);

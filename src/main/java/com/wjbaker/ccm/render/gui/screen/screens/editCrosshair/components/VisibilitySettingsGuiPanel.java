@@ -18,37 +18,37 @@ public final class VisibilitySettingsGuiPanel extends PanelGuiComponent {
 
         super(parentGuiScreen, x, y, width, height);
 
-        HeadingGuiComponent heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Visibility Settings");
+        var heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Visibility Settings");
 
-        CheckBoxGuiComponent isVisibleDefaultCheckBox = new CheckBoxGuiComponent(
+        var isVisibleDefaultCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Visible by Default", crosshair.isVisibleDefault.get());
         isVisibleDefaultCheckBox.bind(crosshair.isVisibleDefault);
 
-        CheckBoxGuiComponent isVisibleHiddenGuiCheckBox = new CheckBoxGuiComponent(
+        var isVisibleHiddenGuiCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Visible Hidden Gui", crosshair.isVisibleHiddenGui.get());
         isVisibleHiddenGuiCheckBox.bind(crosshair.isVisibleHiddenGui);
 
-        CheckBoxGuiComponent isVisibleDebugCheckBox = new CheckBoxGuiComponent(
+        var isVisibleDebugCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Visible Debug Gui", crosshair.isVisibleDebug.get());
         isVisibleDebugCheckBox.bind(crosshair.isVisibleDebug);
 
-        CheckBoxGuiComponent isVisibleThirdPersonCheckBox = new CheckBoxGuiComponent(
+        var isVisibleThirdPersonCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Visible in Third Person", crosshair.isVisibleThirdPerson.get());
         isVisibleThirdPersonCheckBox.bind(crosshair.isVisibleThirdPerson);
 
-        CheckBoxGuiComponent isVisibleSpectatorCheckBox = new CheckBoxGuiComponent(
+        var isVisibleSpectatorCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Visible in Spectator Mode", crosshair.isVisibleSpectator.get());
         isVisibleSpectatorCheckBox.bind(crosshair.isVisibleSpectator);
 
-        CheckBoxGuiComponent isVisibleHoldingRangedWeaponCheckBox = new CheckBoxGuiComponent(
+        var isVisibleHoldingRangedWeaponCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Visible Holding Ranged Weapon", crosshair.isVisibleHoldingRangedWeapon.get());
         isVisibleHoldingRangedWeaponCheckBox.bind(crosshair.isVisibleHoldingRangedWeapon);
 
-        CheckBoxGuiComponent isVisibleHoldingThrowableItemCheckBox = new CheckBoxGuiComponent(
+        var isVisibleHoldingThrowableItemCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Visible Holding Throwable Item", crosshair.isVisibleHoldingThrowableItem.get());
         isVisibleHoldingThrowableItemCheckBox.bind(crosshair.isVisibleHoldingThrowableItem);
 
-        CheckBoxGuiComponent isVisibleUsingSpyglassCheckBox = new CheckBoxGuiComponent(
+        var isVisibleUsingSpyglassCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Visible Using Spyglass", crosshair.isVisibleUsingSpyglass.get());
         isVisibleUsingSpyglassCheckBox.bind(crosshair.isVisibleUsingSpyglass);
 

@@ -40,8 +40,8 @@ public final class ButtonGuiComponent extends GuiComponent {
             this.currentBorderColour,
             this.currentBackgroundColour);
 
-        int centreX = this.x + (this.width / 2) - (this.renderManager.textWidth(this.label) / 2);
-        int centreY = this.y + (this.height / 2) - (7 / 2);
+        var centreX = this.x + (this.width / 2) - (this.renderManager.textWidth(this.label) / 2);
+        var centreY = this.y + (this.height / 2) - (7 / 2);
 
         this.renderManager.drawText(matrixStack, this.label, centreX, centreY, this.currentTextColour, false);
     }

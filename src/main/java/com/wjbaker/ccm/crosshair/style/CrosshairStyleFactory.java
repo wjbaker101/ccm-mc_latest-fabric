@@ -7,14 +7,13 @@ import net.minecraft.client.util.math.MatrixStack;
 public final class CrosshairStyleFactory {
 
     public ICrosshairStyle from(final MatrixStack matrixStack, final CrosshairStyle style, final CustomCrosshair crosshair) {
-        switch (style) {
-            case DEFAULT: return new DefaultStyle(matrixStack, crosshair);
-            case CIRCLE: return new CircleStyle(matrixStack, crosshair);
-            case SQUARE: return new SquareStyle(matrixStack, crosshair);
-            case TRIANGLE: return new TriangleStyle(matrixStack, crosshair);
-            case ARROW: return new ArrowStyle(matrixStack, crosshair);
-
-            default: return new CrossStyle(matrixStack, crosshair);
-        }
+        return switch (style) {
+            case DEFAULT -> new DefaultStyle(matrixStack, crosshair);
+            case CIRCLE -> new CircleStyle(matrixStack, crosshair);
+            case SQUARE -> new SquareStyle(matrixStack, crosshair);
+            case TRIANGLE -> new TriangleStyle(matrixStack, crosshair);
+            case ARROW -> new ArrowStyle(matrixStack, crosshair);
+            default -> new CrossStyle(matrixStack, crosshair);
+        };
     }
 }

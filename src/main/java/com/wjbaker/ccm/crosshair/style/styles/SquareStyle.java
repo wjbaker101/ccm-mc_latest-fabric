@@ -3,7 +3,6 @@ package com.wjbaker.ccm.crosshair.style.styles;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.ComputedProperties;
 import com.wjbaker.ccm.crosshair.style.AbstractCrosshairStyle;
-import com.wjbaker.ccm.type.RGBA;
 import net.minecraft.client.util.math.MatrixStack;
 
 public final class SquareStyle extends AbstractCrosshairStyle {
@@ -14,15 +13,15 @@ public final class SquareStyle extends AbstractCrosshairStyle {
 
     @Override
     public void draw(final int x, final int y, final ComputedProperties computedProperties) {
-        boolean isOutlineEnabled = this.crosshair.isOutlineEnabled.get();
-        int width = this.crosshair.width.get();
-        int height = this.crosshair.height.get();
-        int thickness = this.crosshair.thickness.get();
-        int gap = computedProperties.gap();
-        RGBA colour = computedProperties.colour();
+        var isOutlineEnabled = this.crosshair.isOutlineEnabled.get();
+        var width = this.crosshair.width.get();
+        var height = this.crosshair.height.get();
+        var thickness = this.crosshair.thickness.get();
+        var gap = computedProperties.gap();
+        var colour = computedProperties.colour();
 
         if (isOutlineEnabled) {
-            RGBA outlineColour = this.crosshair.outlineColour.get();
+            var outlineColour = this.crosshair.outlineColour.get();
 
             // Inner
             this.renderManager.drawRectangle(

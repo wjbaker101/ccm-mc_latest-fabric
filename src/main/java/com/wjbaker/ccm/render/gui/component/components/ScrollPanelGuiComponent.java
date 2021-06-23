@@ -66,7 +66,7 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
             ModTheme.DARK_GREY,
             this.isScrollBarDragging ? ModTheme.SECONDARY : ModTheme.PRIMARY);
 
-        float thumbCentreX = this.x + this.width - (this.scrollBarWidth / 2.0F);
+        var thumbCentreX = this.x + this.width - (this.scrollBarWidth / 2.0F);
 
         this.renderManager.drawLines(matrixStack, new float[] {
             thumbCentreX - 2, this.y + this.scrollBarPosition + 6,
@@ -122,9 +122,9 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
         super.onMouseDrag(startX, startY, mouseX, mouseY);
 
         if (this.isScrollBarDragging) {
-            int minY = 0;
-            int maxY = this.height - 1 - this.scrollBarSize;
-            int newPosition = mouseY - this.grabOffset - this.y;
+            var minY = 0;
+            var maxY = this.height - 1 - this.scrollBarSize;
+            var newPosition = mouseY - this.grabOffset - this.y;
 
             this.scrollBarPosition = Math.min(maxY, Math.max(minY, newPosition));
 
@@ -153,10 +153,10 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
     }
 
     private void onScroll() {
-        int height = this.padding;
+        var height = this.padding;
 
-        int remainingContentHeight = this.contentHeight + this.padding - this.height;
-        float ratio = this.scrollBarPosition / (float)(this.height - this.scrollBarSize);
+        var remainingContentHeight = this.contentHeight + this.padding - this.height;
+        var ratio = this.scrollBarPosition / (float)(this.height - this.scrollBarSize);
 
         for (GuiComponent component : this.components) {
             component.setPosition(this.x + this.padding, this.y + height - (int)(remainingContentHeight * ratio));
@@ -170,7 +170,7 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
         int height = this.padding;
 
         for (int index = 0; index < this.components.size(); ++index) {
-            GuiComponent component = this.components.get(index);
+            var component = this.components.get(index);
 
             component.setPosition(this.x + this.padding, this.y + height);
 
@@ -184,7 +184,7 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
     }
 
     private int calculateContentHeight() {
-        int height = this.components
+        var height = this.components
             .stream()
             .mapToInt(x -> x.getHeight() + this.componentSpacing)
             .sum();

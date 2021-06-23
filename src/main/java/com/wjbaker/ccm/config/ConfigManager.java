@@ -32,7 +32,7 @@ public final class ConfigManager {
     }
 
     public boolean read() {
-        try (final BufferedReader reader = new BufferedReader(new FileReader(this.fileName))) {
+        try (final var reader = new BufferedReader(new FileReader(this.fileName))) {
             String currentLine;
 
             CustomCrosshairMod.INSTANCE.log("Config Manager (Read)", "Started reading file '{}'.", this.fileName);
@@ -41,15 +41,15 @@ public final class ConfigManager {
                 if (currentLine.startsWith(this.comment))
                     continue;
 
-                String[] lineSplit = currentLine.split(":");
+                var lineSplit = currentLine.split(":");
 
                 if (lineSplit.length == 0)
                     continue;
 
-                String alias = lineSplit[0].trim().toLowerCase();
-                String value = lineSplit[1].trim().toLowerCase();
+                var alias = lineSplit[0].trim().toLowerCase();
+                var value = lineSplit[1].trim().toLowerCase();
 
-                ICrosshairProperty<?> property = this.properties.get(alias);
+                var property = this.properties.get(alias);
 
                 if (property == null)
                     continue;
@@ -71,15 +71,15 @@ public final class ConfigManager {
     }
 
     public boolean write() {
-        try (final BufferedWriter writer = new BufferedWriter(new FileWriter(this.fileName))) {
+        try (final var writer = new BufferedWriter(new FileWriter(this.fileName))) {
             CustomCrosshairMod.INSTANCE.log("Config Manager (Write)", "Start writing file '{}'.", this.fileName);
 
-            for (String line : this.header) {
+            for (var line : this.header) {
                 writer.write(line);
                 writer.newLine();
             }
 
-            for (ICrosshairProperty<?> property : this.properties.values()) {
+            for (var property : this.properties.values()) {
                 writer.write(String.format("%s:%s", property.alias(), property.forConfig()));
                 writer.newLine();
             }

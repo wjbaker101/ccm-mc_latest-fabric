@@ -13,9 +13,9 @@ public final class ArrowStyle extends AbstractCrosshairStyle {
 
     @Override
     public void draw(final int x, final int y, final ComputedProperties computedProperties) {
-        int width = this.crosshair.width.get();
-        int height = this.crosshair.height.get();
-        int thickness = this.crosshair.thickness.get();
+        var width = this.crosshair.width.get();
+        var height = this.crosshair.height.get();
+        var thickness = this.crosshair.thickness.get();
 
         this.renderManager.drawLines(this.matrixStack, new float[] {
             x - width, y + height, x, y,

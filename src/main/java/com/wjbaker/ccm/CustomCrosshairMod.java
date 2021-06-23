@@ -14,9 +14,7 @@ import net.minecraft.client.util.InputUtil;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -53,7 +51,7 @@ public final class CustomCrosshairMod implements ModInitializer {
     }
 
     private void loadConfig() {
-        List<ICrosshairProperty<?>> configProperties = this.properties.getCrosshair().propertiesAsList;
+        var configProperties = this.properties.getCrosshair().propertiesAsList;
         configProperties.add(this.properties.getIsModEnabled());
 
         this.configManager = new ConfigManager("crosshair_config.ccmcfg", configProperties
@@ -68,17 +66,17 @@ public final class CustomCrosshairMod implements ModInitializer {
     }
 
     private void checkVersion() {
-        try (final BufferedReader reader = new RequestHelper().get("https://pastebin.com/raw/B2sL8QCh")) {
+        try (final var reader = new RequestHelper().get("https://pastebin.com/raw/B2sL8QCh")) {
             String currentLine;
 
             while ((currentLine = reader.readLine()) != null) {
-                String[] lineSplit = currentLine.split(" ");
+                var lineSplit = currentLine.split(" ");
 
                 if (lineSplit.length != 2)
                     continue;
 
-                String mcVersion = lineSplit[0];
-                String expectedModVersion = lineSplit[1];
+                var mcVersion = lineSplit[0];
+                var expectedModVersion = lineSplit[1];
 
                 if (mcVersion.equals(MC_VERSION) && !expectedModVersion.equals(VERSION)) {
                     this.log("Version Checker", "Not using latest version of Customer Crosshair Mod.");
@@ -92,7 +90,7 @@ public final class CustomCrosshairMod implements ModInitializer {
     }
 
     private void loadKeyBindings() {
-        KeyBinding editCrosshair = new KeyBinding(
+        var editCrosshair = new KeyBinding(
             "key.custom-crosshair-mod.edit_crosshair",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_GRAVE_ACCENT,

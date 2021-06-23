@@ -21,13 +21,13 @@ public final class RainbowSettingsGuiPanel extends PanelGuiComponent {
 
         super(parentGuiScreen, x, y, width, height);
 
-        HeadingGuiComponent heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Rainbow Settings");
+        var heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Rainbow Settings");
 
-        CheckBoxGuiComponent isRainbowEnabledCheckBox = new CheckBoxGuiComponent(
+        var isRainbowEnabledCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Enable Rainbow", crosshair.isRainbowEnabled.get());
         isRainbowEnabledCheckBox.bind(crosshair.isRainbowEnabled);
 
-        IntegerSliderGuiComponent rainbowSpeedSlider = new IntegerSliderGuiComponent(
+        var rainbowSpeedSlider = new IntegerSliderGuiComponent(
             this.parentGuiScreen, -1, -1, 250, "Rainbow Speed", 0, 1000, crosshair.rainbowSpeed.get()) {
 
             @Override

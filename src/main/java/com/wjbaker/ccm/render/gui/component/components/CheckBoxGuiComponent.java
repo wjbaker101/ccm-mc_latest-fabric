@@ -50,7 +50,7 @@ public final class CheckBoxGuiComponent extends GuiComponent implements IBindabl
             ModTheme.DARK_GREY,
             this.currentBackgroundColour);
 
-        float inset = 1.5F;
+        var inset = 1.5F;
 
         if (this.isChecked.get()) {
             this.renderManager.drawFilledRectangle(

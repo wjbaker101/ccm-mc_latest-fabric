@@ -19,13 +19,13 @@ public final class DotSettingsGuiPanel extends PanelGuiComponent {
 
         super(parentGuiScreen, x, y, width, height);
 
-        HeadingGuiComponent heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Dot Settings");
+        var heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Dot Settings");
 
-        CheckBoxGuiComponent isDotEnabledCheckBox = new CheckBoxGuiComponent(
+        var isDotEnabledCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Enable Dot", crosshair.isDotEnabled.get());
         isDotEnabledCheckBox.bind(crosshair.isDotEnabled);
 
-        ColourPickerGuiComponent dotColourColourPicker = new ColourPickerGuiComponent(
+        var dotColourColourPicker = new ColourPickerGuiComponent(
             this.parentGuiScreen, crosshair, -1, -1, "Dot Colour");
         dotColourColourPicker.bind(crosshair.dotColour);
 

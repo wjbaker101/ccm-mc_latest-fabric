@@ -58,7 +58,7 @@ public abstract class SliderGuiComponent extends GuiComponent {
 
         this.renderManager.drawText(matrixStack, this.label, this.x, this.y, this.currentTextColour, false);
 
-        int posY = this.y + 8 + this.titleSpacing;
+        var posY = this.y + 8 + this.titleSpacing;
 
         this.renderManager.drawBorderedRectangle(
             matrixStack,
@@ -109,7 +109,7 @@ public abstract class SliderGuiComponent extends GuiComponent {
     }
 
     private boolean isInsideThumb(final int mouseX, final int mouseY) {
-        int posY = this.y + 8 + this.titleSpacing;
+        var posY = this.y + 8 + this.titleSpacing;
 
         return mouseX > this.x + this.thumbPosition && mouseX <= this.x + this.thumbPosition + this.thumbSize
             && mouseY > posY && mouseY <= posY + this.thumbSize;
@@ -122,9 +122,9 @@ public abstract class SliderGuiComponent extends GuiComponent {
         if (!this.isDragging)
             return;
 
-        int minPosition = 0;
-        int maxPosition = this.width - this.thumbSize;
-        int newPosition = mouseX - this.x - this.grabOffset;
+        var minPosition = 0;
+        var maxPosition = this.width - this.thumbSize;
+        var newPosition = mouseX - this.x - this.grabOffset;
 
         this.thumbPosition = Math.min(maxPosition, Math.max(minPosition, newPosition));
 

@@ -116,10 +116,10 @@ public class PanelGuiComponent extends GuiComponent {
     }
 
     private void packVertically() {
-        int height = this.padding;
+        var height = this.padding;
 
         for (int index = 0; index < this.components.size(); ++index) {
-            GuiComponent component = this.components.get(index);
+            var component = this.components.get(index);
 
             component.setPosition(this.x + this.padding, this.y + height);
 
@@ -133,10 +133,10 @@ public class PanelGuiComponent extends GuiComponent {
     }
 
     private void packHorizontally() {
-        int width = 0;
+        var width = 0;
 
         for (int index = 0; index < this.components.size(); ++index) {
-            GuiComponent component = this.components.get(index);
+            var component = this.components.get(index);
 
             component.setPosition(this.x + width, this.y);
 
@@ -148,7 +148,7 @@ public class PanelGuiComponent extends GuiComponent {
 
         this.width = width;
 
-        int maxHeight = 0;
+        var maxHeight = 0;
         for (GuiComponent component : this.components) {
             maxHeight = Math.max(maxHeight, component.getHeight());
         }

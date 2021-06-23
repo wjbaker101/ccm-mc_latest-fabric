@@ -19,29 +19,29 @@ public final class HighlightSettingsGuiPanel extends PanelGuiComponent {
 
         super(parentGuiScreen, x, y, width, height);
 
-        HeadingGuiComponent heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Highlight Settings");
+        var heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Highlight Settings");
 
-        CheckBoxGuiComponent isHighlightHostilesEnabledCheckBox = new CheckBoxGuiComponent(
+        var isHighlightHostilesEnabledCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Enable Hostile Mob Highlighting", crosshair.isHighlightHostilesEnabled.get());
         isHighlightHostilesEnabledCheckBox.bind(crosshair.isHighlightHostilesEnabled);
 
-        ColourPickerGuiComponent hostilesColourPicker = new ColourPickerGuiComponent(
+        var hostilesColourPicker = new ColourPickerGuiComponent(
             this.parentGuiScreen, crosshair, -1, -1, "Hostile Mobs Colour");
         hostilesColourPicker.bind(crosshair.highlightHostilesColour);
 
-        CheckBoxGuiComponent isHighlightPassivesEnabledCheckBox = new CheckBoxGuiComponent(
+        var isHighlightPassivesEnabledCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Enable Passive Mob Highlighting", crosshair.isHighlightPassivesEnabled.get());;
         isHighlightPassivesEnabledCheckBox.bind(crosshair.isHighlightPassivesEnabled);
 
-        ColourPickerGuiComponent passivesColourPicker = new ColourPickerGuiComponent(
+        var passivesColourPicker = new ColourPickerGuiComponent(
             this.parentGuiScreen, crosshair, -1, -1, "Passive Mobs Colour");
         passivesColourPicker.bind(crosshair.highlightPassivesColour);
 
-        CheckBoxGuiComponent isHighlightPlayersEnabledCheckBox = new CheckBoxGuiComponent(
+        var isHighlightPlayersEnabledCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Enable Player Highlighting", crosshair.isHighlightPlayersEnabled.get());;
         isHighlightPlayersEnabledCheckBox.bind(crosshair.isHighlightPlayersEnabled);
 
-        ColourPickerGuiComponent playersColourPicker = new ColourPickerGuiComponent(
+        var playersColourPicker = new ColourPickerGuiComponent(
             this.parentGuiScreen, crosshair, -1, -1, "Players Colour");
         playersColourPicker.bind(crosshair.highlightPlayersColour);
 

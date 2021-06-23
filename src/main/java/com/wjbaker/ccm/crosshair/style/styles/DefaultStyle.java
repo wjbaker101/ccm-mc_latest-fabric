@@ -28,8 +28,8 @@ public final class DefaultStyle extends AbstractCrosshairStyle {
 
         RenderSystem.setShaderTexture(0, DrawableHelper.GUI_ICONS_TEXTURE);
 
-        int crosshairSize = 15;
-        int textureSize = 256;
+        var crosshairSize = 15;
+        var textureSize = 256;
 
         DrawableHelper.drawTexture(
             this.matrixStack,

@@ -27,10 +27,10 @@ public final class EditColourGuiScreen extends GuiScreen {
 
         this.panelWidth = 300;
 
-        HeadingGuiComponent titleHeading = new HeadingGuiComponent(this, -1, -1, "Edit Colour");
+        var titleHeading = new HeadingGuiComponent(this, -1, -1, "Edit Colour");
 
-        IntegerProperty red = new IntegerProperty("fake_red", colour.get().getRed());
-        IntegerSliderGuiComponent redSlider = new IntegerSliderGuiComponent(this, -1, -1, 260, "Red", 0, 255, red.get());
+        var red = new IntegerProperty("fake_red", colour.get().getRed());
+        var redSlider = new IntegerSliderGuiComponent(this, -1, -1, 260, "Red", 0, 255, red.get());
         redSlider.setBaseThumbColour(new RGBA(240, 20, 20, 255));
         redSlider.setHoverThumbColour(new RGBA(210, 40, 40, 255));
         redSlider.bind(red);
@@ -38,8 +38,8 @@ public final class EditColourGuiScreen extends GuiScreen {
             colour.set(colour.get().setRed(redSlider.getValue()));
         });
 
-        IntegerProperty green = new IntegerProperty("fake_green", colour.get().getGreen());
-        IntegerSliderGuiComponent greenSlider = new IntegerSliderGuiComponent(this, -1, -1, 260, "Green", 0, 255, green.get());
+        var green = new IntegerProperty("fake_green", colour.get().getGreen());
+        var greenSlider = new IntegerSliderGuiComponent(this, -1, -1, 260, "Green", 0, 255, green.get());
         greenSlider.setBaseThumbColour(new RGBA(20, 240, 20, 255));
         greenSlider.setHoverThumbColour(new RGBA(40, 210, 40, 255));
         greenSlider.bind(green);
@@ -47,8 +47,8 @@ public final class EditColourGuiScreen extends GuiScreen {
             colour.set(colour.get().setGreen(greenSlider.getValue()));
         });
 
-        IntegerProperty blue = new IntegerProperty("fake_blue", colour.get().getBlue());
-        IntegerSliderGuiComponent blueSlider = new IntegerSliderGuiComponent(this, -1, -1, 260, "Blue", 0, 255, blue.get());
+        var blue = new IntegerProperty("fake_blue", colour.get().getBlue());
+        var blueSlider = new IntegerSliderGuiComponent(this, -1, -1, 260, "Blue", 0, 255, blue.get());
         blueSlider.setBaseThumbColour(new RGBA(20, 20, 240, 255));
         blueSlider.setHoverThumbColour(new RGBA(40, 40, 210, 255));
         blueSlider.bind(blue);
@@ -56,8 +56,8 @@ public final class EditColourGuiScreen extends GuiScreen {
             colour.set(colour.get().setBlue(blueSlider.getValue()));
         });
 
-        IntegerProperty opacity = new IntegerProperty("fake_opacity", colour.get().getOpacity());
-        IntegerSliderGuiComponent opacitySlider = new IntegerSliderGuiComponent(this, -1, -1, 260, "Opacity", 0, 255, opacity.get());
+        var opacity = new IntegerProperty("fake_opacity", colour.get().getOpacity());
+        var opacitySlider = new IntegerSliderGuiComponent(this, -1, -1, 260, "Opacity", 0, 255, opacity.get());
         opacitySlider.setBaseThumbColour(new RGBA(250, 250, 250, 255));
         opacitySlider.setHoverThumbColour(new RGBA(240, 240, 240, 255));
         opacitySlider.bind(opacity);
@@ -65,14 +65,14 @@ public final class EditColourGuiScreen extends GuiScreen {
             colour.set(colour.get().setOpacity(opacitySlider.getValue()));
         });
 
-        ButtonGuiComponent doneButton = new ButtonGuiComponent(this, -1, -1, 50, 35, "Done");
+        var doneButton = new ButtonGuiComponent(this, -1, -1, 50, 35, "Done");
         doneButton.addEvent(IOnClickEvent.class, () -> {
             MinecraftClient.getInstance().openScreen(new EditCrosshairGuiScreen(crosshair));
         });
 
-        ColourPreviewGuiComponent colourPreview = new ColourPreviewGuiComponent(this, -1, -1, colour);
+        var colourPreview = new ColourPreviewGuiComponent(this, -1, -1, colour);
 
-        PanelGuiComponent donePanel = new PanelGuiComponent(this, -1, -1, 200, -1, PanelOrientation.HORIZONTAL);
+        var donePanel = new PanelGuiComponent(this, -1, -1, 200, -1, PanelOrientation.HORIZONTAL);
         donePanel.setBaseBorderColour(ModTheme.TRANSPARENT);
         donePanel.setHoverBorderColour(ModTheme.TRANSPARENT);
         donePanel.addComponent(doneButton);

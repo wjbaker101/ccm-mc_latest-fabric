@@ -33,15 +33,15 @@ public class IntegerSliderGuiComponent
 
     @Override
     protected void calculateValue() {
-        float positionRatio = this.thumbPosition / (float)(this.width - this.thumbSize);
-        int newValue = (int)(this.minValue + ((this.maxValue - this.minValue) * positionRatio));
+        var positionRatio = this.thumbPosition / (float)(this.width - this.thumbSize);
+        var newValue = (int)(this.minValue + ((this.maxValue - this.minValue) * positionRatio));
 
         this.value.set(newValue);
     }
 
     @Override
     protected void drawLabel(final MatrixStack matrixStack) {
-        int posY = this.y + 8 + this.titleSpacing;
+        var posY = this.y + 8 + this.titleSpacing;
 
         this.renderManager.drawText(
             matrixStack,

@@ -28,12 +28,12 @@ public final class CrosshairPreviewGuiComponent extends GuiComponent {
     public void draw(final MatrixStack matrixStack) {
         super.draw(matrixStack);
 
-        int gridCount = 30;
-        int gridSize = this.width / gridCount;
+        var gridCount = 30;
+        var gridSize = this.width / gridCount;
 
         for (int gridX = 0; gridX < gridCount; ++gridX) {
             for (int gridY = 0; gridY < gridCount; ++gridY) {
-                RGBA gridColour = (gridX % 2 == 0 && gridY % 2 == 0) || (gridX % 2 != 0 && gridY % 2 != 0)
+                var gridColour = (gridX % 2 == 0 && gridY % 2 == 0) || (gridX % 2 != 0 && gridY % 2 != 0)
                     ? ModTheme.WHITE.setOpacity(140)
                     : ModTheme.DARK_GREY.setOpacity(140);
 

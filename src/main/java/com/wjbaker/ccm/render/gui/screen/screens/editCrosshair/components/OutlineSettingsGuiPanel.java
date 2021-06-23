@@ -19,13 +19,13 @@ public final class OutlineSettingsGuiPanel extends PanelGuiComponent {
 
         super(parentGuiScreen, x, y, width, height);
 
-        HeadingGuiComponent heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Outline Settings");
+        var heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Outline Settings");
 
-        CheckBoxGuiComponent isOutlineEnabledCheckBox = new CheckBoxGuiComponent(
+        var isOutlineEnabledCheckBox = new CheckBoxGuiComponent(
             this.parentGuiScreen, -1, -1, "Enable Outline", crosshair.isOutlineEnabled.get());
         isOutlineEnabledCheckBox.bind(crosshair.isOutlineEnabled);
 
-        ColourPickerGuiComponent outlineColourColourPicker = new ColourPickerGuiComponent(this.parentGuiScreen, crosshair, -1, -1, "Outline Colour");
+        var outlineColourColourPicker = new ColourPickerGuiComponent(this.parentGuiScreen, crosshair, -1, -1, "Outline Colour");
         outlineColourColourPicker.bind(crosshair.outlineColour);
 
         this.addComponent(heading);
