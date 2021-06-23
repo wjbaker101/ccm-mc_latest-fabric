@@ -49,45 +49,6 @@ public final class ComputedProperties {
         Items.CROSSBOW, 0.0F
     );
 
-    private final Set<Item> attackableItems = ImmutableSet.of(
-        Items.WOODEN_SWORD,
-        Items.GOLDEN_SWORD,
-        Items.STONE_SWORD,
-        Items.IRON_SWORD,
-        Items.DIAMOND_SWORD,
-        Items.NETHERITE_SWORD,
-
-        Items.WOODEN_AXE,
-        Items.GOLDEN_AXE,
-        Items.STONE_AXE,
-        Items.IRON_AXE,
-        Items.DIAMOND_AXE,
-        Items.NETHERITE_AXE,
-
-        Items.WOODEN_SHOVEL,
-        Items.GOLDEN_SHOVEL,
-        Items.STONE_SHOVEL,
-        Items.IRON_SHOVEL,
-        Items.DIAMOND_SHOVEL,
-        Items.NETHERITE_SHOVEL,
-
-        Items.WOODEN_PICKAXE,
-        Items.GOLDEN_PICKAXE,
-        Items.STONE_PICKAXE,
-        Items.IRON_PICKAXE,
-        Items.DIAMOND_PICKAXE,
-        Items.NETHERITE_PICKAXE,
-
-        Items.WOODEN_HOE,
-        Items.GOLDEN_HOE,
-        Items.STONE_HOE,
-        Items.IRON_HOE,
-        Items.DIAMOND_HOE,
-        Items.NETHERITE_HOE,
-
-        Items.TRIDENT
-    );
-
     public ComputedProperties(final CustomCrosshair crosshair) {
         this.mc = MinecraftClient.getInstance();
         this.crosshair = crosshair;
