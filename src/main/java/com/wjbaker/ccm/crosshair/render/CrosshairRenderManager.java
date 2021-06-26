@@ -38,6 +38,8 @@ public final class CrosshairRenderManager {
         if (!computedProperties.isVisible())
             return;
 
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
         var style = this.crosshairStyleFactory.from(matrixStack, this.crosshair.style.get(), this.crosshair);
         var isItemCooldownEnabled = this.crosshair.isItemCooldownEnabled.get();
         var isDotEnabled = this.crosshair.isDotEnabled.get();
