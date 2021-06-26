@@ -59,7 +59,7 @@ public final class CrosshairRenderManager {
 
     private void preTransformation(final MatrixStack matrixStack, final int x, final int y) {
         var rotation = this.crosshair.rotation.get();
-        var scale = this.crosshair.scale.get();
+        var scale = this.crosshair.scale.get() - 2;
         var windowScaling = (float)MinecraftClient.getInstance().getWindow().getScaleFactor() / 2.0F;
 
         matrixStack.push();
