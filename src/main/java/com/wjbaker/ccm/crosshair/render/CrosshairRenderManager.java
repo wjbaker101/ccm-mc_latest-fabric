@@ -1,13 +1,18 @@
 package com.wjbaker.ccm.crosshair.render;
 
 import com.google.common.collect.ImmutableSet;
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.style.CrosshairStyle;
 import com.wjbaker.ccm.crosshair.style.CrosshairStyleFactory;
 import com.wjbaker.ccm.render.RenderManager;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.Drawable;
+import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.option.AttackIndicator;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.Quaternion;
@@ -49,6 +54,8 @@ public final class CrosshairRenderManager {
 
         if (isDotEnabled && this.crosshair.style.get() != CrosshairStyle.DEFAULT)
             this.renderManager.drawCircle(matrixStack, x, y, 0.5F, 1.0F, this.crosshair.dotColour.get());
+
+        this.drawDefaultAttackIndicator(matrixStack, computedProperties, x, y);
 
         this.preTransformation(matrixStack, x, y);
 
@@ -109,6 +116,40 @@ public final class CrosshairRenderManager {
                 colour);
 
             offset += 3;
+        }
+    }
+
+    private void drawDefaultAttackIndicator(
+        final MatrixStack matrixStack,
+        final ComputedProperties computedProperties,
+        final int x, final int y) {
+
+        RenderSystem.setShaderTexture(0, DrawableHelper.GUI_ICONS_TEXTURE);
+        RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
+
+        var mc = MinecraftClient.getInstance();
+
+        if (mc.options.attackIndicator == AttackIndicator.CROSSHAIR && mc.player != null) {
+            var f = mc.player.getAttackCooldownProgress(0.0F);
+            var bl = false;
+
+            if (mc.targetedEntity instanceof LivingEntity && f >= 1.0F) {
+                bl = mc.player.getAttackCooldownProgressPerTick() > 5.0F;
+                bl &= mc.targetedEntity.isAlive();
+            }
+
+            var j = mc.getWindow().getScaledHeight() / 2 - 7 + 16;
+            var k = mc.getWindow().getScaledWidth() / 2 - 8;
+
+            if (bl) {
+                DrawableHelper.drawTexture(matrixStack, k, j, 68, 94, 16, 16, 256, 256);
+            }
+            else if (f < 1.0F) {
+                var l = (int)(f * 17.0F);
+
+                DrawableHelper.drawTexture(matrixStack, k, j, 36, 94, 16, 4, 256, 256);
+                DrawableHelper.drawTexture(matrixStack, k, j, 52, 94, l, 4, 256, 256);
+            }
         }
     }
 }
