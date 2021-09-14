@@ -2,10 +2,7 @@ package com.wjbaker.ccm.render.gui.screen.screens.editCrosshair.components;
 
 import com.wjbaker.ccm.CustomCrosshairMod;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.render.gui.component.components.CheckBoxGuiComponent;
-import com.wjbaker.ccm.render.gui.component.components.EnumSliderGuiComponent;
-import com.wjbaker.ccm.render.gui.component.components.HeadingGuiComponent;
-import com.wjbaker.ccm.render.gui.component.components.PanelGuiComponent;
+import com.wjbaker.ccm.render.gui.component.components.*;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
 
 public final class GeneralSettingsGuiPanel extends PanelGuiComponent {
@@ -37,9 +34,17 @@ public final class GeneralSettingsGuiPanel extends PanelGuiComponent {
             crosshair.style.get());
         crosshairStyleSlider.bind(crosshair.style);
 
+        var blockOutlineColourColourPicker = new ColourPickerGuiComponent(
+            this.parentGuiScreen,
+            crosshair,
+            -1, -1,
+            "Block Outline Colour");
+        blockOutlineColourColourPicker.bind(CustomCrosshairMod.INSTANCE.properties().getBlockOutlineColour());
+
         this.addComponent(heading);
         this.addComponent(isModEnabledCheckbox);
         this.addComponent(crosshairStyleSlider);
+        this.addComponent(blockOutlineColourColourPicker);
         this.pack();
     }
 }

@@ -53,6 +53,7 @@ public final class CustomCrosshairMod implements ModInitializer {
     private void loadConfig() {
         var configProperties = this.properties.getCrosshair().propertiesAsList;
         configProperties.add(this.properties.getIsModEnabled());
+        configProperties.add(this.properties.getBlockOutlineColour());
 
         this.configManager = new ConfigManager("crosshair_config.ccmcfg", configProperties
             .stream()
