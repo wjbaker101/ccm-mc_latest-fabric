@@ -1,6 +1,7 @@
 package com.wjbaker.ccm.mixin;
 
 import com.wjbaker.ccm.CustomCrosshairMod;
+import com.wjbaker.ccm.type.RGBA;
 import net.minecraft.client.render.WorldRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,8 +19,8 @@ public class WorldRendererMixin {
             value = "INVOKE",
             target = BLOCK_OUTLINE_COLOUR_INNER_METHOD),
         index = 6)
-    private float setOutlineRed(float originalRed) {
-        return CustomCrosshairMod.INSTANCE.properties().getBlockOutlineColour().get().getRed() / 255.0F;
+    private float setOutlineRed(final float originalRed) {
+        return setColour(originalRed, RGBA::getRed);
     }
 
     @ModifyArg(
@@ -28,8 +29,8 @@ public class WorldRendererMixin {
             value = "INVOKE",
             target = BLOCK_OUTLINE_COLOUR_INNER_METHOD),
         index = 7)
-    private float setOutlineGreen(float originalGreen) {
-        return CustomCrosshairMod.INSTANCE.properties().getBlockOutlineColour().get().getGreen() / 255.0F;
+    private float setOutlineGreen(final float originalGreen) {
+        return setColour(originalGreen, RGBA::getGreen);
     }
 
     @ModifyArg(
@@ -38,8 +39,8 @@ public class WorldRendererMixin {
             value = "INVOKE",
             target = BLOCK_OUTLINE_COLOUR_INNER_METHOD),
         index = 8)
-    private float setOutlineBlue(float originalBlue) {
-        return CustomCrosshairMod.INSTANCE.properties().getBlockOutlineColour().get().getBlue() / 255.0F;
+    private float setOutlineBlue(final float originalBlue) {
+        return setColour(originalBlue, RGBA::getBlue);
     }
 
     @ModifyArg(
@@ -48,7 +49,19 @@ public class WorldRendererMixin {
             value = "INVOKE",
             target = BLOCK_OUTLINE_COLOUR_INNER_METHOD),
         index = 9)
-    private float setOutlineOpacity(float originalOpacity) {
-        return CustomCrosshairMod.INSTANCE.properties().getBlockOutlineColour().get().getOpacity() / 255.0F;
+    private float setOutlineOpacity(final float originalOpacity) {
+        return setColour(originalOpacity, RGBA::getOpacity);
+    }
+
+    private static float setColour(float originalColour, IColourSelector colourSelector) {
+        if (!CustomCrosshairMod.INSTANCE.properties().getIsModEnabled().get())
+            return originalColour;
+
+        return colourSelector.get(CustomCrosshairMod.INSTANCE.properties().getBlockOutlineColour().get()) / 255.0F;
+    }
+
+    private interface IColourSelector {
+
+        int get(final RGBA colour);
     }
 }
