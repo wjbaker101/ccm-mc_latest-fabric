@@ -16,7 +16,7 @@ public final class GlobalProperties {
         this.crosshair = new CustomCrosshair();
         this.isModEnabled = new BooleanProperty("mod_enabled", true);
         this.isLatestVersion = new BooleanProperty("is_latest_version", true);
-        this.blockOutlineColour = new RGBAProperty("block_outline_colour", new RGBA(0, 0, 0, 0));
+        this.blockOutlineColour = new RGBAProperty("block_outline_colour", new RGBA(0, 0, 0, 102));
     }
 
     public CustomCrosshair getCrosshair() {
