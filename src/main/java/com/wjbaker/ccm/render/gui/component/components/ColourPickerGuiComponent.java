@@ -91,7 +91,7 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
         if (!this.isMouseDownInside)
             return;
 
-        MinecraftClient.getInstance().openScreen(new EditColourGuiScreen(this.crosshair, this.colour));
+        MinecraftClient.getInstance().setScreen(new EditColourGuiScreen(this.crosshair, this.colour));
 
         this.isMouseDownInside = false;
     }

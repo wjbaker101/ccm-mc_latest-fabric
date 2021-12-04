@@ -67,7 +67,7 @@ public final class EditColourGuiScreen extends GuiScreen {
 
         var doneButton = new ButtonGuiComponent(this, -1, -1, 50, 35, "Done");
         doneButton.addEvent(IOnClickEvent.class, () -> {
-            MinecraftClient.getInstance().openScreen(new EditCrosshairGuiScreen(crosshair));
+            MinecraftClient.getInstance().setScreen(new EditCrosshairGuiScreen(crosshair));
         });
 
         var colourPreview = new ColourPreviewGuiComponent(this, -1, -1, colour);
