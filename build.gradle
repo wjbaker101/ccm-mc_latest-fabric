@@ -70,7 +70,3 @@ publishing {
 		// retrieving dependencies.
 	}
 }
-
-configurations {
-	jar.archiveName = "custom-crosshair-mod-v${project.version}-mc${project.minecraft_version}.jar"
-}
