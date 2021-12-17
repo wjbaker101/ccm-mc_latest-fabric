@@ -8,6 +8,7 @@ public enum CrosshairStyle {
     SQUARE(3, "Square"),
     TRIANGLE(4, "Triangle"),
     ARROW(5, "Arrow"),
+    DEBUG(6, "Debug"),
 
     ;
 
