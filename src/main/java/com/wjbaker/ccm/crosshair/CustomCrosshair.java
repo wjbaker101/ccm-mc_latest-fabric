@@ -12,6 +12,7 @@ public final class CustomCrosshair {
 
     public final EnumProperty<CrosshairStyle> style;
     public final RGBAProperty colour;
+    public final BooleanProperty isAdaptiveColourEnabled;
     public final IntegerProperty width;
     public final IntegerProperty height;
     public final IntegerProperty gap;
@@ -58,6 +59,7 @@ public final class CustomCrosshair {
         this.propertiesAsList = Lists.newArrayList(
             this.style = new EnumProperty<>("crosshair_style", CrosshairStyle.CROSS),
             this.colour = new RGBAProperty("crosshair_colour", ModTheme.WHITE),
+            this.isAdaptiveColourEnabled = new BooleanProperty("crosshair_adaptive_colour_enabled", false),
             this.width = new IntegerProperty("crosshair_width", 4),
             this.height = new IntegerProperty("crosshair_height", 4),
             this.gap = new IntegerProperty("crosshair_gap", 3),
