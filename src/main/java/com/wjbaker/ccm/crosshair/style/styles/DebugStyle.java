@@ -16,8 +16,8 @@ public final class DebugStyle extends AbstractCrosshairStyle {
 
     @Override
     public void draw(final int x, final int y, final ComputedProperties computedProperties) {
-        var camera = MinecraftClient.getInstance().gameRenderer.getCamera();
-        var window = MinecraftClient.getInstance().getWindow();
+        var camera = this.mc.gameRenderer.getCamera();
+        var window = this.mc.getWindow();
 
         var matrixStack = RenderSystem.getModelViewStack();
         matrixStack.push();
