@@ -18,6 +18,7 @@ public final class TriangleStyle extends AbstractCrosshairStyle {
         var height = this.crosshair.height.get();
         var gap = computedProperties.gap();
         var colour = computedProperties.colour();
+        var isAdaptiveColourEnabled = this.crosshair.isAdaptiveColourEnabled.get();
 
         if (isOutlineEnabled) {
             var outlineColour = this.crosshair.outlineColour.get();
@@ -50,6 +51,6 @@ public final class TriangleStyle extends AbstractCrosshairStyle {
             x - (width / 2.0F) - gap, y + (height / 2.0F) + gap,
             x - (width / 2.0F) - gap, y + (height / 2.0F) + gap,
             x, y - (height / 2.0F) - gap
-        }, 1.0F, colour);
+        }, 1.0F, colour, isAdaptiveColourEnabled);
     }
 }

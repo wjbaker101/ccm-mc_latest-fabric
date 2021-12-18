@@ -19,6 +19,7 @@ public final class SquareStyle extends AbstractCrosshairStyle {
         var thickness = this.crosshair.thickness.get();
         var gap = computedProperties.gap();
         var colour = computedProperties.colour();
+        var isAdaptiveColourEnabled = this.crosshair.isAdaptiveColourEnabled.get();
 
         if (isOutlineEnabled) {
             var outlineColour = this.crosshair.outlineColour.get();
@@ -45,27 +46,31 @@ public final class SquareStyle extends AbstractCrosshairStyle {
             this.matrixStack,
             x - width - thickness - gap, y - height - thickness - gap,
             x + width + thickness + gap, y - height - gap,
-            colour);
+            colour,
+            isAdaptiveColourEnabled);
 
         // Bottom
         this.renderManager.drawFilledRectangle(
             this.matrixStack,
             x - width - thickness - gap, y + height + gap,
             x + width + thickness + gap, y + height + thickness + gap,
-            colour);
+            colour,
+            isAdaptiveColourEnabled);
 
         // Left
         this.renderManager.drawFilledRectangle(
             this.matrixStack,
             x - width - thickness - gap, y - gap - height,
             x - width - gap, y + gap + height,
-            colour);
+            colour,
+            isAdaptiveColourEnabled);
 
         // Right
         this.renderManager.drawFilledRectangle(
             this.matrixStack,
             x + width + gap, y - gap - height,
             x + width + thickness + gap, y + gap + height,
-            colour);
+            colour,
+            isAdaptiveColourEnabled);
     }
 }

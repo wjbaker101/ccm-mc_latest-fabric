@@ -16,10 +16,11 @@ public final class ArrowStyle extends AbstractCrosshairStyle {
         var width = this.crosshair.width.get();
         var height = this.crosshair.height.get();
         var thickness = this.crosshair.thickness.get();
+        var isAdaptiveColourEnabled = this.crosshair.isAdaptiveColourEnabled.get();
 
         this.renderManager.drawLines(this.matrixStack, new float[] {
             x - width, y + height, x, y,
             x, y, x + width, y + height
-        }, thickness, computedProperties.colour());
+        }, thickness, computedProperties.colour(), isAdaptiveColourEnabled);
     }
 }
