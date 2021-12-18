@@ -22,6 +22,8 @@ public abstract class GuiScreen extends GuiScreenAdapter {
     protected final int headerHeight;
 
     private final ButtonGuiComponent newVersionButton;
+    private final ButtonGuiComponent patreonButton;
+    private final ButtonGuiComponent paypalButton;
 
     public GuiScreen(final String title) {
         this(title, null);
@@ -45,15 +47,49 @@ public abstract class GuiScreen extends GuiScreenAdapter {
             if (!CustomCrosshairMod.INSTANCE.properties().isLatestVersion().get())
                 new ExternalHelper().openInBrowser(CustomCrosshairMod.CURSEFORGE_PAGE);
         });
+
+        this.patreonButton = new ButtonGuiComponent(this, -1, -1, 125, 25, "Support via Patreon!");
+        this.patreonButton.setBaseBackgroundColour(ModTheme.SECONDARY);
+        this.patreonButton.setHoverBackgroundColour(ModTheme.PRIMARY);
+        this.patreonButton.setBaseTextColour(ModTheme.WHITE);
+        this.patreonButton.setHoverTextColour(ModTheme.WHITE);
+        this.patreonButton.addEvent(IOnClickEvent.class, () -> {
+            new ExternalHelper().openInBrowser(CustomCrosshairMod.PATREON_PAGE);
+        });
+
+        this.paypalButton = new ButtonGuiComponent(this, -1, -1, 125, 25, "Support via PayPal!");
+        this.paypalButton.setBaseBackgroundColour(ModTheme.SECONDARY);
+        this.paypalButton.setHoverBackgroundColour(ModTheme.PRIMARY);
+        this.paypalButton.setBaseTextColour(ModTheme.WHITE);
+        this.paypalButton.setHoverTextColour(ModTheme.WHITE);
+        this.paypalButton.addEvent(IOnClickEvent.class, () -> {
+            new ExternalHelper().openInBrowser(CustomCrosshairMod.PAYPAL_PAGE);
+        });
     }
 
     @Override
     public void update() {
         this.components.forEach(GuiComponent::update);
 
+        var x = this.width;
+
+        x -= this.newVersionButton.getWidth() + 5;
+
         this.newVersionButton.setPosition(
-            this.width - this.newVersionButton.getWidth() - 5,
+            x,
             (this.headerHeight / 2) - (this.newVersionButton.getHeight() / 2));
+
+        x -= this.patreonButton.getWidth() + 5;
+
+        this.patreonButton.setPosition(
+            x,
+            (this.headerHeight / 2) - (this.patreonButton.getHeight() / 2));
+
+        x -= this.paypalButton.getWidth() + 5;
+
+        this.paypalButton.setPosition(
+            x,
+            (this.headerHeight / 2) - (this.paypalButton.getHeight() / 2));
     }
 
     @Override
@@ -84,6 +120,9 @@ public abstract class GuiScreen extends GuiScreenAdapter {
 
         if (!CustomCrosshairMod.INSTANCE.properties().isLatestVersion().get())
             this.newVersionButton.draw(matrixStack);
+
+        this.patreonButton.draw(matrixStack);
+        this.paypalButton.draw(matrixStack);
     }
 
     @Override
@@ -94,6 +133,8 @@ public abstract class GuiScreen extends GuiScreenAdapter {
             .forEach(x -> x.onMouseDown(mouseX, mouseY, button));
 
         this.newVersionButton.onMouseDown(mouseX, mouseY, button);
+        this.patreonButton.onMouseDown(mouseX, mouseY, button);
+        this.paypalButton.onMouseDown(mouseX, mouseY, button);
     }
 
     @Override
@@ -101,6 +142,8 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.components.forEach(x -> x.onMouseUp(mouseX, mouseY, button));
 
         this.newVersionButton.onMouseUp(mouseX, mouseY, button);
+        this.patreonButton.onMouseUp(mouseX, mouseY, button);
+        this.paypalButton.onMouseUp(mouseX, mouseY, button);
     }
 
     @Override
@@ -108,6 +151,8 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.components.forEach(x -> x.onMouseMove(mouseX, mouseY));
 
         this.newVersionButton.onMouseMove(mouseX, mouseY);
+        this.patreonButton.onMouseMove(mouseX, mouseY);
+        this.paypalButton.onMouseMove(mouseX, mouseY);
     }
 
     @Override
