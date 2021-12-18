@@ -11,6 +11,7 @@ import net.minecraft.client.util.math.MatrixStack;
 
 public final class CrosshairPreviewGuiComponent extends GuiComponent {
 
+    private final CustomCrosshair crosshair;
     private final CrosshairRenderManager crosshairRenderManager;
 
     public CrosshairPreviewGuiComponent(
@@ -21,7 +22,8 @@ public final class CrosshairPreviewGuiComponent extends GuiComponent {
 
         super(parentGuiScreen, x, y, 150, 150);
 
-        this.crosshairRenderManager = new CrosshairRenderManager(crosshair);
+        this.crosshair = crosshair;
+        this.crosshairRenderManager = new CrosshairRenderManager(this.crosshair);
     }
 
     @Override

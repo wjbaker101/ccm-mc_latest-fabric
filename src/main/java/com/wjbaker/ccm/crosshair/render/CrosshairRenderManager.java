@@ -8,7 +8,6 @@ import com.wjbaker.ccm.crosshair.style.CrosshairStyle;
 import com.wjbaker.ccm.crosshair.style.CrosshairStyleFactory;
 import com.wjbaker.ccm.render.RenderManager;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.option.AttackIndicator;
 import net.minecraft.client.util.math.MatrixStack;
@@ -57,11 +56,15 @@ public final class CrosshairRenderManager {
 
         this.drawDefaultAttackIndicator(matrixStack, computedProperties, x, y);
 
-        this.preTransformation(matrixStack, x, y);
+        var transformMatrixStack = this.crosshair.style.get() == CrosshairStyle.DEBUG
+            ? RenderSystem.getModelViewStack()
+            : matrixStack;
+
+        this.preTransformation(transformMatrixStack, x, y);
 
         style.draw(0, 0, computedProperties);
 
-        this.postTransformation(matrixStack);
+        this.postTransformation(transformMatrixStack);
     }
 
     private void preTransformation(final MatrixStack matrixStack, final int x, final int y) {
@@ -79,6 +82,7 @@ public final class CrosshairRenderManager {
 
     private void postTransformation(final MatrixStack matrixStack) {
         matrixStack.pop();
+        RenderSystem.applyModelViewMatrix();
     }
 
     private void drawItemCooldownIndicator(
