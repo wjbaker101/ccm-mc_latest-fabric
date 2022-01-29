@@ -42,9 +42,13 @@ public final class CrosshairRenderManager {
         if (!computedProperties.isVisible())
             return;
 
+        var calculatedStyle = MinecraftClient.getInstance().options.debugEnabled && crosshair.isKeepDebugEnabled.get()
+            ? CrosshairStyle.DEBUG
+            : this.crosshair.style.get();
+
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-        var style = this.crosshairStyleFactory.from(matrixStack, this.crosshair.style.get(), this.crosshair);
+        var style = this.crosshairStyleFactory.from(matrixStack, calculatedStyle, this.crosshair);
         var isItemCooldownEnabled = this.crosshair.isItemCooldownEnabled.get();
         var isDotEnabled = this.crosshair.isDotEnabled.get();
 
@@ -56,7 +60,7 @@ public final class CrosshairRenderManager {
 
         this.drawDefaultAttackIndicator(matrixStack, computedProperties, x, y);
 
-        var transformMatrixStack = this.crosshair.style.get() == CrosshairStyle.DEBUG
+        var transformMatrixStack = calculatedStyle == CrosshairStyle.DEBUG
             ? RenderSystem.getModelViewStack()
             : matrixStack;
 

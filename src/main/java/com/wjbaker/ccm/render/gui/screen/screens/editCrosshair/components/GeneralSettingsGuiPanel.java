@@ -34,6 +34,13 @@ public final class GeneralSettingsGuiPanel extends PanelGuiComponent {
             crosshair.style.get());
         crosshairStyleSlider.bind(crosshair.style);
 
+        var isKeepDebugEnabledCheckbox = new CheckBoxGuiComponent(
+            this.parentGuiScreen,
+            -1, -1,
+            "Keep Default Debug Crosshair When HUD Is Visible",
+            crosshair.isKeepDebugEnabled.get());
+        isKeepDebugEnabledCheckbox.bind(crosshair.isKeepDebugEnabled);
+
         var blockOutlineColourColourPicker = new ColourPickerGuiComponent(
             this.parentGuiScreen,
             crosshair,
@@ -44,6 +51,7 @@ public final class GeneralSettingsGuiPanel extends PanelGuiComponent {
         this.addComponent(heading);
         this.addComponent(isModEnabledCheckbox);
         this.addComponent(crosshairStyleSlider);
+        this.addComponent(isKeepDebugEnabledCheckbox);
         this.addComponent(blockOutlineColourColourPicker);
         this.pack();
     }
