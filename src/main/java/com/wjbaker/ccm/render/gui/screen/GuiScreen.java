@@ -182,5 +182,6 @@ public abstract class GuiScreen extends GuiScreenAdapter {
     @Override
     public void close() {
         CustomCrosshairMod.INSTANCE.configManager().write();
+        super.close();
     }
 }

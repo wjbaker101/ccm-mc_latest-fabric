@@ -17,9 +17,8 @@ public abstract class GuiScreenAdapter extends Screen implements IGuiScreen {
     }
 
     @Override
-    public void onClose() {
-        this.close();
-        super.onClose();
+    public void close() {
+        super.close();
     }
 
     @Override
