@@ -20,6 +20,8 @@ public final class CustomCrosshair {
     public final IntegerProperty thickness;
     public final IntegerProperty rotation;
     public final IntegerProperty scale;
+    public final IntegerProperty offsetX;
+    public final IntegerProperty offsetY;
 
     public final BooleanProperty isVisibleDefault;
     public final BooleanProperty isVisibleHiddenGui;
@@ -68,6 +70,8 @@ public final class CustomCrosshair {
             this.thickness = new IntegerProperty("crosshair_thickness", null),
             this.rotation = new IntegerProperty("crosshair_rotation", null),
             this.scale = new IntegerProperty("crosshair_scale", null),
+            this.offsetX = new IntegerProperty("crosshair_offset_x", null),
+            this.offsetY = new IntegerProperty("crosshair_offset_y", null),
 
             this.isVisibleDefault = new BooleanProperty("visible_default", null),
             this.isVisibleHiddenGui = new BooleanProperty("visible_hiddengui", null),
@@ -117,6 +121,8 @@ public final class CustomCrosshair {
         this.thickness.set(1);
         this.rotation.set(0);
         this.scale.set(100);
+        this.offsetX.set(0);
+        this.offsetY.set(0);
 
         this.isVisibleDefault.set(true);
         this.isVisibleHiddenGui.set(true);
