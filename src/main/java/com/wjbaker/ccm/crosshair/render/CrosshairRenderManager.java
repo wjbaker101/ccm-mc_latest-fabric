@@ -62,7 +62,10 @@ public final class CrosshairRenderManager {
             ? RenderSystem.getModelViewStack()
             : matrixStack;
 
-        this.preTransformation(transformMatrixStack, crosshair, x, y);
+        var renderX = x + crosshair.offsetX.get();
+        var renderY = y + crosshair.offsetY.get();
+
+        this.preTransformation(transformMatrixStack, crosshair, renderX, renderY);
 
         style.draw(0, 0, computedProperties);
 
