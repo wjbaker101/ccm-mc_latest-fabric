@@ -59,7 +59,7 @@ public final class ShapeSettingsGuiPanel extends PanelGuiComponent {
 
         var offsetYSlider = new IntegerSliderGuiComponent(
             this.parentGuiScreen, -1, -1, 250, "Offset (Y)", -500, 500, crosshair.offsetY.get());
-        offsetXSlider.bind(crosshair.offsetY);
+        offsetYSlider.bind(crosshair.offsetY);
 
         this.addComponent(heading);
         this.addComponent(colourPicker);
