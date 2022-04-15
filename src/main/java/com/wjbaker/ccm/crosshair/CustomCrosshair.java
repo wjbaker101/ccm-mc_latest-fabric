@@ -58,50 +58,96 @@ public final class CustomCrosshair {
 
     public CustomCrosshair() {
         this.propertiesAsList = Lists.newArrayList(
-            this.style = new EnumProperty<>("crosshair_style", CrosshairStyle.CROSS),
-            this.isKeepDebugEnabled = new BooleanProperty("crosshair_keep_debug_enabled", false),
-            this.colour = new RGBAProperty("crosshair_colour", ModTheme.WHITE),
-            this.isAdaptiveColourEnabled = new BooleanProperty("crosshair_adaptive_colour_enabled", false),
-            this.width = new IntegerProperty("crosshair_width", 4),
-            this.height = new IntegerProperty("crosshair_height", 4),
-            this.gap = new IntegerProperty("crosshair_gap", 3),
-            this.thickness = new IntegerProperty("crosshair_thickness", 1),
-            this.rotation = new IntegerProperty("crosshair_rotation", 0),
-            this.scale = new IntegerProperty("crosshair_scale", 100),
+            this.style = new EnumProperty<>("crosshair_style", null),
+            this.isKeepDebugEnabled = new BooleanProperty("crosshair_keep_debug_enabled", null),
+            this.colour = new RGBAProperty("crosshair_colour", null),
+            this.isAdaptiveColourEnabled = new BooleanProperty("crosshair_adaptive_colour_enabled", null),
+            this.width = new IntegerProperty("crosshair_width", null),
+            this.height = new IntegerProperty("crosshair_height", null),
+            this.gap = new IntegerProperty("crosshair_gap", null),
+            this.thickness = new IntegerProperty("crosshair_thickness", null),
+            this.rotation = new IntegerProperty("crosshair_rotation", null),
+            this.scale = new IntegerProperty("crosshair_scale", null),
 
-            this.isVisibleDefault = new BooleanProperty("visible_default", true),
-            this.isVisibleHiddenGui = new BooleanProperty("visible_hiddengui", true),
-            this.isVisibleDebug = new BooleanProperty("visible_debug", true),
-            this.isVisibleThirdPerson = new BooleanProperty("visible_thirdperson", false),
-            this.isVisibleSpectator = new BooleanProperty("visible_spectator", true),
-            this.isVisibleHoldingRangedWeapon = new BooleanProperty("visible_holding_ranged_weapon", true),
-            this.isVisibleHoldingThrowableItem = new BooleanProperty("visible_holding_throwable_item", true),
-            this.isVisibleUsingSpyglass = new BooleanProperty("visible_holding_spyglass", false),
+            this.isVisibleDefault = new BooleanProperty("visible_default", null),
+            this.isVisibleHiddenGui = new BooleanProperty("visible_hiddengui", null),
+            this.isVisibleDebug = new BooleanProperty("visible_debug", null),
+            this.isVisibleThirdPerson = new BooleanProperty("visible_thirdperson", null),
+            this.isVisibleSpectator = new BooleanProperty("visible_spectator", null),
+            this.isVisibleHoldingRangedWeapon = new BooleanProperty("visible_holding_ranged_weapon", null),
+            this.isVisibleHoldingThrowableItem = new BooleanProperty("visible_holding_throwable_item", null),
+            this.isVisibleUsingSpyglass = new BooleanProperty("visible_holding_spyglass", null),
 
-            this.isOutlineEnabled = new BooleanProperty("outline_enabled", true),
-            this.outlineColour = new RGBAProperty("outline_colour", ModTheme.BLACK),
+            this.isOutlineEnabled = new BooleanProperty("outline_enabled", null),
+            this.outlineColour = new RGBAProperty("outline_colour", null),
 
-            this.isDotEnabled = new BooleanProperty("dot_enabled", false),
-            this.dotColour = new RGBAProperty("dot_colour", ModTheme.WHITE),
+            this.isDotEnabled = new BooleanProperty("dot_enabled", null),
+            this.dotColour = new RGBAProperty("dot_colour", null),
 
-            this.isDynamicAttackIndicatorEnabled = new BooleanProperty("dynamic_attackindicator_enabled", true),
-            this.isDynamicBowEnabled = new BooleanProperty("dynamic_bow_enabled", true),
+            this.isDynamicAttackIndicatorEnabled = new BooleanProperty("dynamic_attackindicator_enabled", null),
+            this.isDynamicBowEnabled = new BooleanProperty("dynamic_bow_enabled", null),
 
-            this.isHighlightHostilesEnabled = new BooleanProperty("highlight_hostile_enabled", true),
-            this.isHighlightPassivesEnabled = new BooleanProperty("highlight_passive_enabled", true),
-            this.isHighlightPlayersEnabled = new BooleanProperty("highlight_players_enabled", true),
+            this.isHighlightHostilesEnabled = new BooleanProperty("highlight_hostile_enabled", null),
+            this.isHighlightPassivesEnabled = new BooleanProperty("highlight_passive_enabled", null),
+            this.isHighlightPlayersEnabled = new BooleanProperty("highlight_players_enabled", null),
 
-            this.highlightHostilesColour = new RGBAProperty("highlight_hostile_colour", new RGBA(220, 40, 40, 255)),
-            this.highlightPassivesColour = new RGBAProperty("highlight_passive_colour", new RGBA(40, 230, 40, 255)),
-            this.highlightPlayersColour = new RGBAProperty("highlight_players_colour", new RGBA(60, 60, 240, 255)),
+            this.highlightHostilesColour = new RGBAProperty("highlight_hostile_colour", null),
+            this.highlightPassivesColour = new RGBAProperty("highlight_passive_colour", null),
+            this.highlightPlayersColour = new RGBAProperty("highlight_players_colour", null),
 
-            this.isItemCooldownEnabled = new BooleanProperty("itemcooldown_enabled", true),
-            this.itemCooldownColour = new RGBAProperty("itemcooldown_colour", ModTheme.WHITE.setOpacity(80)),
+            this.isItemCooldownEnabled = new BooleanProperty("itemcooldown_enabled", null),
+            this.itemCooldownColour = new RGBAProperty("itemcooldown_colour", null),
 
-            this.isRainbowEnabled = new BooleanProperty("rainbow_enabled", false),
-            this.rainbowSpeed = new IntegerProperty("rainbow_speed", 500)
+            this.isRainbowEnabled = new BooleanProperty("rainbow_enabled", null),
+            this.rainbowSpeed = new IntegerProperty("rainbow_speed", null)
         );
+        this.resetProperties();
 
         this.rainbowTicks = new IntegerProperty("rainbow_ticks", 0);
+    }
+
+    public void resetProperties() {
+        this.style.set(CrosshairStyle.CROSS);
+        this.isKeepDebugEnabled.set(false);
+        this.colour.set(ModTheme.WHITE);
+        this.isAdaptiveColourEnabled.set(false);
+        this.width.set(4);
+        this.height.set(4);
+        this.gap.set(3);
+        this.thickness.set(1);
+        this.rotation.set(0);
+        this.scale.set(100);
+
+        this.isVisibleDefault.set(true);
+        this.isVisibleHiddenGui.set(true);
+        this.isVisibleDebug.set(true);
+        this.isVisibleThirdPerson.set(false);
+        this.isVisibleSpectator.set(true);
+        this.isVisibleHoldingRangedWeapon.set(true);
+        this.isVisibleHoldingThrowableItem.set(true);
+        this.isVisibleUsingSpyglass.set(false);
+
+        this.isOutlineEnabled.set(true);
+        this.outlineColour.set(ModTheme.BLACK);
+
+        this.isDotEnabled.set(false);
+        this.dotColour.set(ModTheme.WHITE);
+
+        this.isDynamicAttackIndicatorEnabled.set(true);
+        this.isDynamicBowEnabled.set(true);
+
+        this.isHighlightHostilesEnabled.set(true);
+        this.isHighlightPassivesEnabled.set(true);
+        this.isHighlightPlayersEnabled.set(true);
+
+        this.highlightHostilesColour.set(new RGBA(220, 40, 40, 255));
+        this.highlightPassivesColour.set(new RGBA(40, 230, 40, 255));
+        this.highlightPlayersColour.set(new RGBA(60, 60, 240, 255));
+
+        this.isItemCooldownEnabled.set(true);
+        this.itemCooldownColour.set(ModTheme.WHITE.setOpacity(80));
+
+        this.isRainbowEnabled.set(false);
+        this.rainbowSpeed.set(500);
     }
 }

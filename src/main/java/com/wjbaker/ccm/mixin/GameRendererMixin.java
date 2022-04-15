@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
 
-    private final CrosshairRenderManager crosshairRenderManager = new CrosshairRenderManager(
-        CustomCrosshairMod.INSTANCE.properties().getCrosshair());
+    private final CrosshairRenderManager crosshairRenderManager = new CrosshairRenderManager();
 
     @Inject(
             at = @At(
@@ -31,6 +30,7 @@ public class GameRendererMixin {
         var x = window.getScaledWidth() / 2;
         var y = window.getScaledHeight() / 2;
 
-        this.crosshairRenderManager.draw(new MatrixStack(), x, y);
+        var crosshair = CustomCrosshairMod.INSTANCE.properties().getCrosshair();
+        this.crosshairRenderManager.draw(new MatrixStack(), crosshair, x, y);
     }
 }

@@ -21,7 +21,6 @@ import java.util.Set;
 
 public final class CrosshairRenderManager {
 
-    private final CustomCrosshair crosshair;
     private final RenderManager renderManager;
     private final CrosshairStyleFactory crosshairStyleFactory;
 
@@ -30,33 +29,32 @@ public final class CrosshairRenderManager {
         Items.CHORUS_FRUIT
     );
 
-    public CrosshairRenderManager(final CustomCrosshair crosshair) {
-        this.crosshair = crosshair;
+    public CrosshairRenderManager() {
         this.renderManager = new RenderManager();
         this.crosshairStyleFactory = new CrosshairStyleFactory();
     }
 
-    public void draw(final MatrixStack matrixStack, final int x, final int y) {
-        var computedProperties = new ComputedProperties(this.crosshair);
+    public void draw(final MatrixStack matrixStack, final CustomCrosshair crosshair, final int x, final int y) {
+        var computedProperties = new ComputedProperties(crosshair);
 
         if (!computedProperties.isVisible())
             return;
 
         var calculatedStyle = MinecraftClient.getInstance().options.debugEnabled && crosshair.isKeepDebugEnabled.get()
             ? CrosshairStyle.DEBUG
-            : this.crosshair.style.get();
+            : crosshair.style.get();
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-        var style = this.crosshairStyleFactory.from(matrixStack, calculatedStyle, this.crosshair);
-        var isItemCooldownEnabled = this.crosshair.isItemCooldownEnabled.get();
-        var isDotEnabled = this.crosshair.isDotEnabled.get();
+        var style = this.crosshairStyleFactory.from(matrixStack, calculatedStyle, crosshair);
+        var isItemCooldownEnabled = crosshair.isItemCooldownEnabled.get();
+        var isDotEnabled = crosshair.isDotEnabled.get();
 
         if (isItemCooldownEnabled)
-            this.drawItemCooldownIndicator(matrixStack, computedProperties, x, y);
+            this.drawItemCooldownIndicator(matrixStack, crosshair, computedProperties, x, y);
 
-        if (isDotEnabled && this.crosshair.style.get() != CrosshairStyle.DEFAULT)
-            this.renderManager.drawCircle(matrixStack, x, y, 0.5F, 1.0F, this.crosshair.dotColour.get());
+        if (isDotEnabled && crosshair.style.get() != CrosshairStyle.DEFAULT)
+            this.renderManager.drawCircle(matrixStack, x, y, 0.5F, 1.0F, crosshair.dotColour.get());
 
         this.drawDefaultAttackIndicator(matrixStack, computedProperties, x, y);
 
@@ -64,16 +62,20 @@ public final class CrosshairRenderManager {
             ? RenderSystem.getModelViewStack()
             : matrixStack;
 
-        this.preTransformation(transformMatrixStack, x, y);
+        this.preTransformation(transformMatrixStack, crosshair, x, y);
 
         style.draw(0, 0, computedProperties);
 
         this.postTransformation(transformMatrixStack);
     }
 
-    private void preTransformation(final MatrixStack matrixStack, final int x, final int y) {
-        var rotation = this.crosshair.rotation.get();
-        var scale = this.crosshair.scale.get() - 2;
+    private void preTransformation(
+        final MatrixStack matrixStack,
+        final CustomCrosshair crosshair,
+        final int x, final int y) {
+
+        var rotation = crosshair.rotation.get();
+        var scale = crosshair.scale.get() - 2;
         var windowScaling = (float)MinecraftClient.getInstance().getWindow().getScaleFactor() / 2.0F;
 
         matrixStack.push();
@@ -91,6 +93,7 @@ public final class CrosshairRenderManager {
 
     private void drawItemCooldownIndicator(
         final MatrixStack matrixStack,
+        final CustomCrosshair crosshair,
         final ComputedProperties computedProperties,
         final int x, final int y) {
 
@@ -99,10 +102,10 @@ public final class CrosshairRenderManager {
         if (player == null)
             return;
 
-        var colour = this.crosshair.itemCooldownColour.get();
+        var colour = crosshair.itemCooldownColour.get();
 
-        var width = this.crosshair.width.get();
-        var height = this.crosshair.height.get();
+        var width = crosshair.width.get();
+        var height = crosshair.height.get();
         var maxSize = Math.max(width, height);
         var offset = 3;
 

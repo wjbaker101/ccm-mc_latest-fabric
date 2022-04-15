@@ -23,7 +23,7 @@ public final class CrosshairPreviewGuiComponent extends GuiComponent {
         super(parentGuiScreen, x, y, 150, 150);
 
         this.crosshair = crosshair;
-        this.crosshairRenderManager = new CrosshairRenderManager(this.crosshair);
+        this.crosshairRenderManager = new CrosshairRenderManager();
     }
 
     @Override
@@ -56,7 +56,7 @@ public final class CrosshairPreviewGuiComponent extends GuiComponent {
             2.0F,
             ModTheme.PRIMARY);
 
-        this.crosshairRenderManager.draw(matrixStack, this.x + (this.width / 2), this.y + (this.height / 2));
+        this.crosshairRenderManager.draw(matrixStack, this.crosshair, this.x + (this.width / 2), this.y + (this.height / 2));
 
         if (!CustomCrosshairMod.INSTANCE.properties().getIsModEnabled().get())
             this.renderManager.drawSmallText(

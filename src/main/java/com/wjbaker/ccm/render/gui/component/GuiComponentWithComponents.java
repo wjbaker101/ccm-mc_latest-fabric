@@ -10,6 +10,10 @@ public abstract class GuiComponentWithComponents extends GuiComponentTheme imple
 
     protected List<GuiComponent> components = new ArrayList<>();
 
+    public void clearComponents() {
+        this.components.clear();
+    }
+
     public void draw(final MatrixStack matrixStack) {
         this.components.forEach(x -> x.draw(matrixStack));
     }
