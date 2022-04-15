@@ -53,6 +53,14 @@ public final class ShapeSettingsGuiPanel extends PanelGuiComponent {
             this.parentGuiScreen, -1, -1, 250, "Scale (%)", 25, 500, crosshair.scale.get());
         scaleSlider.bind(crosshair.scale);
 
+        var offsetXSlider = new IntegerSliderGuiComponent(
+            this.parentGuiScreen, -1, -1, 250, "Offset (X)", -500, 500, crosshair.offsetX.get());
+        offsetXSlider.bind(crosshair.offsetX);
+
+        var offsetYSlider = new IntegerSliderGuiComponent(
+            this.parentGuiScreen, -1, -1, 250, "Offset (Y)", -500, 500, crosshair.offsetY.get());
+        offsetXSlider.bind(crosshair.offsetY);
+
         this.addComponent(heading);
         this.addComponent(colourPicker);
         this.addComponent(isBlendEnabledCheckBox);
@@ -62,6 +70,8 @@ public final class ShapeSettingsGuiPanel extends PanelGuiComponent {
         this.addComponent(thicknessSlider);
         this.addComponent(rotationSlider);
         this.addComponent(scaleSlider);
+        this.addComponent(offsetXSlider);
+        this.addComponent(offsetYSlider);
         this.pack();
     }
 }
