@@ -5,9 +5,8 @@
     "compatibilityLevel": "JAVA_8",
     "mixins": [],
     "client": [
-        "InGameHudMixin",
         "GameRendererMixin",
-        "WorldRendererMixin"
+        "InGameHudMixin"
     ],
     "injectors": {
         "defaultRequire": 1

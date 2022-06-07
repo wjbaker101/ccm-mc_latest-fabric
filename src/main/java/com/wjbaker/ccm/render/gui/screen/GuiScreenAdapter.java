@@ -2,12 +2,12 @@ package com.wjbaker.ccm.render.gui.screen;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 
 public abstract class GuiScreenAdapter extends Screen implements IGuiScreen {
 
     protected GuiScreenAdapter(final String title) {
-        super(new LiteralText(title));
+        super(Text.of(title));
     }
 
     @Override

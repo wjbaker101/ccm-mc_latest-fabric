@@ -66,8 +66,7 @@ public final class RenderManager {
         }
 
         RenderSystem.lineWidth(thickness);
-        bufferBuilder.end();
-        BufferRenderer.draw(bufferBuilder);
+        BufferRenderer.drawWithShader(bufferBuilder.end());
 
         this.postRender(matrixStack);
     }
@@ -104,8 +103,7 @@ public final class RenderManager {
                 .next();
         }
 
-        bufferBuilder.end();
-        BufferRenderer.draw(bufferBuilder);
+        BufferRenderer.drawWithShader(bufferBuilder.end());
 
         this.postRender(matrixStack);
     }
@@ -219,8 +217,7 @@ public final class RenderManager {
                 .next();
         }
 
-        bufferBuilder.end();
-        BufferRenderer.draw(bufferBuilder);
+        BufferRenderer.drawWithShader(bufferBuilder.end());
 
         this.postRender(matrixStack);
     }
@@ -286,8 +283,7 @@ public final class RenderManager {
                 .next();
         }
 
-        bufferBuilder.end();
-        BufferRenderer.draw(bufferBuilder);
+        BufferRenderer.drawWithShader(bufferBuilder.end());
 
         this.postRender(matrixStack);
     }

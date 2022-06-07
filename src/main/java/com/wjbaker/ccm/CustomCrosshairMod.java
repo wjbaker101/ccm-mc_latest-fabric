@@ -2,7 +2,6 @@ package com.wjbaker.ccm;
 
 import com.wjbaker.ccm.config.ConfigManager;
 import com.wjbaker.ccm.config.GlobalProperties;
-import com.wjbaker.ccm.crosshair.property.ICrosshairProperty;
 import com.wjbaker.ccm.helper.RequestHelper;
 import com.wjbaker.ccm.render.gui.screen.screens.editCrosshair.EditCrosshairGuiScreen;
 import net.fabricmc.api.ModInitializer;
@@ -15,7 +14,6 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
-import java.util.stream.Collectors;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -25,7 +23,7 @@ public final class CustomCrosshairMod implements ModInitializer {
 
     public static final String TITLE = "Custom Crosshair Mod";
     public static final String VERSION = "1.4.0-fabric";
-    public static final String MC_VERSION = "1.18.2-fabric";
+    public static final String MC_VERSION = "1.19-fabric";
     public static final String CURSEFORGE_PAGE = "https://www.curseforge.com/projects/242995/";
     public static final String MC_FORUMS_PAGE = "https://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/2637819/";
     public static final String PATREON_PAGE = "https://www.patreon.com/bePatron?u=66431720";
@@ -56,8 +54,7 @@ public final class CustomCrosshairMod implements ModInitializer {
         this.configManager = new ConfigManager(
             "crosshair_config.ccmcfg",
             this.properties.getCrosshair(),
-            this.properties.getIsModEnabled(),
-            this.properties.getBlockOutlineColour());
+            this.properties.getIsModEnabled());
 
         if (!this.configManager.read()) {
             if (!this.configManager.write()) {

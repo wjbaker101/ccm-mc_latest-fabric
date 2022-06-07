@@ -143,7 +143,7 @@ public final class CrosshairRenderManager {
 
         var mc = MinecraftClient.getInstance();
 
-        if (mc.options.attackIndicator == AttackIndicator.CROSSHAIR && mc.player != null) {
+        if (mc.options.getAttackIndicator().getValue() == AttackIndicator.CROSSHAIR && mc.player != null) {
             var f = mc.player.getAttackCooldownProgress(0.0F);
             var bl = false;
 
