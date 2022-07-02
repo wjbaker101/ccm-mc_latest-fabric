@@ -68,14 +68,14 @@ public final class DrawCrosshairGuiComponent extends GuiComponent {
 
     private RGBA getGridColour(final int x, final int y) {
         var imageSize = this.imageSize.get();
-
         var isOdd = imageSize % 2 != 0;
-
         var middle = imageSize / 2;
 
-        if (x == middle && y == middle) {
+        var centerWhenOdd = isOdd && x == middle && y == middle;
+        var centerWhenEven = !isOdd && (x == middle - 1 || x == middle) && (y == middle - 1 || y == middle);
+
+        if (centerWhenOdd || centerWhenEven)
             return ModTheme.DARK_GREY.setOpacity(220);
-        }
 
         if ((x % 2 == 0 && y % 2 == 0) || (x % 2 != 0 && y % 2 != 0))
             return ModTheme.WHITE.setOpacity(140);
