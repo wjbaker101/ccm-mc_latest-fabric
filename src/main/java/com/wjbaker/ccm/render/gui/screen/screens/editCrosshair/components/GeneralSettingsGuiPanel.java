@@ -2,11 +2,11 @@ package com.wjbaker.ccm.render.gui.screen.screens.editCrosshair.components;
 
 import com.wjbaker.ccm.CustomCrosshairMod;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.render.gui.component.components.CheckBoxGuiComponent;
-import com.wjbaker.ccm.render.gui.component.components.EnumSliderGuiComponent;
-import com.wjbaker.ccm.render.gui.component.components.HeadingGuiComponent;
-import com.wjbaker.ccm.render.gui.component.components.PanelGuiComponent;
+import com.wjbaker.ccm.render.gui.component.components.*;
+import com.wjbaker.ccm.render.gui.component.event.IOnClickEvent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
+import com.wjbaker.ccm.render.gui.screen.screens.drawCrosshair.DrawCrosshairGuiScreen;
+import net.minecraft.client.MinecraftClient;
 
 public final class GeneralSettingsGuiPanel extends PanelGuiComponent {
 
@@ -44,10 +44,16 @@ public final class GeneralSettingsGuiPanel extends PanelGuiComponent {
             crosshair.isKeepDebugEnabled.get());
         isKeepDebugEnabledCheckbox.bind(crosshair.isKeepDebugEnabled);
 
+        var drawCrosshairButton = new ButtonGuiComponent(this.parentGuiScreen, -1, -1, 90, 15, "Draw Crosshair");
+        drawCrosshairButton.addEvent(IOnClickEvent.class, () -> {
+            MinecraftClient.getInstance().setScreen(new DrawCrosshairGuiScreen());
+        });
+
         this.addComponent(heading);
         this.addComponent(isModEnabledCheckbox);
         this.addComponent(crosshairStyleSlider);
         this.addComponent(isKeepDebugEnabledCheckbox);
+        this.addComponent(drawCrosshairButton);
         this.pack();
     }
 }

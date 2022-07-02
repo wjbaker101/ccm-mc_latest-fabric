@@ -20,7 +20,7 @@ public final class CustomCrosshairDrawer {
         this.reset(17, 17);
     }
 
-    private void reset(final int width, final int height) {
+    public void reset(final int width, final int height) {
         this.width = width;
         this.height = height;
         this.pixels = new int[this.width][this.height];
