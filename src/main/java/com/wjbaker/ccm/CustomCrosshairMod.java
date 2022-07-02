@@ -48,6 +48,8 @@ public final class CustomCrosshairMod implements ModInitializer {
         this.loadConfig();
         this.checkVersion();
         this.loadKeyBindings();
+
+        this.properties.getCustomCrosshairDrawer().loadImage();
     }
 
     private void loadConfig() {

@@ -2,6 +2,7 @@ package com.wjbaker.ccm.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.wjbaker.ccm.crosshair.custom.CustomCrosshairDrawer;
 import com.wjbaker.ccm.render.type.GuiBounds;
 import com.wjbaker.ccm.render.type.IDrawInsideWindowCallback;
 import com.wjbaker.ccm.type.RGBA;
@@ -286,6 +287,23 @@ public final class RenderManager {
         BufferRenderer.drawWithShader(bufferBuilder.end());
 
         this.postRender(matrixStack);
+    }
+
+    public void drawImage(
+        final MatrixStack matrixStack,
+        final int x, final int y,
+        final CustomCrosshairDrawer image,
+        final RGBA colour) {
+
+        var width = image.getWidth();
+        var height = image.getHeight();
+
+        for (int imageX = 0; imageX < width; ++imageX) {
+            for (int imageY = 0; imageY < height; ++imageY) {
+                if (image.getAt(imageX, imageY) == 1)
+                    this.drawFilledRectangle(matrixStack, x + imageX, y + imageY, x + imageX + 1, y + imageY + 1, colour);
+            }
+        }
     }
 
     public void drawText(final MatrixStack matrixStack, final String text, final int x, final int y, final RGBA colour, final boolean hasShadow) {
