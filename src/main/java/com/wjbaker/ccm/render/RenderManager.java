@@ -293,15 +293,23 @@ public final class RenderManager {
         final MatrixStack matrixStack,
         final int x, final int y,
         final CustomCrosshairDrawer image,
-        final RGBA colour) {
+        final RGBA colour,
+        final boolean isCentered) {
+
+        var offsetX = isCentered ? image.getWidth() / 2.0F : 0;
+        var offsetY = isCentered ? image.getHeight() / 2.0F : 0;
 
         var width = image.getWidth();
         var height = image.getHeight();
 
         for (int imageX = 0; imageX < width; ++imageX) {
             for (int imageY = 0; imageY < height; ++imageY) {
-                if (image.getAt(imageX, imageY) == 1)
-                    this.drawFilledRectangle(matrixStack, x + imageX, y + imageY, x + imageX + 1, y + imageY + 1, colour);
+                if (image.getAt(imageX, imageY) == 1) {
+                    var drawX = x + imageX - offsetX;
+                    var drawY = y + imageY - offsetY;
+
+                    this.drawFilledRectangle(matrixStack, drawX, drawY, drawX + 1, drawY + 1, colour);
+                }
             }
         }
     }
