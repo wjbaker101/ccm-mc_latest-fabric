@@ -14,6 +14,7 @@ public final class CrosshairStyleFactory {
             case TRIANGLE -> new TriangleStyle(matrixStack, crosshair);
             case ARROW -> new ArrowStyle(matrixStack, crosshair);
             case DEBUG -> new DebugStyle(matrixStack, crosshair);
+            case DRAWN -> new DrawnStyle(matrixStack, crosshair);
 
             default -> new CrossStyle(matrixStack, crosshair);
         };
