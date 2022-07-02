@@ -17,7 +17,7 @@ public final class CustomCrosshairDrawer {
     private int[][] pixels;
 
     public CustomCrosshairDrawer() {
-        this.reset(17, 17);
+        this.reset(57, 57);
     }
 
     public void reset(final int width, final int height) {
