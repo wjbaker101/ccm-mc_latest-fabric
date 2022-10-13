@@ -56,6 +56,8 @@ public final class CustomCrosshair {
     public final IntegerProperty rainbowSpeed;
     public final IntegerProperty rainbowTicks;
 
+    public final BooleanProperty isToolDamageEnabled;
+
     public final List<ICrosshairProperty<?>> propertiesAsList;
 
     public CustomCrosshair() {
@@ -103,7 +105,9 @@ public final class CustomCrosshair {
             this.itemCooldownColour = new RGBAProperty("itemcooldown_colour", null),
 
             this.isRainbowEnabled = new BooleanProperty("rainbow_enabled", null),
-            this.rainbowSpeed = new IntegerProperty("rainbow_speed", null)
+            this.rainbowSpeed = new IntegerProperty("rainbow_speed", null),
+
+            this.isToolDamageEnabled = new BooleanProperty("tool_damage_enabled", null)
         );
         this.resetProperties();
 
@@ -155,5 +159,7 @@ public final class CustomCrosshair {
 
         this.isRainbowEnabled.set(false);
         this.rainbowSpeed.set(500);
+
+        this.isToolDamageEnabled.set(true);
     }
 }
