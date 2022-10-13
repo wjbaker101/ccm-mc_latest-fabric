@@ -6,10 +6,15 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.style.CrosshairStyle;
 import com.wjbaker.ccm.crosshair.style.CrosshairStyleFactory;
+import com.wjbaker.ccm.render.ModTheme;
 import com.wjbaker.ccm.render.RenderManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.option.AttackIndicator;
+import net.minecraft.client.render.DiffuseLighting;
+import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.model.json.ModelTransformation;
+import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
@@ -64,6 +69,8 @@ public final class CrosshairRenderManager {
 
         var renderX = x + crosshair.offsetX.get();
         var renderY = y + crosshair.offsetY.get();
+
+        this.drawToolDamageIndicator(transformMatrixStack, crosshair, computedProperties, renderX, renderY);
 
         this.preTransformation(transformMatrixStack, crosshair, renderX, renderY);
 
@@ -165,5 +172,62 @@ public final class CrosshairRenderManager {
                 DrawableHelper.drawTexture(matrixStack, k, j, 52, 94, l, 4, 256, 256);
             }
         }
+    }
+
+    private void drawToolDamageIndicator(
+        final MatrixStack matrixStackP,
+        final CustomCrosshair crosshair,
+        final ComputedProperties computedProperties,
+        final int x, final int y) {
+
+        if (!crosshair.isToolDamageEnabled.get())
+            return;
+
+        var drawX = x + crosshair.gap.get() + 5;
+        var drawY = y + crosshair.gap.get() + 5;
+
+        var mc = MinecraftClient.getInstance();
+        if (mc.player == null || mc.player.getMainHandStack() == null)
+            return;
+
+        var tool = mc.player.getMainHandStack();
+        if (!tool.isDamageable())
+            return;
+
+        var remainingDamage = tool.getMaxDamage() - tool.getDamage();
+
+        if (remainingDamage > 10)
+            return;
+
+        var itemRenderer = mc.getItemRenderer();
+        var model = itemRenderer.getModel(tool, null, null, 0);
+
+        mc.getTextureManager().getTexture(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).setFilter(false, false);
+        RenderSystem.setShaderTexture(0, SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
+
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        MatrixStack matrixStack = RenderSystem.getModelViewStack();
+        matrixStack.push();
+        matrixStack.translate(x, y, (100.0F + 1));
+        matrixStack.translate(8.0D, 8.0D, 0.0D);
+        matrixStack.scale(1.0F, -1.0F, 1.0F);
+        matrixStack.scale(8F, 8F, 8F);
+        RenderSystem.applyModelViewMatrix();
+
+        var immediate = mc.getBufferBuilders().getEntityVertexConsumers();
+        DiffuseLighting.disableGuiDepthLighting();
+
+        itemRenderer.renderItem(tool, ModelTransformation.Mode.GUI, false, new MatrixStack(), immediate, 15728880, OverlayTexture.DEFAULT_UV, model);
+        immediate.draw();
+
+        RenderSystem.enableDepthTest();
+        DiffuseLighting.enableGuiDepthLighting();
+
+        matrixStack.pop();
+
+        this.renderManager.drawSmallText(matrixStackP, "" + remainingDamage, drawX + 6, drawY, ModTheme.WHITE, true);
     }
 }
