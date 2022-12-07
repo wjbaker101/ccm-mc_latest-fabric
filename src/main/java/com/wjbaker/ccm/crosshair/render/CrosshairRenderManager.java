@@ -19,8 +19,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.util.math.Quaternion;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
+import org.joml.Quaternionf;
 
 import java.util.Set;
 
@@ -91,7 +91,7 @@ public final class CrosshairRenderManager {
         matrixStack.push();
         matrixStack.translate(x, y, 0.0D);
         matrixStack.scale(scale / 100.0F / windowScaling, scale / 100.0F / windowScaling, 1.0F);
-        matrixStack.multiply(new Quaternion(Vec3f.POSITIVE_Z, rotation, true));
+        matrixStack.multiply(new Quaternionf(RotationAxis.POSITIVE_Z.rotationDegrees(rotation)));
 
         RenderSystem.applyModelViewMatrix();
     }

@@ -18,7 +18,7 @@ public final class DefaultStyle extends AbstractCrosshairStyle {
     @Override
     public void draw(final int x, final int y, final ComputedProperties computedProperties) {
         RenderSystem.enableBlend();
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
 
         RenderSystem.blendFuncSeparate(
             GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR,

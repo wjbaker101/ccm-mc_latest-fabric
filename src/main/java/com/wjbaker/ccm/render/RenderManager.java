@@ -25,7 +25,7 @@ public final class RenderManager {
         RenderSystem.enableBlend();
         RenderSystem.disableTexture();
         RenderSystem.defaultBlendFunc();
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
     }
 
     private void postRender(final MatrixStack matrixStack) {
@@ -67,7 +67,7 @@ public final class RenderManager {
         }
 
         RenderSystem.lineWidth(thickness);
-        BufferRenderer.drawWithShader(bufferBuilder.end());
+        BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
 
         this.postRender(matrixStack);
     }
@@ -104,7 +104,7 @@ public final class RenderManager {
                 .next();
         }
 
-        BufferRenderer.drawWithShader(bufferBuilder.end());
+        BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
 
         this.postRender(matrixStack);
     }
@@ -218,7 +218,7 @@ public final class RenderManager {
                 .next();
         }
 
-        BufferRenderer.drawWithShader(bufferBuilder.end());
+        BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
 
         this.postRender(matrixStack);
     }
@@ -284,7 +284,7 @@ public final class RenderManager {
                 .next();
         }
 
-        BufferRenderer.drawWithShader(bufferBuilder.end());
+        BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
 
         this.postRender(matrixStack);
     }

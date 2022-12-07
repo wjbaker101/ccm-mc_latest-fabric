@@ -5,7 +5,7 @@ import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.ComputedProperties;
 import com.wjbaker.ccm.crosshair.style.AbstractCrosshairStyle;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 
 public final class DebugStyle extends AbstractCrosshairStyle {
 
@@ -19,8 +19,8 @@ public final class DebugStyle extends AbstractCrosshairStyle {
 
         var matrixStack = RenderSystem.getModelViewStack();
         matrixStack.push();
-        matrixStack.multiply(Vec3f.NEGATIVE_X.getDegreesQuaternion(camera.getPitch()));
-        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(camera.getYaw()));
+        matrixStack.multiply(RotationAxis.NEGATIVE_X.rotationDegrees(camera.getPitch()));
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(camera.getYaw()));
         matrixStack.scale(-1, -1, -1);
 
         RenderSystem.applyModelViewMatrix();
