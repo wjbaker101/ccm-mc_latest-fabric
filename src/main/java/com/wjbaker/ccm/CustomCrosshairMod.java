@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
+import java.util.concurrent.Executors;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -46,7 +47,7 @@ public final class CustomCrosshairMod implements ModInitializer {
         INSTANCE = this;
 
         this.loadConfig();
-        this.checkVersion();
+        this.checkVersionAsync();
         this.loadKeyBindings();
 
         this.properties.getCustomCrosshairDrawer().loadImage();
@@ -63,6 +64,10 @@ public final class CustomCrosshairMod implements ModInitializer {
                 this.error("Config Manager (Load)", "Unable to load or write config.");
             }
         }
+    }
+
+    private void checkVersionAsync() {
+        Executors.newSingleThreadExecutor().submit(this::checkVersion);
     }
 
     private void checkVersion() {
