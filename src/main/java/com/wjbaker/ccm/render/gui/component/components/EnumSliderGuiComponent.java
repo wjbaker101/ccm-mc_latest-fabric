@@ -4,7 +4,7 @@ import com.wjbaker.ccm.crosshair.property.EnumProperty;
 import com.wjbaker.ccm.render.ModTheme;
 import com.wjbaker.ccm.render.gui.component.type.IBindableGuiComponent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 import org.apache.commons.lang3.StringUtils;
 
 public final class EnumSliderGuiComponent<TEnum extends Enum<TEnum>>
@@ -39,11 +39,11 @@ public final class EnumSliderGuiComponent<TEnum extends Enum<TEnum>>
     }
 
     @Override
-    protected void drawLabel(final MatrixStack matrixStack) {
+    protected void drawLabel(final DrawContext drawContext) {
         var posY = this.y + 8 + this.titleSpacing;
 
         this.renderManager.drawText(
-            matrixStack,
+            drawContext,
             StringUtils.capitalize(this.value.get().name().toLowerCase()),
             this.x + this.width + this.titleSpacing,
             posY + (this.thumbSize / 2) - 3,

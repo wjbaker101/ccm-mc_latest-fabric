@@ -4,7 +4,7 @@ import com.wjbaker.ccm.crosshair.property.IntegerProperty;
 import com.wjbaker.ccm.render.ModTheme;
 import com.wjbaker.ccm.render.gui.component.type.IBindableGuiComponent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 public class IntegerSliderGuiComponent
     extends SliderGuiComponent
@@ -40,11 +40,11 @@ public class IntegerSliderGuiComponent
     }
 
     @Override
-    protected void drawLabel(final MatrixStack matrixStack) {
+    protected void drawLabel(final DrawContext drawContext) {
         var posY = this.y + 8 + this.titleSpacing;
 
         this.renderManager.drawText(
-            matrixStack,
+            drawContext,
             "" + this.value.get(),
             this.x + this.width + this.titleSpacing,
             posY + (this.thumbSize / 2) - 3,

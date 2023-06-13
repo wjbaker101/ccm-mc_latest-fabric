@@ -8,7 +8,7 @@ import com.wjbaker.ccm.render.gui.component.type.IBindableGuiComponent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
 import com.wjbaker.ccm.render.gui.screen.screens.editColour.EditColourGuiScreen;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 public final class ColourPickerGuiComponent extends GuiComponent implements IBindableGuiComponent<RGBAProperty> {
 
@@ -41,8 +41,10 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
     }
 
     @Override
-    public void draw(final MatrixStack matrixStack) {
-        super.draw(matrixStack);
+    public void draw(final DrawContext drawContext) {
+        super.draw(drawContext);
+
+        var matrixStack = drawContext.getMatrices();
 
         this.renderManager.drawBorderedRectangle(
             matrixStack,
@@ -59,7 +61,7 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
             this.colour.get());
 
         this.renderManager.drawText(
-            matrixStack,
+            drawContext,
             this.label,
             this.x + this.boxSize + this.labelSpacing,
             this.y + (this.boxSize / 2) - 3,

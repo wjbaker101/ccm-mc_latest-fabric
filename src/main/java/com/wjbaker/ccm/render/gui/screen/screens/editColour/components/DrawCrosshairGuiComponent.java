@@ -7,7 +7,7 @@ import com.wjbaker.ccm.render.ModTheme;
 import com.wjbaker.ccm.render.gui.component.GuiComponent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
 import com.wjbaker.ccm.type.RGBA;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 public final class DrawCrosshairGuiComponent extends GuiComponent {
 
@@ -38,8 +38,10 @@ public final class DrawCrosshairGuiComponent extends GuiComponent {
     }
 
     @Override
-    public void draw(final MatrixStack matrixStack) {
-        super.draw(matrixStack);
+    public void draw(final DrawContext drawContext) {
+        super.draw(drawContext);
+
+        var matrixStack = drawContext.getMatrices();
 
         var gridCount = this.imageSize.get();
 

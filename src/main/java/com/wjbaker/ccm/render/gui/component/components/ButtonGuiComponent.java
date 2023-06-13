@@ -4,7 +4,7 @@ import com.wjbaker.ccm.render.gui.component.GuiComponent;
 import com.wjbaker.ccm.render.gui.component.event.IGuiComponentEvent;
 import com.wjbaker.ccm.render.gui.component.event.IOnClickEvent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +29,10 @@ public final class ButtonGuiComponent extends GuiComponent {
     }
 
     @Override
-    public void draw(final MatrixStack matrixStack) {
-        super.draw(matrixStack);
+    public void draw(final DrawContext drawContext) {
+        super.draw(drawContext);
+
+        var matrixStack = drawContext.getMatrices();
 
         this.renderManager.drawBorderedRectangle(
             matrixStack,
@@ -43,7 +45,7 @@ public final class ButtonGuiComponent extends GuiComponent {
         var centreX = this.x + (this.width / 2) - (this.renderManager.textWidth(this.label) / 2);
         var centreY = this.y + (this.height / 2) - (7 / 2);
 
-        this.renderManager.drawText(matrixStack, this.label, centreX, centreY, this.currentTextColour, false);
+        this.renderManager.drawText(drawContext, this.label, centreX, centreY, this.currentTextColour, false);
     }
 
     @Override

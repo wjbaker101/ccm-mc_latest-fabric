@@ -1,7 +1,7 @@
 package com.wjbaker.ccm.render.gui.screen;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 
 public abstract class GuiScreenAdapter extends Screen implements IGuiScreen {
@@ -22,9 +22,9 @@ public abstract class GuiScreenAdapter extends Screen implements IGuiScreen {
     }
 
     @Override
-    public void render(final MatrixStack matrixStack, final int mouseX, final int mouseY, final float delta) {
-        this.draw(matrixStack);
-        super.render(matrixStack, mouseX, mouseY, delta);
+    public void render(final DrawContext drawContext, final int mouseX, final int mouseY, final float delta) {
+        this.draw(drawContext);
+        super.render(drawContext, mouseX, mouseY, delta);
     }
 
     @Override

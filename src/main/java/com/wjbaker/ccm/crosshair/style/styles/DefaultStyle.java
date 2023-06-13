@@ -5,18 +5,21 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.ComputedProperties;
 import com.wjbaker.ccm.crosshair.style.AbstractCrosshairStyle;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
 
 public final class DefaultStyle extends AbstractCrosshairStyle {
+
+    private static final Identifier ICONS = new Identifier("textures/gui/icons.png");
 
     public DefaultStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
         super(matrixStack, crosshair);
     }
 
     @Override
-    public void draw(final int x, final int y, final ComputedProperties computedProperties) {
+    public void draw(final DrawContext drawContext, final int x, final int y, final ComputedProperties computedProperties) {
         RenderSystem.enableBlend();
         RenderSystem.setShader(GameRenderer::getPositionColorProgram);
 
@@ -26,13 +29,11 @@ public final class DefaultStyle extends AbstractCrosshairStyle {
             GlStateManager.SrcFactor.ONE,
             GlStateManager.DstFactor.ZERO);
 
-        RenderSystem.setShaderTexture(0, DrawableHelper.GUI_ICONS_TEXTURE);
-
         var crosshairSize = 15;
         var textureSize = 256;
 
-        DrawableHelper.drawTexture(
-            this.matrixStack,
+        drawContext.drawTexture(
+            ICONS,
             x - Math.round(crosshairSize / 2.0F),
             y - Math.round(crosshairSize / 2.0F),
             0, 0,

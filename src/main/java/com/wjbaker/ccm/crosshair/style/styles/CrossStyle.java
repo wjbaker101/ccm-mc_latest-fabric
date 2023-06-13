@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.ComputedProperties;
 import com.wjbaker.ccm.crosshair.style.AbstractCrosshairStyle;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 
 public final class CrossStyle extends AbstractCrosshairStyle {
@@ -13,7 +14,7 @@ public final class CrossStyle extends AbstractCrosshairStyle {
     }
 
     @Override
-    public void draw(final int x, final int y, final ComputedProperties computedProperties) {
+    public void draw(final DrawContext drawContext, final int x, final int y, final ComputedProperties computedProperties) {
         RenderSystem.enableBlend();
 
         var isOutlineEnabled = this.crosshair.isOutlineEnabled.get();

@@ -7,7 +7,7 @@ import com.wjbaker.ccm.render.ModTheme;
 import com.wjbaker.ccm.render.gui.component.GuiComponent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
 import com.wjbaker.ccm.type.RGBA;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 public final class CrosshairPreviewGuiComponent extends GuiComponent {
 
@@ -27,8 +27,10 @@ public final class CrosshairPreviewGuiComponent extends GuiComponent {
     }
 
     @Override
-    public void draw(final MatrixStack matrixStack) {
-        super.draw(matrixStack);
+    public void draw(final DrawContext drawContext) {
+        super.draw(drawContext);
+
+        var matrixStack = drawContext.getMatrices();
 
         var gridCount = 30;
         var gridSize = this.width / gridCount;
@@ -56,11 +58,11 @@ public final class CrosshairPreviewGuiComponent extends GuiComponent {
             2.0F,
             ModTheme.PRIMARY);
 
-        this.crosshairRenderManager.draw(matrixStack, this.crosshair, this.x + (this.width / 2), this.y + (this.height / 2));
+        this.crosshairRenderManager.draw(this.crosshair, drawContext, this.x + (this.width / 2), this.y + (this.height / 2));
 
         if (!CustomCrosshairMod.INSTANCE.properties().getIsModEnabled().get())
             this.renderManager.drawSmallText(
-                matrixStack,
+                drawContext,
                 "Mod is disabled, re-enable to see this crosshair!",
                 this.x + 5,
                 this.y + this.height - 8,

@@ -14,7 +14,7 @@ import com.wjbaker.ccm.render.gui.screen.GuiScreen;
 import com.wjbaker.ccm.render.gui.screen.screens.editCrosshair.EditCrosshairGuiScreen;
 import com.wjbaker.ccm.type.RGBA;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 public final class EditColourGuiScreen extends GuiScreen {
 
@@ -119,9 +119,9 @@ public final class EditColourGuiScreen extends GuiScreen {
     }
 
     @Override
-    public void draw(final MatrixStack matrixStack) {
-        super.draw(matrixStack);
+    public void draw(final DrawContext drawContext) {
+        super.draw(drawContext);
 
-        this.crosshairPreviewPanel.draw(matrixStack);
+        this.crosshairPreviewPanel.draw(drawContext);
     }
 }

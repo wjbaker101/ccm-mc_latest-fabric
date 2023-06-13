@@ -4,7 +4,7 @@ import com.wjbaker.ccm.render.ModTheme;
 import com.wjbaker.ccm.render.gui.component.GuiComponent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
 import com.wjbaker.ccm.render.type.GuiBounds;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 public final class ScrollPanelGuiComponent extends PanelGuiComponent {
 
@@ -44,11 +44,13 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
     }
 
     @Override
-    public void draw(final MatrixStack matrixStack) {
-        super.draw(matrixStack);
+    public void draw(final DrawContext drawContext) {
+        super.draw(drawContext);
 
         if (this.contentHeight < this.height)
             return;
+
+        var matrixStack = drawContext.getMatrices();
 
         this.renderManager.drawBorderedRectangle(
             matrixStack,

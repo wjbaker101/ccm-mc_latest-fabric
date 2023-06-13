@@ -9,7 +9,7 @@ import com.wjbaker.ccm.crosshair.style.CrosshairStyleFactory;
 import com.wjbaker.ccm.render.ModTheme;
 import com.wjbaker.ccm.render.RenderManager;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.option.AttackIndicator;
 import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.OverlayTexture;
@@ -19,12 +19,15 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import org.joml.Quaternionf;
 
 import java.util.Set;
 
 public final class CrosshairRenderManager {
+
+    private static final Identifier ICONS = new Identifier("textures/gui/icons.png");
 
     private final RenderManager renderManager;
     private final CrosshairStyleFactory crosshairStyleFactory;
@@ -39,7 +42,7 @@ public final class CrosshairRenderManager {
         this.crosshairStyleFactory = new CrosshairStyleFactory();
     }
 
-    public void draw(final MatrixStack matrixStack, final CustomCrosshair crosshair, final int x, final int y) {
+    public void draw(final CustomCrosshair crosshair, final DrawContext drawContext, final int x, final int y) {
         var computedProperties = new ComputedProperties(crosshair);
 
         if (!computedProperties.isVisible())
@@ -51,6 +54,8 @@ public final class CrosshairRenderManager {
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
+        var matrixStack = drawContext.getMatrices();
+
         var style = this.crosshairStyleFactory.from(matrixStack, calculatedStyle, crosshair);
         var isItemCooldownEnabled = crosshair.isItemCooldownEnabled.get();
         var isDotEnabled = crosshair.isDotEnabled.get();
@@ -61,7 +66,7 @@ public final class CrosshairRenderManager {
         if (isDotEnabled && crosshair.style.get() != CrosshairStyle.DEFAULT)
             this.renderManager.drawCircle(matrixStack, x, y, 0.5F, 1.0F, crosshair.dotColour.get());
 
-        this.drawDefaultAttackIndicator(matrixStack, computedProperties, x, y);
+        this.drawDefaultAttackIndicator(drawContext, computedProperties, x, y);
 
         var transformMatrixStack = calculatedStyle == CrosshairStyle.DEBUG
             ? RenderSystem.getModelViewStack()
@@ -70,11 +75,11 @@ public final class CrosshairRenderManager {
         var renderX = x + crosshair.offsetX.get();
         var renderY = y + crosshair.offsetY.get();
 
-        this.drawToolDamageIndicator(transformMatrixStack, crosshair, computedProperties, renderX, renderY);
+        this.drawToolDamageIndicator(drawContext, crosshair, computedProperties, renderX, renderY);
 
         this.preTransformation(transformMatrixStack, crosshair, renderX, renderY);
 
-        style.draw(0, 0, computedProperties);
+        style.draw(drawContext, 0, 0, computedProperties);
 
         this.postTransformation(transformMatrixStack);
     }
@@ -141,11 +146,10 @@ public final class CrosshairRenderManager {
     }
 
     private void drawDefaultAttackIndicator(
-        final MatrixStack matrixStack,
+        final DrawContext drawContext,
         final ComputedProperties computedProperties,
         final int x, final int y) {
 
-        RenderSystem.setShaderTexture(0, DrawableHelper.GUI_ICONS_TEXTURE);
         RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
 
         var mc = MinecraftClient.getInstance();
@@ -163,19 +167,19 @@ public final class CrosshairRenderManager {
             var k = mc.getWindow().getScaledWidth() / 2 - 8;
 
             if (bl) {
-                DrawableHelper.drawTexture(matrixStack, k, j, 68, 94, 16, 16, 256, 256);
+                drawContext.drawTexture(ICONS, k, j, 68, 94, 16, 16, 256, 256);
             }
             else if (f < 1.0F) {
                 var l = (int)(f * 17.0F);
 
-                DrawableHelper.drawTexture(matrixStack, k, j, 36, 94, 16, 4, 256, 256);
-                DrawableHelper.drawTexture(matrixStack, k, j, 52, 94, l, 4, 256, 256);
+                drawContext.drawTexture(ICONS, k, j, 36, 94, 16, 4, 256, 256);
+                drawContext.drawTexture(ICONS, k, j, 52, 94, l, 4, 256, 256);
             }
         }
     }
 
     private void drawToolDamageIndicator(
-        final MatrixStack matrixStackP,
+        final DrawContext drawContext,
         final CustomCrosshair crosshair,
         final ComputedProperties computedProperties,
         final int x, final int y) {
@@ -209,7 +213,7 @@ public final class CrosshairRenderManager {
         RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-        MatrixStack matrixStack = RenderSystem.getModelViewStack();
+        MatrixStack matrixStack = drawContext.getMatrices();
         matrixStack.push();
         matrixStack.translate(x, y, (100.0F + 1));
         matrixStack.translate(8.0D, 8.0D, 0.0D);
@@ -228,6 +232,6 @@ public final class CrosshairRenderManager {
 
         matrixStack.pop();
 
-        this.renderManager.drawSmallText(matrixStackP, "" + remainingDamage, drawX + 6, drawY, ModTheme.WHITE, true);
+        this.renderManager.drawSmallText(drawContext, "" + remainingDamage, drawX + 6, drawY, ModTheme.WHITE, true);
     }
 }

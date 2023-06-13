@@ -7,6 +7,7 @@ import com.wjbaker.ccm.render.type.GuiBounds;
 import com.wjbaker.ccm.render.type.IDrawInsideWindowCallback;
 import com.wjbaker.ccm.type.RGBA;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.opengl.GL11;
@@ -312,30 +313,32 @@ public final class RenderManager {
         }
     }
 
-    public void drawText(final MatrixStack matrixStack, final String text, final int x, final int y, final RGBA colour, final boolean hasShadow) {
+    public void drawText(final DrawContext drawContext, final String text, final int x, final int y, final RGBA colour, final boolean hasShadow) {
         var colourAsInt = this.rgbaAsInt(colour);
 
         if (hasShadow)
-            MinecraftClient.getInstance().textRenderer.drawWithShadow(matrixStack, text, x, y, colourAsInt);
+            drawContext.drawTextWithShadow(MinecraftClient.getInstance().textRenderer, text, x, y, colourAsInt);
         else
-            MinecraftClient.getInstance().textRenderer.draw(matrixStack, text, x, y, colourAsInt);
+            drawContext.drawText(MinecraftClient.getInstance().textRenderer, text, x, y, colourAsInt, false);
     }
 
-    public void drawSmallText(final MatrixStack matrixStack, final String text, final int x, final int y, final RGBA colour, final boolean hasShadow) {
+    public void drawSmallText(final DrawContext drawContext, final String text, final int x, final int y, final RGBA colour, final boolean hasShadow) {
+        var matrixStack = drawContext.getMatrices();
         matrixStack.push();
         matrixStack.scale(0.5F, 0.5F, 1.0F);
         RenderSystem.applyModelViewMatrix();
 
-        this.drawText(matrixStack, text, x * 2, y * 2, colour, hasShadow);
+        this.drawText(drawContext, text, x * 2, y * 2, colour, hasShadow);
         matrixStack.pop();
     }
 
-    public void drawBigText(final MatrixStack matrixStack, final String text, final int x, final int y, final RGBA colour, final boolean hasShadow) {
+    public void drawBigText(final DrawContext drawContext, final String text, final int x, final int y, final RGBA colour, final boolean hasShadow) {
+        var matrixStack = drawContext.getMatrices();
         matrixStack.push();
         matrixStack.scale(1.5F, 1.5F, 1.0F);
         RenderSystem.applyModelViewMatrix();
 
-        this.drawText(matrixStack, text, (int)(x * 0.666F), (int)(y * 0.666F), colour, hasShadow);
+        this.drawText(drawContext, text, (int)(x * 0.666F), (int)(y * 0.666F), colour, hasShadow);
         matrixStack.pop();
     }
 

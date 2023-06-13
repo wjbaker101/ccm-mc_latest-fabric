@@ -7,7 +7,7 @@ import com.wjbaker.ccm.render.gui.component.custom.CrosshairPreviewGuiComponent;
 import com.wjbaker.ccm.render.gui.component.event.IOnClickEvent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
 import com.wjbaker.ccm.render.gui.screen.screens.editCrosshair.components.*;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 public final class EditCrosshairGuiScreen extends GuiScreen {
 
@@ -94,11 +94,11 @@ public final class EditCrosshairGuiScreen extends GuiScreen {
     }
 
     @Override
-    public void draw(final MatrixStack matrixStack) {
-        super.draw(matrixStack);
+    public void draw(final DrawContext drawContext) {
+        super.draw(drawContext);
 
-        this.crosshairPreviewPanel.draw(matrixStack);
-        this.resetButton.draw(matrixStack);
+        this.crosshairPreviewPanel.draw(drawContext);
+        this.resetButton.draw(drawContext);
     }
 
     @Override

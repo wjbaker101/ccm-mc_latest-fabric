@@ -5,7 +5,7 @@ import com.wjbaker.ccm.render.gui.component.event.IGuiComponentEvent;
 import com.wjbaker.ccm.render.gui.component.event.IOnValueChangedEvent;
 import com.wjbaker.ccm.render.gui.screen.GuiScreen;
 import com.wjbaker.ccm.type.RGBA;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 public abstract class SliderGuiComponent extends GuiComponent {
 
@@ -53,10 +53,12 @@ public abstract class SliderGuiComponent extends GuiComponent {
     }
 
     @Override
-    public void draw(final MatrixStack matrixStack) {
-        super.draw(matrixStack);
+    public void draw(final DrawContext drawContext) {
+        super.draw(drawContext);
 
-        this.renderManager.drawText(matrixStack, this.label, this.x, this.y, this.currentTextColour, false);
+        var matrixStack = drawContext.getMatrices();
+
+        this.renderManager.drawText(drawContext, this.label, this.x, this.y, this.currentTextColour, false);
 
         var posY = this.y + 8 + this.titleSpacing;
 
@@ -76,7 +78,7 @@ public abstract class SliderGuiComponent extends GuiComponent {
             this.currentBorderColour,
             this.currentThumbColour);
 
-        this.drawLabel(matrixStack);
+        this.drawLabel(drawContext);
     }
 
     @Override
@@ -135,7 +137,7 @@ public abstract class SliderGuiComponent extends GuiComponent {
     }
 
     protected abstract void calculateValue();
-    protected abstract void drawLabel(final MatrixStack matrixStack);
+    protected abstract void drawLabel(final DrawContext drawContext);
 
     public void setBaseThumbColour(final RGBA baseThumbColour) {
         this.baseThumbColour = baseThumbColour;
