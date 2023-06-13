@@ -23,13 +23,11 @@ public final class RenderManager {
     private void preRender(final MatrixStack matrixStack) {
         matrixStack.push();
         RenderSystem.enableBlend();
-        RenderSystem.disableTexture();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShader(GameRenderer::getPositionColorProgram);
     }
 
     private void postRender(final MatrixStack matrixStack) {
-        RenderSystem.enableTexture();
         RenderSystem.disableBlend();
         matrixStack.pop();
     }

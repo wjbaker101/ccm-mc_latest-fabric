@@ -13,7 +13,7 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.option.AttackIndicator;
 import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.model.json.ModelTransformation;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
@@ -220,7 +220,7 @@ public final class CrosshairRenderManager {
         var immediate = mc.getBufferBuilders().getEntityVertexConsumers();
         DiffuseLighting.disableGuiDepthLighting();
 
-        itemRenderer.renderItem(tool, ModelTransformation.Mode.GUI, false, new MatrixStack(), immediate, 15728880, OverlayTexture.DEFAULT_UV, model);
+        itemRenderer.renderItem(tool, ModelTransformationMode.GUI, false, new MatrixStack(), immediate, 15728880, OverlayTexture.DEFAULT_UV, model);
         immediate.draw();
 
         RenderSystem.enableDepthTest();
