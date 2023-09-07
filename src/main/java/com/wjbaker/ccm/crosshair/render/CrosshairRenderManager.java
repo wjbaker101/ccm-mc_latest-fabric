@@ -215,8 +215,7 @@ public final class CrosshairRenderManager {
 
         MatrixStack matrixStack = drawContext.getMatrices();
         matrixStack.push();
-        matrixStack.translate(x, y, (100.0F + 1));
-        matrixStack.translate(8.0D, 8.0D, 0.0D);
+        matrixStack.translate(drawX, drawY, (100.0F + 1));
         matrixStack.scale(1.0F, -1.0F, 1.0F);
         matrixStack.scale(8F, 8F, 8F);
         RenderSystem.applyModelViewMatrix();
@@ -224,7 +223,7 @@ public final class CrosshairRenderManager {
         var immediate = mc.getBufferBuilders().getEntityVertexConsumers();
         DiffuseLighting.disableGuiDepthLighting();
 
-        itemRenderer.renderItem(tool, ModelTransformationMode.GUI, false, new MatrixStack(), immediate, 15728880, OverlayTexture.DEFAULT_UV, model);
+        itemRenderer.renderItem(tool, ModelTransformationMode.GUI, false, matrixStack, immediate, 15728880, OverlayTexture.DEFAULT_UV, model);
         immediate.draw();
 
         RenderSystem.enableDepthTest();
