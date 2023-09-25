@@ -23,8 +23,8 @@ public abstract class GuiScreenAdapter extends Screen implements IGuiScreen {
 
     @Override
     public void render(final DrawContext drawContext, final int mouseX, final int mouseY, final float delta) {
-        this.draw(drawContext);
         super.render(drawContext, mouseX, mouseY, delta);
+        this.draw(drawContext);
     }
 
     @Override
