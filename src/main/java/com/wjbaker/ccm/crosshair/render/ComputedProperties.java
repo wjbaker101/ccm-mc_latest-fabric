@@ -174,7 +174,7 @@ public final class ComputedProperties {
         if (!this.crosshair.isVisibleThirdPerson.get() && isThirdPerson)
             return false;
 
-        if (!this.crosshair.isVisibleDebug.get() && this.mc.options.debugEnabled)
+        if (!this.crosshair.isVisibleDebug.get() && this.mc.inGameHud.getDebugHud().shouldShowDebugHud())
             return false;
 
         if (!this.crosshair.isVisibleSpectator.get() && this.mc.player.isSpectator())

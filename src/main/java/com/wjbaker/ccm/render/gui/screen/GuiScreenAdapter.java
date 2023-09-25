@@ -58,13 +58,13 @@ public abstract class GuiScreenAdapter extends Screen implements IGuiScreen {
     }
 
     @Override
-    public boolean mouseScrolled(final double mouseX, final double mouseY, final double amount) {
-        if (amount > 0)
+    public boolean mouseScrolled(final double mouseX, final double mouseY, final double horizontalAmount, final double verticalAmount) {
+        if (verticalAmount > 0)
             this.onMouseScrollUp();
         else
             this.onMouseScrollDown();
 
-        return super.mouseScrolled(mouseX, mouseY, amount);
+        return super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);
     }
 
     @Override
