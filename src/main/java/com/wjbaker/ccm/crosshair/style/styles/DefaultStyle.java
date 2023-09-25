@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 
 public final class DefaultStyle extends AbstractCrosshairStyle {
 
-    private static final Identifier ICONS = new Identifier("textures/gui/icons.png");
+    private static final Identifier ICONS = new Identifier("hud/crosshair");
 
     public DefaultStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
         super(matrixStack, crosshair);
@@ -30,14 +30,11 @@ public final class DefaultStyle extends AbstractCrosshairStyle {
             GlStateManager.DstFactor.ZERO);
 
         var crosshairSize = 15;
-        var textureSize = 256;
+        var textureSize = 15;
 
-        drawContext.drawTexture(
+        drawContext.drawGuiTexture(
             ICONS,
-            x - Math.round(crosshairSize / 2.0F),
-            y - Math.round(crosshairSize / 2.0F),
-            0, 0,
-            crosshairSize, crosshairSize,
+            (x - crosshairSize) / 2, (y - crosshairSize) / 2,
             textureSize, textureSize);
     }
 }
