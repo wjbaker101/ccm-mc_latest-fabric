@@ -150,6 +150,7 @@ public final class CrosshairRenderManager {
         final ComputedProperties computedProperties,
         final int x, final int y) {
 
+        RenderSystem.enableBlend();
         RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
 
         var mc = MinecraftClient.getInstance();
@@ -176,6 +177,7 @@ public final class CrosshairRenderManager {
                 drawContext.drawTexture(ICONS, k, j, 52, 94, l, 4, 256, 256);
             }
         }
+        RenderSystem.disableBlend();
     }
 
     private void drawToolDamageIndicator(
