@@ -57,6 +57,7 @@ public final class CustomCrosshair {
     public final IntegerProperty rainbowTicks;
 
     public final BooleanProperty isToolDamageEnabled;
+    public final BooleanProperty isProjectileIndicatorEnabled;
 
     public final List<ICrosshairProperty<?>> propertiesAsList;
 
@@ -107,7 +108,8 @@ public final class CustomCrosshair {
             this.isRainbowEnabled = new BooleanProperty("rainbow_enabled", null),
             this.rainbowSpeed = new IntegerProperty("rainbow_speed", null),
 
-            this.isToolDamageEnabled = new BooleanProperty("tool_damage_enabled", null)
+            this.isToolDamageEnabled = new BooleanProperty("tool_damage_enabled", null),
+            this.isProjectileIndicatorEnabled = new BooleanProperty("projectile_indicator_enabled", null)
         );
         this.resetProperties();
 
@@ -161,5 +163,6 @@ public final class CustomCrosshair {
         this.rainbowSpeed.set(500);
 
         this.isToolDamageEnabled.set(true);
+        this.isProjectileIndicatorEnabled.set(true);
     }
 }
