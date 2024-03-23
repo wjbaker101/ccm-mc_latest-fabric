@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.crosshair.style.styles;
+package com.wjbaker.ccm.crosshair.styles;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.ComputedProperties;
@@ -6,9 +6,9 @@ import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 
-public final class TriangleStyle extends CrosshairStyle {
+public final class ArrowStyle extends CrosshairStyle {
 
-    public TriangleStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
+    public ArrowStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
         super(matrixStack, crosshair);
     }
 
@@ -16,17 +16,12 @@ public final class TriangleStyle extends CrosshairStyle {
     public void draw(final DrawContext drawContext, final int x, final int y, final ComputedProperties computedProperties) {
         var width = this.crosshair.width.get();
         var height = this.crosshair.height.get();
-        var gap = computedProperties.gap();
-        var colour = computedProperties.colour();
+        var thickness = this.crosshair.thickness.get();
         var isAdaptiveColourEnabled = this.crosshair.isAdaptiveColourEnabled.get();
 
         this.renderManager.drawLines(this.matrixStack, new float[] {
-            x, y - (height / 2.0F) - gap,
-            x + width / 2.0F + gap, y + (height / 2.0F) + gap,
-            x + width / 2.0F + gap, y + (height / 2.0F) + gap,
-            x - (width / 2.0F) - gap, y + (height / 2.0F) + gap,
-            x - (width / 2.0F) - gap, y + (height / 2.0F) + gap,
-            x, y - (height / 2.0F) - gap
-        }, 1.0F, colour, isAdaptiveColourEnabled);
+            x - width, y + height, x, y,
+            x, y, x + width, y + height
+        }, thickness, computedProperties.colour(), isAdaptiveColourEnabled);
     }
 }

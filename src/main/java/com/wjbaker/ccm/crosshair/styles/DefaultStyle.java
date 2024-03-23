@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.crosshair.style.styles;
+package com.wjbaker.ccm.crosshair.styles;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;

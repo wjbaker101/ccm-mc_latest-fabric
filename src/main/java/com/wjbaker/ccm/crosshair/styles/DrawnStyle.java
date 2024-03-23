@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.crosshair.style.styles;
+package com.wjbaker.ccm.crosshair.styles;
 
 import com.wjbaker.ccm.CustomCrosshairMod;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
