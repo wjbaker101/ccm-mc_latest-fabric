@@ -1,6 +1,7 @@
 package com.wjbaker.ccm.crosshair.style;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
+import com.wjbaker.ccm.crosshair.types.ICrosshairStyle;
 import com.wjbaker.ccm.rendering.RenderManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
