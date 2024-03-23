@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.gui.screen.screens.editColour.components;
+package com.wjbaker.ccm.gui.screen.screens.drawCrosshair.components;
 
 import com.wjbaker.ccm.CustomCrosshairMod;
 import com.wjbaker.ccm.crosshair.custom.CustomCrosshairDrawer;

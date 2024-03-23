@@ -7,7 +7,7 @@ import com.wjbaker.ccm.gui.component.components.HeadingGuiComponent;
 import com.wjbaker.ccm.gui.component.components.PanelGuiComponent;
 import com.wjbaker.ccm.gui.component.event.IOnClickEvent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
-import com.wjbaker.ccm.gui.screen.screens.editColour.components.DrawCrosshairGuiComponent;
+import com.wjbaker.ccm.gui.screen.screens.drawCrosshair.components.DrawCrosshairGuiComponent;
 import net.minecraft.client.resource.language.I18n;
 
 public final class DrawCrosshairGuiScreen extends GuiScreen {
