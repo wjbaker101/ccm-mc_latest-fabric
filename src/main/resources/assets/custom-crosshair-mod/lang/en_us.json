@@ -5,7 +5,7 @@
     "custom_crosshair_mod.screen.edit_crosshair.reset_settings": "Reset Settings",
 
     "custom_crosshair_mod.screen.edit_crosshair.general_settings": "General Settings",
-    "custom_crosshair_mod.screen.edit_crosshair.enable_mod": "Enable Custom Crosshair Mod",
+    "custom_crosshair_mod.screen.edit_crosshair.enable_mod": "Enable",
     "custom_crosshair_mod.screen.edit_crosshair.crosshair_style": "Crosshair Style",
     "custom_crosshair_mod.screen.edit_crosshair.crosshair_style.vanilla": "Vanilla",
     "custom_crosshair_mod.screen.edit_crosshair.crosshair_style.cross": "Cross",
@@ -15,7 +15,7 @@
     "custom_crosshair_mod.screen.edit_crosshair.crosshair_style.arrow": "Arrow",
     "custom_crosshair_mod.screen.edit_crosshair.crosshair_style.debug": "Debug",
     "custom_crosshair_mod.screen.edit_crosshair.crosshair_style.drawn": "Drawn",
-    "custom_crosshair_mod.screen.edit_crosshair.keep_vanilla_in_debug_hud": "Keep Vanilla Debug Crosshair when Debug HUD is Visible",
+    "custom_crosshair_mod.screen.edit_crosshair.keep_vanilla_in_debug_hud": "Keep Vanilla Crosshair when Debug HUD is Visible",
     "custom_crosshair_mod.screen.edit_crosshair.draw_crosshair": "Draw Crosshair",
 
     "custom_crosshair_mod.screen.edit_crosshair.shape_settings": "Shape Settings",
