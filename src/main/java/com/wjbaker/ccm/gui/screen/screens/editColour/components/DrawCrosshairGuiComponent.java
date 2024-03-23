@@ -33,10 +33,6 @@ public final class DrawCrosshairGuiComponent extends GuiComponent {
         this.customCrosshairDrawer = CustomCrosshairMod.INSTANCE.properties().getCustomCrosshairDrawer();
     }
 
-    public void updateSize() {
-        this.setSize(this.imageSize.get() * GRID_SIZE, this.imageSize.get() * GRID_SIZE);
-    }
-
     @Override
     public void draw(final DrawContext drawContext) {
         super.draw(drawContext);
