@@ -6,6 +6,7 @@ import com.wjbaker.ccm.gui.component.components.ColourPickerGuiComponent;
 import com.wjbaker.ccm.gui.component.components.HeadingGuiComponent;
 import com.wjbaker.ccm.gui.component.components.PanelGuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
+import net.minecraft.client.resource.language.I18n;
 
 public final class OutlineSettingsGuiPanel extends PanelGuiComponent {
 
@@ -19,13 +20,13 @@ public final class OutlineSettingsGuiPanel extends PanelGuiComponent {
 
         super(parentGuiScreen, x, y, width, height);
 
-        var heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Outline Settings");
+        var heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, I18n.translate("custom_crosshair_mod.screen.edit_crosshair.outline_settings"));
 
         var isOutlineEnabledCheckBox = new CheckBoxGuiComponent(
-            this.parentGuiScreen, -1, -1, "Enable Outline", crosshair.isOutlineEnabled.get());
+            this.parentGuiScreen, -1, -1, I18n.translate("custom_crosshair_mod.screen.edit_crosshair.enable_outline"), crosshair.isOutlineEnabled.get());
         isOutlineEnabledCheckBox.bind(crosshair.isOutlineEnabled);
 
-        var outlineColourColourPicker = new ColourPickerGuiComponent(this.parentGuiScreen, crosshair, -1, -1, "Outline Colour");
+        var outlineColourColourPicker = new ColourPickerGuiComponent(this.parentGuiScreen, crosshair, -1, -1, I18n.translate("custom_crosshair_mod.screen.edit_crosshair.outline_colour"));
         outlineColourColourPicker.bind(crosshair.outlineColour);
 
         this.addComponent(heading);

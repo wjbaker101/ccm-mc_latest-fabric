@@ -8,6 +8,7 @@ import com.wjbaker.ccm.gui.component.components.PanelGuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.rendering.ModTheme;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.resource.language.I18n;
 
 public final class RainbowSettingsGuiPanel extends PanelGuiComponent {
 
@@ -21,22 +22,22 @@ public final class RainbowSettingsGuiPanel extends PanelGuiComponent {
 
         super(parentGuiScreen, x, y, width, height);
 
-        var heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, "Rainbow Settings");
+        var heading = new HeadingGuiComponent(this.parentGuiScreen, -1, -1, I18n.translate("custom_crosshair_mod.screen.edit_crosshair.rainbow_settings"));
 
         var isRainbowEnabledCheckBox = new CheckBoxGuiComponent(
-            this.parentGuiScreen, -1, -1, "Enable Rainbow", crosshair.isRainbowEnabled.get());
+            this.parentGuiScreen, -1, -1, I18n.translate("custom_crosshair_mod.screen.edit_crosshair.enable_rainbow"), crosshair.isRainbowEnabled.get());
         isRainbowEnabledCheckBox.bind(crosshair.isRainbowEnabled);
 
         var rainbowSpeedSlider = new IntegerSliderGuiComponent(
-            this.parentGuiScreen, -1, -1, 250, "Rainbow Speed", 0, 1000, crosshair.rainbowSpeed.get()) {
+            this.parentGuiScreen, -1, -1, 250, I18n.translate("custom_crosshair_mod.screen.edit_crosshair.rainbow_speed"), 0, 1000, crosshair.rainbowSpeed.get()) {
 
             @Override
             protected void drawLabel(final DrawContext drawContext) {
                 String label = this.getValue() < 333
-                    ? "Slow"
+                    ? I18n.translate("custom_crosshair_mod.screen.edit_crosshair.rainbow_speed.slow")
                     : this.getValue() < 666
-                        ? "Medium"
-                        : "Fast";
+                        ? I18n.translate("custom_crosshair_mod.screen.edit_crosshair.rainbow_speed.medium")
+                        : I18n.translate("custom_crosshair_mod.screen.edit_crosshair.rainbow_speed.fast");
 
                 int posY = this.y + 8 + this.titleSpacing;
 

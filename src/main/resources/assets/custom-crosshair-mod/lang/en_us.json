@@ -40,6 +40,7 @@
     "custom_crosshair_mod.screen.edit_crosshair.visible_using_spyglass": "Visible when Using Spyglass",
 
     "custom_crosshair_mod.screen.edit_crosshair.outline_settings": "Outline Settings",
+    "custom_crosshair_mod.screen.edit_crosshair.enable_outline": "Enable Outline",
     "custom_crosshair_mod.screen.edit_crosshair.outline_colour": "Outline Color",
 
     "custom_crosshair_mod.screen.edit_crosshair.dot_settings": "Dot Settings",
@@ -58,6 +59,10 @@
     "custom_crosshair_mod.screen.edit_crosshair.enable_highlight_players": "Enable Player Highlighting",
     "custom_crosshair_mod.screen.edit_crosshair.highlight_players_colour": "Player Color",
 
+    "custom_crosshair_mod.screen.edit_crosshair.item_cooldown_settings": "Item Cooldown Settings",
+    "custom_crosshair_mod.screen.edit_crosshair.enable_item_cooldown_indicator": "Enable Item Cooldown Indicator",
+    "custom_crosshair_mod.screen.edit_crosshair.item_cooldown_colour": "Indicator Color",
+
     "custom_crosshair_mod.screen.edit_crosshair.rainbow_settings": "Rainbow Settings",
     "custom_crosshair_mod.screen.edit_crosshair.enable_rainbow": "Enable Rainbow",
     "custom_crosshair_mod.screen.edit_crosshair.rainbow_speed": "Rainbow Speed",
@@ -66,7 +71,7 @@
     "custom_crosshair_mod.screen.edit_crosshair.rainbow_speed.fast": "Fast",
 
     "custom_crosshair_mod.screen.edit_crosshair.indicator_settings": "Indicator Settings",
-    "custom_crosshair_mod.screen.edit_crosshair.enable_tool_damage_indicator": "Enable Tool Damange Indicator",
+    "custom_crosshair_mod.screen.edit_crosshair.enable_tool_damage_indicator": "Enable Tool Damage Indicator",
     "custom_crosshair_mod.screen.edit_crosshair.enable_projectiles_indicator": "Enable Projectiles Indicator",
 
     "custom_crosshair_mod.screen.draw_crosshair.heading": "Draw Crosshair",

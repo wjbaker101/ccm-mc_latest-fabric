@@ -8,6 +8,7 @@ import com.wjbaker.ccm.gui.component.event.IOnClickEvent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.gui.screen.screens.editCrosshair.components.*;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.resource.language.I18n;
 
 public final class EditCrosshairGuiScreen extends GuiScreen {
 
@@ -32,7 +33,7 @@ public final class EditCrosshairGuiScreen extends GuiScreen {
             -1, -1,
             crosshair);
 
-        this.resetButton = new ButtonGuiComponent(this, -1, -1, 80, 15, "Reset Settings");
+        this.resetButton = new ButtonGuiComponent(this, -1, -1, 80, 15, I18n.translate("custom_crosshair_mod.screen.edit_crosshair.reset_settings"));
         this.resetButton.addEvent(IOnClickEvent.class, () -> {
             crosshair.resetProperties();
             this.buildComponents();
