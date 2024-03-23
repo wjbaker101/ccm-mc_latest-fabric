@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.mixin;
+package com.wjbaker.ccm.mixins;
 
 import com.wjbaker.ccm.CustomCrosshairMod;
 import net.minecraft.client.gui.hud.InGameHud;
