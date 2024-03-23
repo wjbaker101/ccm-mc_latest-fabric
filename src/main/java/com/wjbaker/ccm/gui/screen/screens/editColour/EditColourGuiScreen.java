@@ -2,7 +2,7 @@ package com.wjbaker.ccm.gui.screen.screens.editColour;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.property.IntegerProperty;
-import com.wjbaker.ccm.crosshair.property.RGBAProperty;
+import com.wjbaker.ccm.crosshair.property.RgbaProperty;
 import com.wjbaker.ccm.gui.component.components.*;
 import com.wjbaker.ccm.gui.component.custom.ColourPreviewGuiComponent;
 import com.wjbaker.ccm.gui.component.custom.CrosshairPreviewGuiComponent;
@@ -22,7 +22,7 @@ public final class EditColourGuiScreen extends GuiScreen {
     private final ScrollPanelGuiComponent mainPanel;
     private final CrosshairPreviewGuiComponent crosshairPreviewPanel;
 
-    public EditColourGuiScreen(final CustomCrosshair crosshair, final RGBAProperty colour) {
+    public EditColourGuiScreen(final CustomCrosshair crosshair, final RgbaProperty colour) {
         super("Edit Colour");
 
         this.panelWidth = 300;

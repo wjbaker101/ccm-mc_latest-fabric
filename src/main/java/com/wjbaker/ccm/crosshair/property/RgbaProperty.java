@@ -2,9 +2,9 @@ package com.wjbaker.ccm.crosshair.property;
 
 import com.wjbaker.ccm.type.RGBA;
 
-public final class RGBAProperty extends ICrosshairProperty<RGBA> {
+public final class RgbaProperty extends ICrosshairProperty<RGBA> {
 
-    public RGBAProperty(final String alias, final RGBA value) {
+    public RgbaProperty(final String alias, final RGBA value) {
         super(alias, value);
     }
 

@@ -1,7 +1,7 @@
 package com.wjbaker.ccm.gui.component.components;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.crosshair.property.RGBAProperty;
+import com.wjbaker.ccm.crosshair.property.RgbaProperty;
 import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.component.type.IBindableGuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
@@ -10,14 +10,14 @@ import com.wjbaker.ccm.rendering.ModTheme;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 
-public final class ColourPickerGuiComponent extends GuiComponent implements IBindableGuiComponent<RGBAProperty> {
+public final class ColourPickerGuiComponent extends GuiComponent implements IBindableGuiComponent<RgbaProperty> {
 
     private final int labelSpacing;
     private final int boxSize;
     private final String label;
     private final CustomCrosshair crosshair;
 
-    private RGBAProperty colour;
+    private RgbaProperty colour;
     private boolean isMouseOverBox;
 
     public ColourPickerGuiComponent(
@@ -34,7 +34,7 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
         this.boxSize = 25;
         this.label = label;
 
-        this.colour = new RGBAProperty("fake_colour", ModTheme.WHITE);
+        this.colour = new RgbaProperty("fake_colour", ModTheme.WHITE);
         this.isMouseOverBox = false;
 
         this.width = this.boxSize + this.labelSpacing + this.renderManager.textWidth(this.label);
@@ -104,7 +104,7 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
     }
 
     @Override
-    public void bind(final RGBAProperty property) {
+    public void bind(final RgbaProperty property) {
         this.colour = property;
     }
 }

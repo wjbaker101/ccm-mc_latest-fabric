@@ -12,7 +12,7 @@ public final class CustomCrosshair {
 
     public final EnumProperty<CrosshairStyle> style;
     public final BooleanProperty isKeepDebugEnabled;
-    public final RGBAProperty colour;
+    public final RgbaProperty colour;
     public final BooleanProperty isAdaptiveColourEnabled;
     public final IntegerProperty width;
     public final IntegerProperty height;
@@ -33,10 +33,10 @@ public final class CustomCrosshair {
     public final BooleanProperty isVisibleUsingSpyglass;
 
     public final BooleanProperty isOutlineEnabled;
-    public final RGBAProperty outlineColour;
+    public final RgbaProperty outlineColour;
 
     public final BooleanProperty isDotEnabled;
-    public final RGBAProperty dotColour;
+    public final RgbaProperty dotColour;
 
     public final BooleanProperty isDynamicAttackIndicatorEnabled;
     public final BooleanProperty isDynamicBowEnabled;
@@ -45,12 +45,12 @@ public final class CustomCrosshair {
     public final BooleanProperty isHighlightPassivesEnabled;
     public final BooleanProperty isHighlightPlayersEnabled;
 
-    public final RGBAProperty highlightHostilesColour;
-    public final RGBAProperty highlightPassivesColour;
-    public final RGBAProperty highlightPlayersColour;
+    public final RgbaProperty highlightHostilesColour;
+    public final RgbaProperty highlightPassivesColour;
+    public final RgbaProperty highlightPlayersColour;
 
     public final BooleanProperty isItemCooldownEnabled;
-    public final RGBAProperty itemCooldownColour;
+    public final RgbaProperty itemCooldownColour;
 
     public final BooleanProperty isRainbowEnabled;
     public final IntegerProperty rainbowSpeed;
@@ -65,7 +65,7 @@ public final class CustomCrosshair {
         this.propertiesAsList = Lists.newArrayList(
             this.style = new EnumProperty<>("crosshair_style", null),
             this.isKeepDebugEnabled = new BooleanProperty("crosshair_keep_debug_enabled", null),
-            this.colour = new RGBAProperty("crosshair_colour", null),
+            this.colour = new RgbaProperty("crosshair_colour", null),
             this.isAdaptiveColourEnabled = new BooleanProperty("crosshair_adaptive_colour_enabled", null),
             this.width = new IntegerProperty("crosshair_width", null),
             this.height = new IntegerProperty("crosshair_height", null),
@@ -86,10 +86,10 @@ public final class CustomCrosshair {
             this.isVisibleUsingSpyglass = new BooleanProperty("visible_holding_spyglass", null),
 
             this.isOutlineEnabled = new BooleanProperty("outline_enabled", null),
-            this.outlineColour = new RGBAProperty("outline_colour", null),
+            this.outlineColour = new RgbaProperty("outline_colour", null),
 
             this.isDotEnabled = new BooleanProperty("dot_enabled", null),
-            this.dotColour = new RGBAProperty("dot_colour", null),
+            this.dotColour = new RgbaProperty("dot_colour", null),
 
             this.isDynamicAttackIndicatorEnabled = new BooleanProperty("dynamic_attackindicator_enabled", null),
             this.isDynamicBowEnabled = new BooleanProperty("dynamic_bow_enabled", null),
@@ -98,12 +98,12 @@ public final class CustomCrosshair {
             this.isHighlightPassivesEnabled = new BooleanProperty("highlight_passive_enabled", null),
             this.isHighlightPlayersEnabled = new BooleanProperty("highlight_players_enabled", null),
 
-            this.highlightHostilesColour = new RGBAProperty("highlight_hostile_colour", null),
-            this.highlightPassivesColour = new RGBAProperty("highlight_passive_colour", null),
-            this.highlightPlayersColour = new RGBAProperty("highlight_players_colour", null),
+            this.highlightHostilesColour = new RgbaProperty("highlight_hostile_colour", null),
+            this.highlightPassivesColour = new RgbaProperty("highlight_passive_colour", null),
+            this.highlightPlayersColour = new RgbaProperty("highlight_players_colour", null),
 
             this.isItemCooldownEnabled = new BooleanProperty("itemcooldown_enabled", null),
-            this.itemCooldownColour = new RGBAProperty("itemcooldown_colour", null),
+            this.itemCooldownColour = new RgbaProperty("itemcooldown_colour", null),
 
             this.isRainbowEnabled = new BooleanProperty("rainbow_enabled", null),
             this.rainbowSpeed = new IntegerProperty("rainbow_speed", null),
