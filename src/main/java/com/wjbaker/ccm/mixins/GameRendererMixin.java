@@ -1,7 +1,7 @@
 package com.wjbaker.ccm.mixins;
 
 import com.wjbaker.ccm.CustomCrosshairMod;
-import com.wjbaker.ccm.crosshair.render.CrosshairRenderManager;
+import com.wjbaker.ccm.crosshair.rendering.CrosshairRenderManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.GameRenderer;

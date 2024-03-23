@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.crosshair.render;
+package com.wjbaker.ccm.crosshair.rendering;
 
 import com.google.common.collect.ImmutableSet;
 import com.mojang.blaze3d.platform.GlStateManager;

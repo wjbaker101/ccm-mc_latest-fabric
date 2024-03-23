@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.crosshair.render.types;
+package com.wjbaker.ccm.crosshair.rendering.types;
 
 import net.minecraft.item.ItemStack;
 

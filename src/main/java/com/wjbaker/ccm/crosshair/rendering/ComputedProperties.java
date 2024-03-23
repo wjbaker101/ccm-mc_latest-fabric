@@ -1,9 +1,9 @@
-package com.wjbaker.ccm.crosshair.render;
+package com.wjbaker.ccm.crosshair.rendering;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.crosshair.render.types.IndicatorItem;
+import com.wjbaker.ccm.crosshair.rendering.types.IndicatorItem;
 import com.wjbaker.ccm.type.RGBA;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;

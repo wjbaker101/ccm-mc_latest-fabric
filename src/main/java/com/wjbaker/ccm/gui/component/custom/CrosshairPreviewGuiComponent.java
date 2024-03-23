@@ -2,7 +2,7 @@ package com.wjbaker.ccm.gui.component.custom;
 
 import com.wjbaker.ccm.CustomCrosshairMod;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.crosshair.render.CrosshairRenderManager;
+import com.wjbaker.ccm.crosshair.rendering.CrosshairRenderManager;
 import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.rendering.ModTheme;

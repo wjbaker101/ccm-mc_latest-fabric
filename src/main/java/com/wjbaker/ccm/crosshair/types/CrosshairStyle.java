@@ -1,7 +1,7 @@
 package com.wjbaker.ccm.crosshair.types;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.crosshair.render.ComputedProperties;
+import com.wjbaker.ccm.crosshair.rendering.ComputedProperties;
 import com.wjbaker.ccm.rendering.RenderManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
