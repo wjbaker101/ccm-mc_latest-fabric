@@ -26,6 +26,8 @@ public abstract class GuiScreen extends GuiScreenAdapter {
     private final ButtonGuiComponent patreonButton;
     private final ButtonGuiComponent paypalButton;
 
+    private final List<ButtonGuiComponent> buttons;
+
     public GuiScreen(final String title) {
         this(title, null);
     }
@@ -39,6 +41,8 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.components = new ArrayList<>();
         this.headerHeight = 35;
 
+        this.buttons = new ArrayList<>();
+
         this.newVersionButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.translate("custom_crosshair_mod.screen.new_version"));
         this.newVersionButton.setBaseBackgroundColour(ModTheme.TERTIARY);
         this.newVersionButton.setHoverBackgroundColour(ModTheme.TERTIARY_DARK);
@@ -49,6 +53,9 @@ public abstract class GuiScreen extends GuiScreenAdapter {
                 Helper.openInBrowser(CustomCrosshairMod.CURSEFORGE_PAGE);
         });
 
+        if (!CustomCrosshairMod.INSTANCE.properties().isLatestVersion().get())
+            this.buttons.add(this.newVersionButton);
+
         this.patreonButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.translate("custom_crosshair_mod.screen.support_on_patreon"));
         this.patreonButton.setBaseBackgroundColour(ModTheme.SECONDARY);
         this.patreonButton.setHoverBackgroundColour(ModTheme.PRIMARY);
@@ -57,6 +64,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.patreonButton.addEvent(IOnClickEvent.class, () -> {
             Helper.openInBrowser(CustomCrosshairMod.PATREON_PAGE);
         });
+        this.buttons.add(this.patreonButton);
 
         this.paypalButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.translate("custom_crosshair_mod.screen.support_on_paypal"));
         this.paypalButton.setBaseBackgroundColour(ModTheme.SECONDARY);
@@ -66,31 +74,19 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.paypalButton.addEvent(IOnClickEvent.class, () -> {
             Helper.openInBrowser(CustomCrosshairMod.PAYPAL_PAGE);
         });
+        this.buttons.add(this.paypalButton);
     }
 
     @Override
     public void update() {
         this.components.forEach(GuiComponent::update);
 
-        var x = this.width;
+        var currentX = this.width;
 
-        x -= this.newVersionButton.getWidth() + 5;
-
-        this.newVersionButton.setPosition(
-            x,
-            (this.headerHeight / 2) - (this.newVersionButton.getHeight() / 2));
-
-        x -= this.patreonButton.getWidth() + 5;
-
-        this.patreonButton.setPosition(
-            x,
-            (this.headerHeight / 2) - (this.patreonButton.getHeight() / 2));
-
-        x -= this.paypalButton.getWidth() + 5;
-
-        this.paypalButton.setPosition(
-            x,
-            (this.headerHeight / 2) - (this.paypalButton.getHeight() / 2));
+        for (var button : this.buttons) {
+            currentX -= button.getWidth() + 5;
+            button.setPosition(currentX, (this.headerHeight / 2) - (button.getHeight() / 2));
+        }
     }
 
     @Override
@@ -137,27 +133,21 @@ public abstract class GuiScreen extends GuiScreenAdapter {
             .filter(x -> x.isInsideComponent(mouseX, mouseY))
             .forEach(x -> x.onMouseDown(mouseX, mouseY, button));
 
-        this.newVersionButton.onMouseDown(mouseX, mouseY, button);
-        this.patreonButton.onMouseDown(mouseX, mouseY, button);
-        this.paypalButton.onMouseDown(mouseX, mouseY, button);
+        this.buttons.forEach(x -> x.onMouseDown(mouseX, mouseY, button));
     }
 
     @Override
     public void onMouseUp(final int mouseX, final int mouseY, final int button) {
         this.components.forEach(x -> x.onMouseUp(mouseX, mouseY, button));
 
-        this.newVersionButton.onMouseUp(mouseX, mouseY, button);
-        this.patreonButton.onMouseUp(mouseX, mouseY, button);
-        this.paypalButton.onMouseUp(mouseX, mouseY, button);
+        this.buttons.forEach(x -> x.onMouseUp(mouseX, mouseY, button));
     }
 
     @Override
     public void onMouseMove(final int mouseX, int mouseY) {
         this.components.forEach(x -> x.onMouseMove(mouseX, mouseY));
 
-        this.newVersionButton.onMouseMove(mouseX, mouseY);
-        this.patreonButton.onMouseMove(mouseX, mouseY);
-        this.paypalButton.onMouseMove(mouseX, mouseY);
+        this.buttons.forEach(x -> x.onMouseMove(mouseX, mouseY));
     }
 
     @Override
