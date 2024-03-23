@@ -1,7 +1,7 @@
 package com.wjbaker.ccm.render.gui.screen;
 
 import com.wjbaker.ccm.CustomCrosshairMod;
-import com.wjbaker.ccm.helper.ExternalHelper;
+import com.wjbaker.ccm.helpers.Helper;
 import com.wjbaker.ccm.render.ModTheme;
 import com.wjbaker.ccm.render.RenderManager;
 import com.wjbaker.ccm.render.gui.component.GuiComponent;
@@ -45,7 +45,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.newVersionButton.setHoverTextColour(ModTheme.BLACK);
         this.newVersionButton.addEvent(IOnClickEvent.class, () -> {
             if (!CustomCrosshairMod.INSTANCE.properties().isLatestVersion().get())
-                new ExternalHelper().openInBrowser(CustomCrosshairMod.CURSEFORGE_PAGE);
+                Helper.openInBrowser(CustomCrosshairMod.CURSEFORGE_PAGE);
         });
 
         this.patreonButton = new ButtonGuiComponent(this, -1, -1, 125, 25, "Support via Patreon!");
@@ -54,7 +54,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.patreonButton.setBaseTextColour(ModTheme.WHITE);
         this.patreonButton.setHoverTextColour(ModTheme.WHITE);
         this.patreonButton.addEvent(IOnClickEvent.class, () -> {
-            new ExternalHelper().openInBrowser(CustomCrosshairMod.PATREON_PAGE);
+            Helper.openInBrowser(CustomCrosshairMod.PATREON_PAGE);
         });
 
         this.paypalButton = new ButtonGuiComponent(this, -1, -1, 125, 25, "Support via PayPal!");
@@ -63,7 +63,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.paypalButton.setBaseTextColour(ModTheme.WHITE);
         this.paypalButton.setHoverTextColour(ModTheme.WHITE);
         this.paypalButton.addEvent(IOnClickEvent.class, () -> {
-            new ExternalHelper().openInBrowser(CustomCrosshairMod.PAYPAL_PAGE);
+            Helper.openInBrowser(CustomCrosshairMod.PAYPAL_PAGE);
         });
     }
 

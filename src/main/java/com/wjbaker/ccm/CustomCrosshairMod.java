@@ -2,7 +2,7 @@ package com.wjbaker.ccm;
 
 import com.wjbaker.ccm.config.ConfigManager;
 import com.wjbaker.ccm.config.GlobalProperties;
-import com.wjbaker.ccm.helper.RequestHelper;
+import com.wjbaker.ccm.helpers.Helper;
 import com.wjbaker.ccm.render.gui.screen.screens.editCrosshair.EditCrosshairGuiScreen;
 import com.wjbaker.ccm.translations.ModTranslations;
 import net.fabricmc.api.ModInitializer;
@@ -72,7 +72,7 @@ public final class CustomCrosshairMod implements ModInitializer {
     }
 
     private void checkVersion() {
-        try (final var reader = new RequestHelper().get("https://pastebin.com/raw/B2sL8QCh")) {
+        try (final var reader = Helper.getUrl("https://pastebin.com/raw/B2sL8QCh")) {
             String currentLine;
 
             while ((currentLine = reader.readLine()) != null) {

@@ -1,4 +1,6 @@
-package com.wjbaker.ccm.helper;
+package com.wjbaker.ccm.helpers;
+
+import net.minecraft.util.Util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,9 +8,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public final class RequestHelper {
+public abstract class Helper {
 
-    public BufferedReader get(final String request) throws IOException {
+    private Helper() {}
+
+    public static void openInBrowser(final String url) {
+        try {
+            Util.getOperatingSystem().open(url);
+        }
+        catch (final Exception ignored) {}
+    }
+
+    public static BufferedReader getUrl(final String request) throws IOException {
         var url = new URL(request);
 
         var connection = (HttpURLConnection)url.openConnection();
