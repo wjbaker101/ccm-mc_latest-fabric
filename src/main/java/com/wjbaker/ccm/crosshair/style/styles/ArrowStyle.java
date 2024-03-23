@@ -2,11 +2,11 @@ package com.wjbaker.ccm.crosshair.style.styles;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.ComputedProperties;
-import com.wjbaker.ccm.crosshair.types.AbstractCrosshairStyle;
+import com.wjbaker.ccm.crosshair.types.BaseCrosshairStyle;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 
-public final class ArrowStyle extends AbstractCrosshairStyle {
+public final class ArrowStyle extends BaseCrosshairStyle {
 
     public ArrowStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
         super(matrixStack, crosshair);

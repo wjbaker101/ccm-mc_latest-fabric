@@ -2,12 +2,12 @@ package com.wjbaker.ccm.crosshair.style;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.style.styles.*;
-import com.wjbaker.ccm.crosshair.types.AbstractCrosshairStyle;
+import com.wjbaker.ccm.crosshair.types.BaseCrosshairStyle;
 import net.minecraft.client.util.math.MatrixStack;
 
 public final class CrosshairStyleFactory {
 
-    public AbstractCrosshairStyle from(final MatrixStack matrixStack, final CrosshairStyle style, final CustomCrosshair crosshair) {
+    public BaseCrosshairStyle from(final MatrixStack matrixStack, final CrosshairStyle style, final CustomCrosshair crosshair) {
         return switch (style) {
             case DEFAULT -> new DefaultStyle(matrixStack, crosshair);
             case CIRCLE -> new CircleStyle(matrixStack, crosshair);
