@@ -34,41 +34,33 @@ public final class EditColourGuiScreen extends GuiScreen {
         redSlider.setBaseThumbColour(new RGBA(240, 20, 20, 255));
         redSlider.setHoverThumbColour(new RGBA(210, 40, 40, 255));
         redSlider.bind(red);
-        redSlider.addEvent(IOnValueChangedEvent.class, () -> {
-            colour.set(colour.get().setRed(redSlider.getValue()));
-        });
+        redSlider.addEvent(IOnValueChangedEvent.class, () -> colour.set(colour.get().setRed(redSlider.getValue())));
 
         var green = new IntegerProperty("fake_green", colour.get().getGreen());
         var greenSlider = new IntegerSliderGuiComponent(this, -1, -1, 260, "Green", 0, 255, green.get());
         greenSlider.setBaseThumbColour(new RGBA(20, 240, 20, 255));
         greenSlider.setHoverThumbColour(new RGBA(40, 210, 40, 255));
         greenSlider.bind(green);
-        greenSlider.addEvent(IOnValueChangedEvent.class, () -> {
-            colour.set(colour.get().setGreen(greenSlider.getValue()));
-        });
+        greenSlider.addEvent(IOnValueChangedEvent.class, () -> colour.set(colour.get().setGreen(greenSlider.getValue())));
 
         var blue = new IntegerProperty("fake_blue", colour.get().getBlue());
         var blueSlider = new IntegerSliderGuiComponent(this, -1, -1, 260, "Blue", 0, 255, blue.get());
         blueSlider.setBaseThumbColour(new RGBA(20, 20, 240, 255));
         blueSlider.setHoverThumbColour(new RGBA(40, 40, 210, 255));
         blueSlider.bind(blue);
-        blueSlider.addEvent(IOnValueChangedEvent.class, () -> {
-            colour.set(colour.get().setBlue(blueSlider.getValue()));
-        });
+        blueSlider.addEvent(IOnValueChangedEvent.class, () -> colour.set(colour.get().setBlue(blueSlider.getValue())));
 
         var opacity = new IntegerProperty("fake_opacity", colour.get().getOpacity());
         var opacitySlider = new IntegerSliderGuiComponent(this, -1, -1, 260, "Opacity", 0, 255, opacity.get());
         opacitySlider.setBaseThumbColour(new RGBA(250, 250, 250, 255));
         opacitySlider.setHoverThumbColour(new RGBA(240, 240, 240, 255));
         opacitySlider.bind(opacity);
-        opacitySlider.addEvent(IOnValueChangedEvent.class, () -> {
-            colour.set(colour.get().setOpacity(opacitySlider.getValue()));
-        });
+        opacitySlider.addEvent(IOnValueChangedEvent.class, () -> colour.set(colour.get().setOpacity(opacitySlider.getValue())));
 
         var doneButton = new ButtonGuiComponent(this, -1, -1, 50, 35, "Done");
-        doneButton.addEvent(IOnClickEvent.class, () -> {
-            MinecraftClient.getInstance().setScreen(new EditCrosshairGuiScreen(crosshair));
-        });
+        doneButton.addEvent(
+            IOnClickEvent.class,
+            () -> MinecraftClient.getInstance().setScreen(new EditCrosshairGuiScreen(crosshair)));
 
         var colourPreview = new ColourPreviewGuiComponent(this, -1, -1, colour);
 
