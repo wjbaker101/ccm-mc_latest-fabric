@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.crosshair.style.CrosshairStyleFactory;
+import com.wjbaker.ccm.crosshair.style.styles.*;
 import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import com.wjbaker.ccm.rendering.ModTheme;
 import com.wjbaker.ccm.rendering.RenderManager;
@@ -30,7 +30,6 @@ public final class CrosshairRenderManager {
     private static final Identifier ICONS = new Identifier("textures/gui/icons.png");
 
     private final RenderManager renderManager;
-    private final CrosshairStyleFactory crosshairStyleFactory;
 
     private final Set<Item> itemCooldownItems = ImmutableSet.of(
         Items.ENDER_PEARL,
@@ -39,7 +38,6 @@ public final class CrosshairRenderManager {
 
     public CrosshairRenderManager() {
         this.renderManager = new RenderManager();
-        this.crosshairStyleFactory = new CrosshairStyleFactory();
     }
 
     public void draw(final CustomCrosshair crosshair, final DrawContext drawContext, final int x, final int y) {
@@ -56,7 +54,7 @@ public final class CrosshairRenderManager {
 
         var matrixStack = drawContext.getMatrices();
 
-        var style = this.crosshairStyleFactory.from(matrixStack, calculatedStyle, crosshair);
+        var style = this.mapCrosshairStyle(matrixStack, calculatedStyle, crosshair);
         var isItemCooldownEnabled = crosshair.isItemCooldownEnabled.get();
         var isDotEnabled = crosshair.isDotEnabled.get();
 
@@ -82,6 +80,24 @@ public final class CrosshairRenderManager {
         style.draw(drawContext, 0, 0, computedProperties);
 
         this.postTransformation(transformMatrixStack);
+    }
+
+    private CrosshairStyle mapCrosshairStyle(
+        final MatrixStack matrixStack,
+        final CrosshairStyle.Styles style,
+        final CustomCrosshair crosshair) {
+
+        return switch (style) {
+            case DEFAULT -> new DefaultStyle(matrixStack, crosshair);
+            case CIRCLE -> new CircleStyle(matrixStack, crosshair);
+            case SQUARE -> new SquareStyle(matrixStack, crosshair);
+            case TRIANGLE -> new TriangleStyle(matrixStack, crosshair);
+            case ARROW -> new ArrowStyle(matrixStack, crosshair);
+            case DEBUG -> new DebugStyle(matrixStack, crosshair);
+            case DRAWN -> new DrawnStyle(matrixStack, crosshair);
+
+            default -> new CrossStyle(matrixStack, crosshair);
+        };
     }
 
     private void preTransformation(
