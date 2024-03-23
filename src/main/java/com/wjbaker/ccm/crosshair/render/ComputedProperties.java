@@ -3,6 +3,7 @@ package com.wjbaker.ccm.crosshair.render;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
+import com.wjbaker.ccm.crosshair.render.types.IndicatorItem;
 import com.wjbaker.ccm.type.RGBA;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -18,6 +19,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -199,5 +202,23 @@ public final class ComputedProperties {
         var isOffhand = items.contains(player.getOffHandStack().getItem());
 
         return isMainHand || (isOffhand && mainHandItem.isEmpty());
+    }
+
+    public List<IndicatorItem> getIndicatorItems() {
+        var indicatorItems = new ArrayList<IndicatorItem>();
+
+        if (crosshair.isToolDamageEnabled.get()) {
+            if (this.mc.player != null && this.mc.player.getMainHandStack() != null) {
+                var tool = mc.player.getMainHandStack();
+                if (tool.isDamageable()) {
+                    var remainingDamage = tool.getMaxDamage() - tool.getDamage();
+                    if (remainingDamage <= 10) {
+                        indicatorItems.add(new IndicatorItem("" + remainingDamage, tool));
+                    }
+                }
+            }
+        }
+
+        return indicatorItems;
     }
 }

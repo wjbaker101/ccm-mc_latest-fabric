@@ -184,27 +184,10 @@ public final class CrosshairRenderManager {
         final ComputedProperties computedProperties,
         final int x, final int y) {
 
-        if (!crosshair.isToolDamageEnabled.get())
-            return;
-
         var drawX = x + crosshair.gap.get() + 5;
         var drawY = y + crosshair.gap.get() + 5;
 
         var mc = MinecraftClient.getInstance();
-        if (mc.player == null || mc.player.getMainHandStack() == null)
-            return;
-
-        var tool = mc.player.getMainHandStack();
-        if (!tool.isDamageable())
-            return;
-
-        var remainingDamage = tool.getMaxDamage() - tool.getDamage();
-
-        if (remainingDamage > 10)
-            return;
-
-        var itemRenderer = mc.getItemRenderer();
-        var model = itemRenderer.getModel(tool, null, null, 0);
 
         mc.getTextureManager().getTexture(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).setFilter(false, false);
         RenderSystem.setShaderTexture(0, SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
@@ -213,24 +196,30 @@ public final class CrosshairRenderManager {
         RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-        MatrixStack matrixStack = drawContext.getMatrices();
-        matrixStack.push();
-        matrixStack.translate(drawX, drawY, (100.0F + 1));
-        matrixStack.scale(1.0F, -1.0F, 1.0F);
-        matrixStack.scale(8F, 8F, 8F);
-        RenderSystem.applyModelViewMatrix();
-
+        var indicatorItems = computedProperties.getIndicatorItems();
         var immediate = mc.getBufferBuilders().getEntityVertexConsumers();
+        var matrixStack = drawContext.getMatrices();
+        var itemRenderer = mc.getItemRenderer();
+
         DiffuseLighting.disableGuiDepthLighting();
 
-        itemRenderer.renderItem(tool, ModelTransformationMode.GUI, false, matrixStack, immediate, 15728880, OverlayTexture.DEFAULT_UV, model);
-        immediate.draw();
+        for (var indicatorItem : indicatorItems) {
+            matrixStack.push();
+            matrixStack.translate(drawX, drawY, (100.0F + 1));
+            matrixStack.scale(1.0F, -1.0F, 1.0F);
+            matrixStack.scale(8F, 8F, 8F);
+            var model = itemRenderer.getModel(indicatorItem.getIcon(), null, null, 0);
 
-        RenderSystem.enableDepthTest();
+            itemRenderer.renderItem(indicatorItem.getIcon(), ModelTransformationMode.GUI, false, matrixStack, immediate, 15728880, OverlayTexture.DEFAULT_UV, model);
+            immediate.draw();
+
+            matrixStack.pop();
+
+            this.renderManager.drawSmallText(drawContext, indicatorItem.getText(), drawX + 5, drawY, ModTheme.WHITE, true);
+
+            drawX += 15;
+        }
+
         DiffuseLighting.enableGuiDepthLighting();
-
-        matrixStack.pop();
-
-        this.renderManager.drawSmallText(drawContext, "" + remainingDamage, drawX + 6, drawY, ModTheme.WHITE, true);
     }
 }
