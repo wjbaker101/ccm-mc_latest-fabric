@@ -3,12 +3,12 @@ package com.wjbaker.ccm.crosshair.style.styles;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.ComputedProperties;
-import com.wjbaker.ccm.crosshair.types.BaseCrosshairStyle;
+import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.RotationAxis;
 
-public final class DebugStyle extends BaseCrosshairStyle {
+public final class DebugStyle extends CrosshairStyle {
 
     public DebugStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
         super(matrixStack, crosshair);

@@ -4,13 +4,13 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.ComputedProperties;
-import com.wjbaker.ccm.crosshair.types.BaseCrosshairStyle;
+import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
-public final class DefaultStyle extends BaseCrosshairStyle {
+public final class DefaultStyle extends CrosshairStyle {
 
     private static final Identifier ICONS = new Identifier("hud/crosshair");
 

@@ -5,7 +5,7 @@ import com.wjbaker.ccm.crosshair.properties.BooleanProperty;
 import com.wjbaker.ccm.crosshair.properties.EnumProperty;
 import com.wjbaker.ccm.crosshair.properties.IntegerProperty;
 import com.wjbaker.ccm.crosshair.properties.RgbaProperty;
-import com.wjbaker.ccm.crosshair.style.CrosshairStyle;
+import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import com.wjbaker.ccm.crosshair.types.ICrosshairProperty;
 import com.wjbaker.ccm.rendering.ModTheme;
 import com.wjbaker.ccm.type.RGBA;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public final class CustomCrosshair {
 
-    public final EnumProperty<CrosshairStyle> style;
+    public final EnumProperty<CrosshairStyle.Styles> style;
     public final BooleanProperty isKeepDebugEnabled;
     public final RgbaProperty colour;
     public final BooleanProperty isAdaptiveColourEnabled;
@@ -121,7 +121,7 @@ public final class CustomCrosshair {
     }
 
     public void resetProperties() {
-        this.style.set(CrosshairStyle.CROSS);
+        this.style.set(CrosshairStyle.Styles.CROSS);
         this.isKeepDebugEnabled.set(false);
         this.colour.set(ModTheme.WHITE);
         this.isAdaptiveColourEnabled.set(false);

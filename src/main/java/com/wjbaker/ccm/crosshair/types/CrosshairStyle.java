@@ -7,14 +7,26 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 
-public abstract class BaseCrosshairStyle {
+public abstract class CrosshairStyle {
+
+    public enum Styles {
+
+        DEFAULT,
+        CROSS,
+        CIRCLE,
+        SQUARE,
+        TRIANGLE,
+        ARROW,
+        DEBUG,
+        DRAWN,
+    }
 
     protected final CustomCrosshair crosshair;
     protected final MatrixStack matrixStack;
     protected final RenderManager renderManager;
     protected final MinecraftClient mc;
 
-    public BaseCrosshairStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
+    public CrosshairStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
         this.crosshair = crosshair;
         this.matrixStack = matrixStack;
         this.renderManager = new RenderManager();

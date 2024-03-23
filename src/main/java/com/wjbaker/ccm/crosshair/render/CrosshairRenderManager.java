@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.crosshair.style.CrosshairStyle;
 import com.wjbaker.ccm.crosshair.style.CrosshairStyleFactory;
+import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import com.wjbaker.ccm.rendering.ModTheme;
 import com.wjbaker.ccm.rendering.RenderManager;
 import net.minecraft.client.MinecraftClient;
@@ -49,7 +49,7 @@ public final class CrosshairRenderManager {
             return;
 
         var calculatedStyle = MinecraftClient.getInstance().inGameHud.getDebugHud().shouldShowDebugHud() && crosshair.isKeepDebugEnabled.get()
-            ? CrosshairStyle.DEBUG
+            ? CrosshairStyle.Styles.DEBUG
             : crosshair.style.get();
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
@@ -63,12 +63,12 @@ public final class CrosshairRenderManager {
         if (isItemCooldownEnabled)
             this.drawItemCooldownIndicator(matrixStack, crosshair, computedProperties, x, y);
 
-        if (isDotEnabled && crosshair.style.get() != CrosshairStyle.DEFAULT)
+        if (isDotEnabled && crosshair.style.get() != CrosshairStyle.Styles.DEFAULT)
             this.renderManager.drawCircle(matrixStack, x, y, 0.5F, 1.0F, crosshair.dotColour.get());
 
         this.drawDefaultAttackIndicator(drawContext, computedProperties, x, y);
 
-        var transformMatrixStack = calculatedStyle == CrosshairStyle.DEBUG
+        var transformMatrixStack = calculatedStyle == CrosshairStyle.Styles.DEBUG
             ? RenderSystem.getModelViewStack()
             : matrixStack;
 
