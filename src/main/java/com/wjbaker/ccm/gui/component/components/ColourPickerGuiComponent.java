@@ -18,7 +18,6 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
     private final CustomCrosshair crosshair;
 
     private RgbaProperty colour;
-    private boolean isMouseOverBox;
 
     public ColourPickerGuiComponent(
         final GuiScreen parentGuiScreen,
@@ -35,7 +34,6 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
         this.label = label;
 
         this.colour = new RgbaProperty("fake_colour", ModTheme.WHITE);
-        this.isMouseOverBox = false;
 
         this.width = this.boxSize + this.labelSpacing + this.renderManager.textWidth(this.label);
     }
