@@ -1,6 +1,6 @@
 package com.wjbaker.ccm.gui.component.components;
 
-import com.wjbaker.ccm.crosshair.property.BooleanProperty;
+import com.wjbaker.ccm.crosshair.properties.BooleanProperty;
 import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.component.type.IBindableGuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;

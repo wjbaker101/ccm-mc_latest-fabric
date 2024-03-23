@@ -1,6 +1,6 @@
 package com.wjbaker.ccm.gui.component.components;
 
-import com.wjbaker.ccm.crosshair.property.IntegerProperty;
+import com.wjbaker.ccm.crosshair.properties.IntegerProperty;
 import com.wjbaker.ccm.gui.component.type.IBindableGuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.rendering.ModTheme;

@@ -1,8 +1,8 @@
 package com.wjbaker.ccm.gui.screen.screens.editColour;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.crosshair.property.IntegerProperty;
-import com.wjbaker.ccm.crosshair.property.RgbaProperty;
+import com.wjbaker.ccm.crosshair.properties.IntegerProperty;
+import com.wjbaker.ccm.crosshair.properties.RgbaProperty;
 import com.wjbaker.ccm.gui.component.components.*;
 import com.wjbaker.ccm.gui.component.custom.ColourPreviewGuiComponent;
 import com.wjbaker.ccm.gui.component.custom.CrosshairPreviewGuiComponent;

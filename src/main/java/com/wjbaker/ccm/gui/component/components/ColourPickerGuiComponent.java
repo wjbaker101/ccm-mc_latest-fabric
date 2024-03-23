@@ -1,7 +1,7 @@
 package com.wjbaker.ccm.gui.component.components;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.crosshair.property.RgbaProperty;
+import com.wjbaker.ccm.crosshair.properties.RgbaProperty;
 import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.component.type.IBindableGuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;

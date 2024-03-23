@@ -2,7 +2,7 @@ package com.wjbaker.ccm.config;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.custom.CustomCrosshairDrawer;
-import com.wjbaker.ccm.crosshair.property.BooleanProperty;
+import com.wjbaker.ccm.crosshair.properties.BooleanProperty;
 
 public final class GlobalProperties {
 

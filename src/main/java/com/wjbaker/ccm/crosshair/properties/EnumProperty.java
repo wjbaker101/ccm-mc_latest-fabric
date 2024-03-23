@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.crosshair.property;
+package com.wjbaker.ccm.crosshair.properties;
 
 import java.util.EnumSet;
 

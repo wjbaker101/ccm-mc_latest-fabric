@@ -1,7 +1,7 @@
 package com.wjbaker.ccm.gui.screen.screens.drawCrosshair;
 
 import com.wjbaker.ccm.CustomCrosshairMod;
-import com.wjbaker.ccm.crosshair.property.IntegerProperty;
+import com.wjbaker.ccm.crosshair.properties.IntegerProperty;
 import com.wjbaker.ccm.gui.component.components.ButtonGuiComponent;
 import com.wjbaker.ccm.gui.component.components.HeadingGuiComponent;
 import com.wjbaker.ccm.gui.component.components.PanelGuiComponent;
