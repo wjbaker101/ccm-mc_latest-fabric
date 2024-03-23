@@ -8,19 +8,20 @@ import com.wjbaker.ccm.gui.component.components.PanelGuiComponent;
 import com.wjbaker.ccm.gui.component.event.IOnClickEvent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.gui.screen.screens.editColour.components.DrawCrosshairGuiComponent;
+import net.minecraft.client.resource.language.I18n;
 
 public final class DrawCrosshairGuiScreen extends GuiScreen {
 
     public DrawCrosshairGuiScreen() {
         super("Draw Crosshair");
 
-        var titleHeading = new HeadingGuiComponent(this, -1, -1, "Draw Crosshair");
+        var titleHeading = new HeadingGuiComponent(this, -1, -1, I18n.translate("custom_crosshair_mod.screen.draw_crosshair.heading"));
 
         var customCrosshairDrawer = CustomCrosshairMod.INSTANCE.properties().getCustomCrosshairDrawer();
         var imageSize = new IntegerProperty("fake_image_size", customCrosshairDrawer.getWidth());
         var drawCrosshair = new DrawCrosshairGuiComponent(this, -1, -1, imageSize);
 
-        var resetButton = new ButtonGuiComponent(this, -1, -1, 50, 15, "Reset");
+        var resetButton = new ButtonGuiComponent(this, -1, -1, 50, 15, I18n.translate("custom_crosshair_mod.screen.draw_crosshair.reset"));
         resetButton.addEvent(
             IOnClickEvent.class,
             () -> customCrosshairDrawer.reset(customCrosshairDrawer.getWidth(), customCrosshairDrawer.getHeight()));
