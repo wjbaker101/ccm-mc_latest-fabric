@@ -2,6 +2,10 @@
     "keybind.custom_crosshair_mod.open_edit_crosshair_gui": "Edit Crosshair",
     "gui.custom_crosshair_mod.mod_keybinds_category": "Custom Crosshair Mod",
 
+    "custom_crosshair_mod.screen.support_on_paypal": "Support on PayPal!",
+    "custom_crosshair_mod.screen.support_on_patreon": "Support on Patreon!",
+    "custom_crosshair_mod.screen.new_version": "New Version Available!",
+
     "custom_crosshair_mod.screen.edit_crosshair.reset_settings": "Reset Settings",
 
     "custom_crosshair_mod.screen.edit_crosshair.general_settings": "General Settings",

@@ -9,6 +9,7 @@ import com.wjbaker.ccm.rendering.ModTheme;
 import com.wjbaker.ccm.rendering.RenderManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.resource.language.I18n;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.components = new ArrayList<>();
         this.headerHeight = 35;
 
-        this.newVersionButton = new ButtonGuiComponent(this, -1, -1, 125, 25, "New Version Available!");
+        this.newVersionButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.translate("custom_crosshair_mod.screen.new_version"));
         this.newVersionButton.setBaseBackgroundColour(ModTheme.TERTIARY);
         this.newVersionButton.setHoverBackgroundColour(ModTheme.TERTIARY_DARK);
         this.newVersionButton.setBaseTextColour(ModTheme.BLACK);
@@ -48,7 +49,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
                 Helper.openInBrowser(CustomCrosshairMod.CURSEFORGE_PAGE);
         });
 
-        this.patreonButton = new ButtonGuiComponent(this, -1, -1, 125, 25, "Support via Patreon!");
+        this.patreonButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.translate("custom_crosshair_mod.screen.support_on_patreon"));
         this.patreonButton.setBaseBackgroundColour(ModTheme.SECONDARY);
         this.patreonButton.setHoverBackgroundColour(ModTheme.PRIMARY);
         this.patreonButton.setBaseTextColour(ModTheme.WHITE);
@@ -57,7 +58,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
             Helper.openInBrowser(CustomCrosshairMod.PATREON_PAGE);
         });
 
-        this.paypalButton = new ButtonGuiComponent(this, -1, -1, 125, 25, "Support via PayPal!");
+        this.paypalButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.translate("custom_crosshair_mod.screen.support_on_paypal"));
         this.paypalButton.setBaseBackgroundColour(ModTheme.SECONDARY);
         this.paypalButton.setHoverBackgroundColour(ModTheme.PRIMARY);
         this.paypalButton.setBaseTextColour(ModTheme.WHITE);
