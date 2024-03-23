@@ -2,8 +2,8 @@ package com.wjbaker.ccm;
 
 import com.wjbaker.ccm.config.ConfigManager;
 import com.wjbaker.ccm.config.GlobalProperties;
-import com.wjbaker.ccm.helpers.Helper;
 import com.wjbaker.ccm.gui.screen.screens.editCrosshair.EditCrosshairGuiScreen;
+import com.wjbaker.ccm.helpers.Helper;
 import com.wjbaker.ccm.translations.ModTranslations;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -24,7 +24,7 @@ public final class CustomCrosshairMod implements ModInitializer {
     public static CustomCrosshairMod INSTANCE;
 
     public static final String TITLE = "Custom Crosshair Mod";
-    public static final String VERSION = "1.5.4-fabric";
+    public static final String VERSION = "1.5.5-fabric";
     public static final String MC_VERSION = "1.20.4-fabric";
     public static final String CURSEFORGE_PAGE = "https://www.curseforge.com/projects/242995/";
     public static final String MC_FORUMS_PAGE = "https://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/2637819/";
