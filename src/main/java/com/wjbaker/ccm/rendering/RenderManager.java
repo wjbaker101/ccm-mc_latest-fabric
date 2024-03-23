@@ -5,7 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.custom.CustomCrosshairDrawer;
 import com.wjbaker.ccm.gui.type.GuiBounds;
 import com.wjbaker.ccm.gui.type.IDrawInsideWindowCallback;
-import com.wjbaker.ccm.type.RGBA;
+import com.wjbaker.ccm.types.RGBA;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.*;

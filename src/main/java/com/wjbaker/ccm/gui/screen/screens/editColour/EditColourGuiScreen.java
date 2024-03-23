@@ -12,7 +12,7 @@ import com.wjbaker.ccm.gui.component.type.PanelOrientation;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.gui.screen.screens.editCrosshair.EditCrosshairGuiScreen;
 import com.wjbaker.ccm.rendering.ModTheme;
-import com.wjbaker.ccm.type.RGBA;
+import com.wjbaker.ccm.types.RGBA;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.resource.language.I18n;

@@ -5,7 +5,7 @@ import com.wjbaker.ccm.crosshair.computed.properties.ComputeColour;
 import com.wjbaker.ccm.crosshair.computed.properties.ComputeGap;
 import com.wjbaker.ccm.crosshair.computed.properties.ComputeIndicators;
 import com.wjbaker.ccm.crosshair.computed.properties.ComputeVisibility;
-import com.wjbaker.ccm.type.RGBA;
+import com.wjbaker.ccm.types.RGBA;
 
 import java.util.List;
 

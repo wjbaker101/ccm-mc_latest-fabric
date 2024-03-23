@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.type;
+package com.wjbaker.ccm.types;
 
 public final class RGBA {
 

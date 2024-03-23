@@ -6,7 +6,7 @@ import com.wjbaker.ccm.crosshair.rendering.CrosshairRenderManager;
 import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.rendering.ModTheme;
-import com.wjbaker.ccm.type.RGBA;
+import com.wjbaker.ccm.types.RGBA;
 import net.minecraft.client.gui.DrawContext;
 
 public final class CrosshairPreviewGuiComponent extends GuiComponent {
