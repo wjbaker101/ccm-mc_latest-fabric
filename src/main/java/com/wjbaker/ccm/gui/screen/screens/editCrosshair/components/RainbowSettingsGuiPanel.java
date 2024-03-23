@@ -1,12 +1,12 @@
 package com.wjbaker.ccm.gui.screen.screens.editCrosshair.components;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.render.ModTheme;
 import com.wjbaker.ccm.gui.component.components.CheckBoxGuiComponent;
 import com.wjbaker.ccm.gui.component.components.HeadingGuiComponent;
 import com.wjbaker.ccm.gui.component.components.IntegerSliderGuiComponent;
 import com.wjbaker.ccm.gui.component.components.PanelGuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
+import com.wjbaker.ccm.rendering.ModTheme;
 import net.minecraft.client.gui.DrawContext;
 
 public final class RainbowSettingsGuiPanel extends PanelGuiComponent {

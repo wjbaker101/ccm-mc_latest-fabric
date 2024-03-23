@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.render;
+package com.wjbaker.ccm.rendering;
 
 import com.wjbaker.ccm.type.RGBA;
 

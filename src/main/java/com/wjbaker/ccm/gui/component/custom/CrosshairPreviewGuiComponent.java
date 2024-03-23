@@ -3,9 +3,9 @@ package com.wjbaker.ccm.gui.component.custom;
 import com.wjbaker.ccm.CustomCrosshairMod;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.render.CrosshairRenderManager;
-import com.wjbaker.ccm.render.ModTheme;
 import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
+import com.wjbaker.ccm.rendering.ModTheme;
 import com.wjbaker.ccm.type.RGBA;
 import net.minecraft.client.gui.DrawContext;
 
