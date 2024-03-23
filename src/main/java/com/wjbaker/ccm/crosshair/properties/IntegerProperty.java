@@ -1,5 +1,7 @@
 package com.wjbaker.ccm.crosshair.properties;
 
+import com.wjbaker.ccm.crosshair.types.ICrosshairProperty;
+
 public final class IntegerProperty extends ICrosshairProperty<Integer> {
 
     public IntegerProperty(final String alias, final Integer value) {

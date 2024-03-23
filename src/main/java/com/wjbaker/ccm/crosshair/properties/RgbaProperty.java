@@ -1,5 +1,6 @@
 package com.wjbaker.ccm.crosshair.properties;
 
+import com.wjbaker.ccm.crosshair.types.ICrosshairProperty;
 import com.wjbaker.ccm.type.RGBA;
 
 public final class RgbaProperty extends ICrosshairProperty<RGBA> {

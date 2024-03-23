@@ -1,6 +1,6 @@
 package com.wjbaker.ccm.gui.component.type;
 
-import com.wjbaker.ccm.crosshair.properties.ICrosshairProperty;
+import com.wjbaker.ccm.crosshair.types.ICrosshairProperty;
 
 public interface IBindableGuiComponent<TProperty extends ICrosshairProperty<?>> {
 

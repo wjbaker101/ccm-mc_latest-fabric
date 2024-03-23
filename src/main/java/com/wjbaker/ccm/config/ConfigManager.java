@@ -2,7 +2,7 @@ package com.wjbaker.ccm.config;
 
 import com.wjbaker.ccm.CustomCrosshairMod;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.crosshair.properties.ICrosshairProperty;
+import com.wjbaker.ccm.crosshair.types.ICrosshairProperty;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

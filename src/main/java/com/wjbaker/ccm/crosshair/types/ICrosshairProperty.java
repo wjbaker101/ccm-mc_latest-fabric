@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.crosshair.properties;
+package com.wjbaker.ccm.crosshair.types;
 
 public abstract class ICrosshairProperty<T> {
 

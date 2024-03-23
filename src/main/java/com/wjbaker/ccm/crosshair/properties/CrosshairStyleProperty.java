@@ -1,6 +1,7 @@
 package com.wjbaker.ccm.crosshair.properties;
 
 import com.wjbaker.ccm.crosshair.style.CrosshairStyle;
+import com.wjbaker.ccm.crosshair.types.ICrosshairProperty;
 
 public final class CrosshairStyleProperty extends ICrosshairProperty<CrosshairStyle> {
 

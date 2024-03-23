@@ -1,5 +1,7 @@
 package com.wjbaker.ccm.crosshair.properties;
 
+import com.wjbaker.ccm.crosshair.types.ICrosshairProperty;
+
 import java.util.EnumSet;
 
 public final class EnumProperty<TEnum extends Enum<TEnum>> extends ICrosshairProperty<TEnum> {
