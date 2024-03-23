@@ -19,8 +19,8 @@
     "custom_crosshair_mod.screen.edit_crosshair.draw_crosshair": "Draw Crosshair",
 
     "custom_crosshair_mod.screen.edit_crosshair.shape_settings": "Shape Settings",
-    "custom_crosshair_mod.screen.edit_crosshair.crosshair_colour": "Crosshair Color",
-    "custom_crosshair_mod.screen.edit_crosshair.enable_adaptive_colour": "Enable Adaptive Color",
+    "custom_crosshair_mod.screen.edit_crosshair.crosshair_colour": "Crosshair Colour",
+    "custom_crosshair_mod.screen.edit_crosshair.enable_adaptive_colour": "Enable Adaptive Colour",
     "custom_crosshair_mod.screen.edit_crosshair.width": "Width",
     "custom_crosshair_mod.screen.edit_crosshair.height": "Height",
     "custom_crosshair_mod.screen.edit_crosshair.gap": "Gap",
@@ -40,11 +40,11 @@
     "custom_crosshair_mod.screen.edit_crosshair.visible_using_spyglass": "Visible when Using Spyglass",
 
     "custom_crosshair_mod.screen.edit_crosshair.outline_settings": "Outline Settings",
-    "custom_crosshair_mod.screen.edit_crosshair.outline_colour": "Outline Color",
+    "custom_crosshair_mod.screen.edit_crosshair.outline_colour": "Outline Colour",
 
     "custom_crosshair_mod.screen.edit_crosshair.dot_settings": "Dot Settings",
     "custom_crosshair_mod.screen.edit_crosshair.enable_dot": "Enable Dot",
-    "custom_crosshair_mod.screen.edit_crosshair.dot_colour": "Dot Color",
+    "custom_crosshair_mod.screen.edit_crosshair.dot_colour": "Dot Colour",
 
     "custom_crosshair_mod.screen.edit_crosshair.dynamic_crosshair_settings": "Dynamic Crosshair Settings",
     "custom_crosshair_mod.screen.edit_crosshair.enable_dynamic_attack": "Enable Dynamic when Attacking",
@@ -52,11 +52,11 @@
 
     "custom_crosshair_mod.screen.edit_crosshair.highlight_settings": "Highlight Settings",
     "custom_crosshair_mod.screen.edit_crosshair.enable_highlight_hostiles": "Enable Hostile Mob Highlighting",
-    "custom_crosshair_mod.screen.edit_crosshair.highlight_hostiles_colour": "Hostile Mob Color",
+    "custom_crosshair_mod.screen.edit_crosshair.highlight_hostiles_colour": "Hostile Mob Colour",
     "custom_crosshair_mod.screen.edit_crosshair.enable_highlight_passives": "Enable Passive Mob Highlighting",
-    "custom_crosshair_mod.screen.edit_crosshair.highlight_passives_colour": "Passive Mob Color",
+    "custom_crosshair_mod.screen.edit_crosshair.highlight_passives_colour": "Passive Mob Colour",
     "custom_crosshair_mod.screen.edit_crosshair.enable_highlight_players": "Enable Player Highlighting",
-    "custom_crosshair_mod.screen.edit_crosshair.highlight_players_colour": "Player Color",
+    "custom_crosshair_mod.screen.edit_crosshair.highlight_players_colour": "Player Colour",
 
     "custom_crosshair_mod.screen.edit_crosshair.rainbow_settings": "Rainbow Settings",
     "custom_crosshair_mod.screen.edit_crosshair.enable_rainbow": "Enable Rainbow",
@@ -72,7 +72,7 @@
     "custom_crosshair_mod.screen.draw_crosshair.heading": "Draw Crosshair",
     "custom_crosshair_mod.screen.draw_crosshair.reset": "Reset",
 
-    "custom_crosshair_mod.screen.edit_colour.heading": "Edit Color",
+    "custom_crosshair_mod.screen.edit_colour.heading": "Edit Colour",
     "custom_crosshair_mod.screen.edit_colour.red": "Red",
     "custom_crosshair_mod.screen.edit_colour.green": "Green",
     "custom_crosshair_mod.screen.edit_colour.blue": "Blue",

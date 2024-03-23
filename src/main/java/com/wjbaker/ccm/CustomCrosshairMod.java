@@ -4,7 +4,6 @@ import com.wjbaker.ccm.config.ConfigManager;
 import com.wjbaker.ccm.config.GlobalProperties;
 import com.wjbaker.ccm.gui.screen.screens.editCrosshair.EditCrosshairGuiScreen;
 import com.wjbaker.ccm.helpers.Helper;
-import com.wjbaker.ccm.translations.ModTranslations;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -97,10 +96,10 @@ public final class CustomCrosshairMod implements ModInitializer {
 
     private void loadKeyBindings() {
         var editCrosshair = new KeyBinding(
-            ModTranslations.KEYBIND_OPEN_EDIT_CROSSHAIR_GUI.getKey(),
+            "keybind.custom_crosshair_mod.open_edit_crosshair_gui",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_GRAVE_ACCENT,
-            ModTranslations.GUI_MOD_KEYBINDS_CATEGORY.getKey());
+            "gui.custom_crosshair_mod.mod_keybinds_category");
 
         KeyBindingHelper.registerKeyBinding(editCrosshair);
 
