@@ -21,9 +21,9 @@ public final class DrawCrosshairGuiScreen extends GuiScreen {
         var drawCrosshair = new DrawCrosshairGuiComponent(this, -1, -1, imageSize);
 
         var resetButton = new ButtonGuiComponent(this, -1, -1, 50, 15, "Reset");
-        resetButton.addEvent(IOnClickEvent.class, () -> {
-            customCrosshairDrawer.reset(customCrosshairDrawer.getWidth(), customCrosshairDrawer.getHeight());
-        });
+        resetButton.addEvent(
+            IOnClickEvent.class,
+            () -> customCrosshairDrawer.reset(customCrosshairDrawer.getWidth(), customCrosshairDrawer.getHeight()));
 
         var mainPanel = new PanelGuiComponent(this, 7, this.headerHeight + 8, 300, 300);
         mainPanel.addComponent(titleHeading);
