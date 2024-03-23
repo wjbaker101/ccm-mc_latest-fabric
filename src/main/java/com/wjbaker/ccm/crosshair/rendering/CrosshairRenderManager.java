@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
+import com.wjbaker.ccm.crosshair.computed.ComputedProperties;
 import com.wjbaker.ccm.crosshair.styles.*;
 import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import com.wjbaker.ccm.rendering.ModTheme;

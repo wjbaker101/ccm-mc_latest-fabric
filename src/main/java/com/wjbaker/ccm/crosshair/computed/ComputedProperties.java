@@ -1,10 +1,10 @@
-package com.wjbaker.ccm.crosshair.rendering;
+package com.wjbaker.ccm.crosshair.computed;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.crosshair.rendering.computed.ComputeColour;
-import com.wjbaker.ccm.crosshair.rendering.computed.ComputeGap;
-import com.wjbaker.ccm.crosshair.rendering.computed.ComputeIndicators;
-import com.wjbaker.ccm.crosshair.rendering.computed.ComputeVisibility;
+import com.wjbaker.ccm.crosshair.computed.properties.ComputeColour;
+import com.wjbaker.ccm.crosshair.computed.properties.ComputeGap;
+import com.wjbaker.ccm.crosshair.computed.properties.ComputeIndicators;
+import com.wjbaker.ccm.crosshair.computed.properties.ComputeVisibility;
 import com.wjbaker.ccm.type.RGBA;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.crosshair.rendering.computed;
+package com.wjbaker.ccm.crosshair.computed.properties;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import net.minecraft.client.MinecraftClient;
