@@ -61,9 +61,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.patreonButton.setHoverBackgroundColour(ModTheme.PRIMARY);
         this.patreonButton.setBaseTextColour(ModTheme.WHITE);
         this.patreonButton.setHoverTextColour(ModTheme.WHITE);
-        this.patreonButton.addEvent(IOnClickEvent.class, () -> {
-            Helper.openInBrowser(CustomCrosshairMod.PATREON_PAGE);
-        });
+        this.patreonButton.addEvent(IOnClickEvent.class, () -> Helper.openInBrowser(CustomCrosshairMod.PATREON_PAGE));
         this.buttons.add(this.patreonButton);
 
         this.paypalButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.translate("custom_crosshair_mod.screen.support_on_paypal"));
@@ -71,9 +69,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.paypalButton.setHoverBackgroundColour(ModTheme.PRIMARY);
         this.paypalButton.setBaseTextColour(ModTheme.WHITE);
         this.paypalButton.setHoverTextColour(ModTheme.WHITE);
-        this.paypalButton.addEvent(IOnClickEvent.class, () -> {
-            Helper.openInBrowser(CustomCrosshairMod.PAYPAL_PAGE);
-        });
+        this.paypalButton.addEvent(IOnClickEvent.class, () -> Helper.openInBrowser(CustomCrosshairMod.PAYPAL_PAGE));
         this.buttons.add(this.paypalButton);
     }
 

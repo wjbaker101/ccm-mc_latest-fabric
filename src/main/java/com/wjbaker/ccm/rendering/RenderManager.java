@@ -232,25 +232,6 @@ public final class RenderManager {
         this.drawPartialCircle(matrixStack, x, y, radius, 0, 360, thickness, colour);
     }
 
-    public void drawFilledCircle(
-        final MatrixStack matrixStack,
-        final float x, final float y,
-        final float radius,
-        final RGBA colour) {
-
-        var points = new float[361 * 2];
-        var ratio = (float)Math.PI / 180.F;
-
-        for (int i = 0; i <= 360; ++i) {
-            float radians = (i - 90) * ratio;
-
-            points[i * 2] = x + (float)Math.cos(radians) * radius;
-            points[i * 2 + 1] = y + (float)Math.sin(radians) * radius;
-        }
-
-        this.drawFilledShape(matrixStack, points, colour);
-    }
-
     public void drawTorus(
         final MatrixStack matrixStack,
         final int x, final int y,

@@ -31,7 +31,7 @@ public final class HighlightSettingsGuiPanel extends PanelGuiComponent {
         hostilesColourPicker.bind(crosshair.highlightHostilesColour);
 
         var isHighlightPassivesEnabledCheckBox = new CheckBoxGuiComponent(
-            this.parentGuiScreen, -1, -1, I18n.translate("custom_crosshair_mod.screen.edit_crosshair.enable_highlight_passives"), crosshair.isHighlightPassivesEnabled.get());;
+            this.parentGuiScreen, -1, -1, I18n.translate("custom_crosshair_mod.screen.edit_crosshair.enable_highlight_passives"), crosshair.isHighlightPassivesEnabled.get());
         isHighlightPassivesEnabledCheckBox.bind(crosshair.isHighlightPassivesEnabled);
 
         var passivesColourPicker = new ColourPickerGuiComponent(
@@ -39,7 +39,7 @@ public final class HighlightSettingsGuiPanel extends PanelGuiComponent {
         passivesColourPicker.bind(crosshair.highlightPassivesColour);
 
         var isHighlightPlayersEnabledCheckBox = new CheckBoxGuiComponent(
-            this.parentGuiScreen, -1, -1, I18n.translate("custom_crosshair_mod.screen.edit_crosshair.enable_highlight_players"), crosshair.isHighlightPlayersEnabled.get());;
+            this.parentGuiScreen, -1, -1, I18n.translate("custom_crosshair_mod.screen.edit_crosshair.enable_highlight_players"), crosshair.isHighlightPlayersEnabled.get());
         isHighlightPlayersEnabledCheckBox.bind(crosshair.isHighlightPlayersEnabled);
 
         var playersColourPicker = new ColourPickerGuiComponent(

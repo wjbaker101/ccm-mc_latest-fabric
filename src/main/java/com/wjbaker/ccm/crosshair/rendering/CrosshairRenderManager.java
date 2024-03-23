@@ -65,7 +65,7 @@ public final class CrosshairRenderManager {
         if (isDotEnabled && crosshair.style.get() != CrosshairStyle.Styles.DEFAULT)
             this.renderManager.drawCircle(matrixStack, x, y, 0.5F, 1.0F, crosshair.dotColour.get());
 
-        this.drawDefaultAttackIndicator(drawContext, computedProperties, x, y);
+        this.drawDefaultAttackIndicator(drawContext);
 
         var transformMatrixStack = calculatedStyle == CrosshairStyle.Styles.DEBUG
             ? RenderSystem.getModelViewStack()
@@ -162,11 +162,7 @@ public final class CrosshairRenderManager {
         }
     }
 
-    private void drawDefaultAttackIndicator(
-        final DrawContext drawContext,
-        final ComputedProperties computedProperties,
-        final int x, final int y) {
-
+    private void drawDefaultAttackIndicator(final DrawContext drawContext) {
         RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
 
         var mc = MinecraftClient.getInstance();
