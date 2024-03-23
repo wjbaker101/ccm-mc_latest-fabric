@@ -224,14 +224,14 @@ public final class CrosshairRenderManager {
             matrixStack.translate(drawX, drawY, (100.0F + 1));
             matrixStack.scale(1.0F, -1.0F, 1.0F);
             matrixStack.scale(8F, 8F, 8F);
-            var model = itemRenderer.getModel(indicatorItem.getIcon(), null, null, 0);
+            var model = itemRenderer.getModel(indicatorItem.icon(), null, null, 0);
 
-            itemRenderer.renderItem(indicatorItem.getIcon(), ModelTransformationMode.GUI, false, matrixStack, immediate, 15728880, OverlayTexture.DEFAULT_UV, model);
+            itemRenderer.renderItem(indicatorItem.icon(), ModelTransformationMode.GUI, false, matrixStack, immediate, 15728880, OverlayTexture.DEFAULT_UV, model);
             immediate.draw();
 
             matrixStack.pop();
 
-            this.renderManager.drawSmallText(drawContext, indicatorItem.getText(), drawX + 5, drawY, ModTheme.WHITE, true);
+            this.renderManager.drawSmallText(drawContext, indicatorItem.text(), drawX + 5, drawY, ModTheme.WHITE, true);
 
             drawX += 15;
         }
