@@ -13,13 +13,9 @@ public final class ComputeIndicators {
 
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    private final CustomCrosshair crosshair;
+    public ComputeIndicators() {}
 
-    public ComputeIndicators(final CustomCrosshair crosshair) {
-        this.crosshair = crosshair;
-    }
-
-    public List<IndicatorItem> compute() {
+    public static List<IndicatorItem> compute(final CustomCrosshair crosshair) {
         var indicatorItems = new ArrayList<IndicatorItem>();
 
         if (crosshair.isToolDamageEnabled.get()) {
