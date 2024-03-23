@@ -44,6 +44,9 @@ public final class ComputeIndicators {
 
 
     private static void mutateForProjectiles(final List<IndicatorItem> indicators, final CustomCrosshair crosshair) {
+        if (!crosshair.isProjectileIndicatorEnabled.get())
+            return;
+
         if (mc.player == null || mc.player.getMainHandStack() == null)
             return;
 
