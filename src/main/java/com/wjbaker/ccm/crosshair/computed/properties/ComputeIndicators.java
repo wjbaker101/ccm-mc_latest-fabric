@@ -7,13 +7,13 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ComputeIndicators {
+public abstract class ComputeIndicators {
 
     public record IndicatorItem(String text, ItemStack icon) {}
 
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    public ComputeIndicators() {}
+    private ComputeIndicators() {}
 
     public static List<IndicatorItem> compute(final CustomCrosshair crosshair) {
         var indicators = new ArrayList<IndicatorItem>();

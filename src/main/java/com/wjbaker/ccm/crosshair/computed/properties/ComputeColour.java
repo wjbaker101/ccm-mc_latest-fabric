@@ -8,9 +8,11 @@ import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 
-public final class ComputeColour {
+public abstract class ComputeColour {
 
     private static final MinecraftClient mc = MinecraftClient.getInstance();
+
+    private ComputeColour() {}
 
     public static RGBA compute(final CustomCrosshair crosshair) {
         var target = mc.targetedEntity;

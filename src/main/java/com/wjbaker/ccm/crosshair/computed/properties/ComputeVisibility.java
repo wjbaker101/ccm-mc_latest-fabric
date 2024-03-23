@@ -10,7 +10,7 @@ import net.minecraft.item.Items;
 
 import java.util.Set;
 
-public final class ComputeVisibility {
+public abstract class ComputeVisibility {
 
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
@@ -24,6 +24,8 @@ public final class ComputeVisibility {
         Items.ENDER_PEARL,
         Items.ENDER_EYE
     );
+
+    private ComputeVisibility() {}
 
     public static boolean compute(final CustomCrosshair crosshair) {
         if (mc.player == null)
