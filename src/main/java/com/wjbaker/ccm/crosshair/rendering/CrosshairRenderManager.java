@@ -212,7 +212,7 @@ public final class CrosshairRenderManager {
         RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-        var indicatorItems = computedProperties.getIndicatorItems();
+        var indicatorItems = computedProperties.indicatorItems();
         var immediate = mc.getBufferBuilders().getEntityVertexConsumers();
         var matrixStack = drawContext.getMatrices();
         var itemRenderer = mc.getItemRenderer();

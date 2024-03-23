@@ -11,15 +11,13 @@ import java.util.List;
 
 public final class ComputedProperties {
 
-    private final CustomCrosshair crosshair;
-
     private final int gap;
     private final RGBA colour;
     private final boolean isVisible;
+    private final List<ComputeIndicators.IndicatorItem> indicatorItems;
 
     public ComputedProperties(final CustomCrosshair crosshair) {
-        this.crosshair = crosshair;
-
+        this.indicatorItems = ComputeIndicators.compute(crosshair);
         this.gap = ComputeGap.compute(crosshair);
         this.colour = ComputeColour.compute(crosshair);
         this.isVisible = ComputeVisibility.compute(crosshair);
@@ -37,7 +35,7 @@ public final class ComputedProperties {
         return this.isVisible;
     }
 
-    public List<ComputeIndicators.IndicatorItem> getIndicatorItems() {
-        return ComputeIndicators.compute(this.crosshair);
+    public List<ComputeIndicators.IndicatorItem> indicatorItems() {
+        return this.indicatorItems;
     }
 }
