@@ -11,7 +11,7 @@ public abstract class CrosshairStyle {
 
     public enum Styles {
 
-        DEFAULT,
+        VANILLA,
         CROSS,
         CIRCLE,
         SQUARE,

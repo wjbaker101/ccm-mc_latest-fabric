@@ -62,7 +62,7 @@ public final class CrosshairRenderManager {
         if (isItemCooldownEnabled)
             this.drawItemCooldownIndicator(matrixStack, crosshair, computedProperties, x, y);
 
-        if (isDotEnabled && crosshair.style.get() != CrosshairStyle.Styles.DEFAULT)
+        if (isDotEnabled && crosshair.style.get() != CrosshairStyle.Styles.VANILLA)
             this.renderManager.drawCircle(matrixStack, x, y, 0.5F, 1.0F, crosshair.dotColour.get());
 
         this.drawDefaultAttackIndicator(drawContext);
@@ -89,7 +89,7 @@ public final class CrosshairRenderManager {
         final CustomCrosshair crosshair) {
 
         return switch (style) {
-            case DEFAULT -> new DefaultStyle(matrixStack, crosshair);
+            case VANILLA -> new VanillaStyle(matrixStack, crosshair);
             case CIRCLE -> new CircleStyle(matrixStack, crosshair);
             case SQUARE -> new SquareStyle(matrixStack, crosshair);
             case TRIANGLE -> new TriangleStyle(matrixStack, crosshair);

@@ -10,11 +10,11 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
-public final class DefaultStyle extends CrosshairStyle {
+public final class VanillaStyle extends CrosshairStyle {
 
     private static final Identifier ICONS = new Identifier("hud/crosshair");
 
-    public DefaultStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
+    public VanillaStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
         super(matrixStack, crosshair);
     }
 
