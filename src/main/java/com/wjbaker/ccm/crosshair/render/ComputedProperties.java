@@ -16,6 +16,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 
@@ -216,6 +217,14 @@ public final class ComputedProperties {
                         indicatorItems.add(new IndicatorItem("" + remainingDamage, tool));
                     }
                 }
+            }
+        }
+
+        if (this.mc.player != null && this.mc.player.getMainHandStack() != null) {
+            var tool = mc.player.getMainHandStack();
+            var projectile = this.mc.player.getProjectileType(tool);
+            if (projectile != ItemStack.EMPTY) {
+                indicatorItems.add(new IndicatorItem("" + projectile.getCount(), projectile));
             }
         }
 
