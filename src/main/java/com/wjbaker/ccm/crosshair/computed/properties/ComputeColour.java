@@ -1,7 +1,7 @@
 package com.wjbaker.ccm.crosshair.computed.properties;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import com.wjbaker.ccm.types.RGBA;
+import com.wjbaker.ccm.rendering.types.RGBA;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.mob.Monster;

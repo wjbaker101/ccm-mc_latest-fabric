@@ -8,7 +8,7 @@ import com.wjbaker.ccm.crosshair.properties.RgbaProperty;
 import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import com.wjbaker.ccm.crosshair.types.ICrosshairProperty;
 import com.wjbaker.ccm.rendering.ModTheme;
-import com.wjbaker.ccm.types.RGBA;
+import com.wjbaker.ccm.rendering.types.RGBA;
 
 import java.util.List;
 

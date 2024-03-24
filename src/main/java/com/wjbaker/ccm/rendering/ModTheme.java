@@ -1,6 +1,6 @@
 package com.wjbaker.ccm.rendering;
 
-import com.wjbaker.ccm.types.RGBA;
+import com.wjbaker.ccm.rendering.types.RGBA;
 
 public abstract class ModTheme {
 

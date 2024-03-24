@@ -4,7 +4,7 @@ import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.component.event.IGuiComponentEvent;
 import com.wjbaker.ccm.gui.component.event.IOnValueChangedEvent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
-import com.wjbaker.ccm.types.RGBA;
+import com.wjbaker.ccm.rendering.types.RGBA;
 import net.minecraft.client.gui.DrawContext;
 
 public abstract class SliderGuiComponent extends GuiComponent {

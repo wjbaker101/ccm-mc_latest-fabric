@@ -1,7 +1,7 @@
 package com.wjbaker.ccm.gui.component;
 
 import com.wjbaker.ccm.rendering.ModTheme;
-import com.wjbaker.ccm.types.RGBA;
+import com.wjbaker.ccm.rendering.types.RGBA;
 
 public abstract class GuiComponentTheme {
 
