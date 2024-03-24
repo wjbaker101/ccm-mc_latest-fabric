@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.gui.type;
+package com.wjbaker.ccm.gui.types;
 
 public final class GuiBounds {
 

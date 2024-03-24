@@ -1,6 +1,6 @@
 package com.wjbaker.ccm.gui.component;
 
-import com.wjbaker.ccm.gui.event.IMouseEvents;
+import com.wjbaker.ccm.gui.types.IMouseEvents;
 import net.minecraft.client.gui.DrawContext;
 
 import java.util.ArrayList;

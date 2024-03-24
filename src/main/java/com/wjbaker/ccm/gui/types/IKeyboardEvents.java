@@ -1,4 +1,4 @@
-package com.wjbaker.ccm.gui.event;
+package com.wjbaker.ccm.gui.types;
 
 public interface IKeyboardEvents {
 
