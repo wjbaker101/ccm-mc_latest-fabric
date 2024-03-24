@@ -15,11 +15,13 @@
     "icon": "assets/custom-crosshair-mod/icon.png",
 
     "environment": "client",
+
     "entrypoints": {
         "main": [
             "com.wjbaker.ccm.CustomCrosshairMod"
         ]
     },
+
     "mixins": [
         "custom-crosshair-mod.mixins.json"
     ],
@@ -30,6 +32,6 @@
         "java": ">=17",
         "fabric-api": "*"
     },
-    "suggests": {
-    }
+
+    "suggests": {}
 }
