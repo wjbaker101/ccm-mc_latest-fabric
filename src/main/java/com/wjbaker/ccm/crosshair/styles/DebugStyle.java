@@ -6,7 +6,6 @@ import com.wjbaker.ccm.crosshair.computed.ComputedProperties;
 import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.RotationAxis;
 
 public final class DebugStyle extends CrosshairStyle {
 
@@ -19,16 +18,16 @@ public final class DebugStyle extends CrosshairStyle {
         var camera = this.mc.gameRenderer.getCamera();
 
         var matrixStack = RenderSystem.getModelViewStack();
-        matrixStack.push();
-        matrixStack.multiply(RotationAxis.NEGATIVE_X.rotationDegrees(camera.getPitch()));
-        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(camera.getYaw()));
+        matrixStack.pushMatrix();
+        matrixStack.rotateX(-camera.getPitch() * 0.017453292F);
+        matrixStack.rotateY(camera.getYaw() * 0.017453292F);
         matrixStack.scale(-1, -1, -1);
 
         RenderSystem.applyModelViewMatrix();
 
         RenderSystem.renderCrosshair(10);
 
-        matrixStack.pop();
+        matrixStack.popMatrix();
         RenderSystem.applyModelViewMatrix();
     }
 }

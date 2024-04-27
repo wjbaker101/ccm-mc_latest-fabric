@@ -3,8 +3,6 @@ package com.wjbaker.ccm.crosshair.computed.properties;
 import com.google.common.collect.ImmutableMap;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -53,16 +51,6 @@ public abstract class ComputeGap {
             return baseGap + Math.round((usageItemDuration - progress) * gapModifier);
         }
         else if (isDynamicAttackIndicatorEnabled) {
-            var hasAttackSpeedModifier = mc.player.getMainHandStack()
-                .getItem()
-                .getAttributeModifiers(EquipmentSlot.MAINHAND)
-                .entries()
-                .stream()
-                .anyMatch(x -> x.getKey().equals(EntityAttributes.GENERIC_ATTACK_SPEED));
-
-            if (!hasAttackSpeedModifier)
-                return baseGap;
-
             var currentAttackUsage = mc.player.getAttackCooldownProgress(1.0F);
             var maxAttackUsage = 1.0F;
 

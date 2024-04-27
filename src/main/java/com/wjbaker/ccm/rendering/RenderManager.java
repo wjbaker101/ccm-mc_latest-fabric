@@ -61,7 +61,7 @@ public final class RenderManager {
             bufferBuilder
                 .vertex(matrixStack.peek().getPositionMatrix(), points[i], points[i + 1], 0.0F)
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek().getNormalMatrix(), 0.0F, 0.0F, 0.0F)
+                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F)
                 .next();
         }
 
@@ -213,7 +213,7 @@ public final class RenderManager {
             bufferBuilder
                 .vertex(matrixStack.peek().getPositionMatrix(), x + (float)Math.cos(radians) * radius, y + (float)Math.sin(radians) * radius, 0.0F)
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek().getNormalMatrix(), 0.0F, 0.0F, 0.0F)
+                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F)
                 .next();
         }
 
@@ -254,13 +254,13 @@ public final class RenderManager {
             bufferBuilder
                 .vertex(matrixStack.peek().getPositionMatrix(), x + (float)Math.cos(radians) * innerRadius, y + (float)Math.sin(radians) * innerRadius, 0.0F)
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek().getNormalMatrix(), 0.0F, 0.0F, 0.0F)
+                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F)
                 .next();
 
             bufferBuilder
                 .vertex(matrixStack.peek().getPositionMatrix(), x + (float)Math.cos(radians) * outerRadius, y + (float)Math.sin(radians) * outerRadius, 0.0F)
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek().getNormalMatrix(), 0.0F, 0.0F, 0.0F)
+                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F)
                 .next();
         }
 

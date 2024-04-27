@@ -22,6 +22,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
+import org.joml.Matrix4fStack;
 import org.joml.Quaternionf;
 
 import java.util.Set;
@@ -67,9 +68,7 @@ public final class CrosshairRenderManager {
 
         this.drawDefaultAttackIndicator(drawContext);
 
-        var transformMatrixStack = calculatedStyle == CrosshairStyle.Styles.DEBUG
-            ? RenderSystem.getModelViewStack()
-            : matrixStack;
+        var transformMatrixStack = RenderSystem.getModelViewStack();
 
         var renderX = x + crosshair.offsetX.get();
         var renderY = y + crosshair.offsetY.get();
@@ -102,7 +101,7 @@ public final class CrosshairRenderManager {
     }
 
     private void preTransformation(
-        final MatrixStack matrixStack,
+        final Matrix4fStack matrixStack,
         final CustomCrosshair crosshair,
         final int x, final int y) {
 
@@ -110,16 +109,16 @@ public final class CrosshairRenderManager {
         var scale = crosshair.scale.get() - 2;
         var windowScaling = (float)MinecraftClient.getInstance().getWindow().getScaleFactor() / 2.0F;
 
-        matrixStack.push();
-        matrixStack.translate(x, y, 0.0D);
+        matrixStack.pushMatrix();
+        matrixStack.translate(x, y, 0.0F);
         matrixStack.scale(scale / 100.0F / windowScaling, scale / 100.0F / windowScaling, 1.0F);
-        matrixStack.multiply(new Quaternionf(RotationAxis.POSITIVE_Z.rotationDegrees(rotation)));
+        matrixStack.rotateAffine(new Quaternionf(RotationAxis.POSITIVE_Z.rotationDegrees(rotation)));
 
         RenderSystem.applyModelViewMatrix();
     }
 
-    private void postTransformation(final MatrixStack matrixStack) {
-        matrixStack.pop();
+    private void postTransformation(final Matrix4fStack matrixStack) {
+        matrixStack.popMatrix();
         RenderSystem.applyModelViewMatrix();
     }
 
