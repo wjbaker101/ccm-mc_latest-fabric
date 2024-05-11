@@ -75,7 +75,7 @@ public final class CrosshairRenderManager {
         var renderX = x + crosshair.offsetX.get();
         var renderY = y + crosshair.offsetY.get();
 
-        this.drawToolDamageIndicator(drawContext, crosshair, computedProperties, renderX, renderY);
+        this.drawIndicators(drawContext, crosshair, computedProperties, renderX, renderY);
 
         this.preTransformation(transformMatrixStack, crosshair, renderX, renderY);
 
@@ -192,7 +192,7 @@ public final class CrosshairRenderManager {
         }
     }
 
-    private void drawToolDamageIndicator(
+    private void drawIndicators(
         final DrawContext drawContext,
         final CustomCrosshair crosshair,
         final ComputedProperties computedProperties,
