@@ -29,7 +29,9 @@ import java.util.Set;
 
 public final class CrosshairRenderManager {
 
-    private static final Identifier ICONS = new Identifier("textures/gui/icons.png");
+    private static final Identifier CROSSHAIR_ATTACK_INDICATOR_FULL_TEXTURE = new Identifier("hud/crosshair_attack_indicator_full");
+    private static final Identifier CROSSHAIR_ATTACK_INDICATOR_BACKGROUND_TEXTURE = new Identifier("hud/crosshair_attack_indicator_background");
+    private static final Identifier CROSSHAIR_ATTACK_INDICATOR_PROGRESS_TEXTURE = new Identifier("hud/crosshair_attack_indicator_progress");
 
     private final RenderManager renderManager;
 
@@ -179,13 +181,13 @@ public final class CrosshairRenderManager {
             var k = mc.getWindow().getScaledWidth() / 2 - 8;
 
             if (bl) {
-                drawContext.drawTexture(ICONS, k, j, 68, 94, 16, 16, 256, 256);
+                drawContext.drawGuiTexture(CROSSHAIR_ATTACK_INDICATOR_FULL_TEXTURE, k, j, 16, 16);
             }
             else if (f < 1.0F) {
                 var l = (int)(f * 17.0F);
 
-                drawContext.drawTexture(ICONS, k, j, 36, 94, 16, 4, 256, 256);
-                drawContext.drawTexture(ICONS, k, j, 52, 94, l, 4, 256, 256);
+                drawContext.drawGuiTexture(CROSSHAIR_ATTACK_INDICATOR_BACKGROUND_TEXTURE, k, j, 16, 4);
+                drawContext.drawGuiTexture(CROSSHAIR_ATTACK_INDICATOR_PROGRESS_TEXTURE, 16, 4, 0, 0, k, j, l, 4);
             }
         }
     }
