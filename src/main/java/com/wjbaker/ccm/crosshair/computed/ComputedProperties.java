@@ -17,10 +17,10 @@ public final class ComputedProperties {
     private final List<ComputeIndicators.IndicatorItem> indicatorItems;
 
     public ComputedProperties(final CustomCrosshair crosshair) {
-        this.indicatorItems = ComputeIndicators.compute(crosshair);
         this.gap = ComputeGap.compute(crosshair);
         this.colour = ComputeColour.compute(crosshair);
         this.isVisible = ComputeVisibility.compute(crosshair);
+        this.indicatorItems = ComputeIndicators.compute(crosshair);
     }
 
     public int gap() {
