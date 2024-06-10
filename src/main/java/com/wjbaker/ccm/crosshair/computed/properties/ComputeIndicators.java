@@ -42,7 +42,6 @@ public abstract class ComputeIndicators {
         indicators.add(new IndicatorItem("" + remainingDamage, tool));
     }
 
-
     private static void mutateForProjectiles(final List<IndicatorItem> indicators, final CustomCrosshair crosshair) {
         if (!crosshair.isProjectileIndicatorEnabled.get())
             return;
