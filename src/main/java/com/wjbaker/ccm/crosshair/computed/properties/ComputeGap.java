@@ -44,7 +44,7 @@ public abstract class ComputeGap {
 
         if (isDynamicBowEnabled && usageItemDuration != null) {
             if (mc.player.getActiveItem().getItem() == Items.CROSSBOW)
-                usageItemDuration = (float) CrossbowItem.getPullTime(mc.player.getActiveItem());
+                usageItemDuration = (float) CrossbowItem.getPullTime(mc.player.getActiveItem(), mc.player);
 
             var progress = Math.min(usageItemDuration, mc.player.getItemUseTime());
 

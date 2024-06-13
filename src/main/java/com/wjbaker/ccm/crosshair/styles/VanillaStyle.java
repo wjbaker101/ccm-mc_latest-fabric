@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 
 public final class VanillaStyle extends CrosshairStyle {
 
-    private static final Identifier ICONS = new Identifier("hud/crosshair");
+    private static final Identifier ICONS = Identifier.ofVanilla("hud/crosshair");
 
     public VanillaStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
         super(matrixStack, crosshair);

@@ -44,8 +44,7 @@ public final class RenderManager {
         final RGBA colour,
         final boolean isBlendEnabled) {
 
-        var bufferBuilder = Tessellator.getInstance().getBuffer();
-        bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
+        var bufferBuilder = Tessellator.getInstance().begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
 
         this.preRender(matrixStack);
 
@@ -61,8 +60,7 @@ public final class RenderManager {
             bufferBuilder
                 .vertex(matrixStack.peek().getPositionMatrix(), points[i], points[i + 1], 0.0F)
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F)
-                .next();
+                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F);
         }
 
         RenderSystem.lineWidth(thickness);
@@ -83,8 +81,7 @@ public final class RenderManager {
 
         this.setGlProperty(GL11.GL_LINE_SMOOTH, false);
 
-        var bufferBuilder = Tessellator.getInstance().getBuffer();
-        bufferBuilder.begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
+        var bufferBuilder = Tessellator.getInstance().begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
 
         this.preRender(matrixStack);
 
@@ -99,8 +96,7 @@ public final class RenderManager {
         for (int i = 0; i < points.length; i += 2) {
             bufferBuilder
                 .vertex(matrixStack.peek().getPositionMatrix(), points[i], points[i + 1], 0.0F)
-                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .next();
+                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
         }
 
         BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
@@ -202,8 +198,7 @@ public final class RenderManager {
 
         var ratio = (float)Math.PI / 180.F;
 
-        var bufferBuilder = Tessellator.getInstance().getBuffer();
-        bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
+        var bufferBuilder = Tessellator.getInstance().begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
 
         this.preRender(matrixStack);
 
@@ -213,8 +208,7 @@ public final class RenderManager {
             bufferBuilder
                 .vertex(matrixStack.peek().getPositionMatrix(), x + (float)Math.cos(radians) * radius, y + (float)Math.sin(radians) * radius, 0.0F)
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F)
-                .next();
+                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F);
         }
 
         BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
@@ -243,8 +237,7 @@ public final class RenderManager {
 
         var ratio = (float)Math.PI / 180.F;
 
-        var bufferBuilder = Tessellator.getInstance().getBuffer();
-        bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
+        var bufferBuilder = Tessellator.getInstance().begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
 
         this.preRender(matrixStack);
 
@@ -254,14 +247,12 @@ public final class RenderManager {
             bufferBuilder
                 .vertex(matrixStack.peek().getPositionMatrix(), x + (float)Math.cos(radians) * innerRadius, y + (float)Math.sin(radians) * innerRadius, 0.0F)
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F)
-                .next();
+                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F);
 
             bufferBuilder
                 .vertex(matrixStack.peek().getPositionMatrix(), x + (float)Math.cos(radians) * outerRadius, y + (float)Math.sin(radians) * outerRadius, 0.0F)
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F)
-                .next();
+                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F);
         }
 
         BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
