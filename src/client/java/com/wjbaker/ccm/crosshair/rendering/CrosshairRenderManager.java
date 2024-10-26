@@ -77,8 +77,8 @@ public final class CrosshairRenderManager {
 
         this.preTransformation(drawContext, crosshair, renderX, renderY);
 
-        var xx = crosshair.style.get() == CrosshairStyle.Styles.DEBUG ? renderX : 0;
-        var yy = crosshair.style.get() == CrosshairStyle.Styles.DEBUG ? renderY : 0;
+        var xx = calculatedStyle == CrosshairStyle.Styles.DEBUG ? renderX : 0;
+        var yy = calculatedStyle == CrosshairStyle.Styles.DEBUG ? renderY : 0;
 
         style.draw(drawContext, xx, yy, computedProperties);
 
