@@ -7,8 +7,10 @@ import com.wjbaker.ccm.crosshair.computed.ComputedProperties;
 import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import org.joml.Matrix4f;
 
 public final class VanillaStyle extends CrosshairStyle {
 
@@ -21,7 +23,6 @@ public final class VanillaStyle extends CrosshairStyle {
     @Override
     public void draw(final DrawContext drawContext, final int x, final int y, final ComputedProperties computedProperties) {
         RenderSystem.enableBlend();
-        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
 
         RenderSystem.blendFuncSeparate(
             GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR,
@@ -33,8 +34,9 @@ public final class VanillaStyle extends CrosshairStyle {
         var textureSize = 15;
 
         drawContext.drawGuiTexture(
+            RenderLayer::getCrosshair,
             ICONS,
-            (x - crosshairSize) / 2, (y - crosshairSize) / 2,
+            x - (crosshairSize / 2), y - (crosshairSize / 2),
             textureSize, textureSize);
     }
 }

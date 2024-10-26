@@ -14,15 +14,15 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.option.AttackIndicator;
 import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
-import org.joml.Matrix4fStack;
 import org.joml.Quaternionf;
 
 import java.util.Set;
@@ -70,18 +70,19 @@ public final class CrosshairRenderManager {
 
         this.drawDefaultAttackIndicator(drawContext);
 
-        var transformMatrixStack = RenderSystem.getModelViewStack();
-
         var renderX = x + crosshair.offsetX.get();
         var renderY = y + crosshair.offsetY.get();
 
         this.drawIndicators(drawContext, crosshair, computedProperties, renderX, renderY);
 
-        this.preTransformation(transformMatrixStack, crosshair, renderX, renderY);
+        this.preTransformation(drawContext, crosshair, renderX, renderY);
 
-        style.draw(drawContext, 0, 0, computedProperties);
+        var xx = crosshair.style.get() == CrosshairStyle.Styles.DEBUG ? renderX : 0;
+        var yy = crosshair.style.get() == CrosshairStyle.Styles.DEBUG ? renderY : 0;
 
-        this.postTransformation(transformMatrixStack);
+        style.draw(drawContext, xx, yy, computedProperties);
+
+        this.postTransformation(drawContext);
     }
 
     private CrosshairStyle mapCrosshairStyle(
@@ -103,25 +104,23 @@ public final class CrosshairRenderManager {
     }
 
     private void preTransformation(
-        final Matrix4fStack matrixStack,
+        final DrawContext drawContext,
         final CustomCrosshair crosshair,
         final int x, final int y) {
 
+        drawContext.getMatrices().push();
+        var matrices = drawContext.getMatrices().peek().getPositionMatrix();
+
         var rotation = crosshair.rotation.get();
-        var scale = crosshair.scale.get() - 2;
-        var windowScaling = (float)MinecraftClient.getInstance().getWindow().getScaleFactor() / 2.0F;
+        var scale = crosshair.scale.get();
 
-        matrixStack.pushMatrix();
-        matrixStack.translate(x, y, 0.0F);
-        matrixStack.scale(scale / 100.0F / windowScaling, scale / 100.0F / windowScaling, 1.0F);
-        matrixStack.rotateAffine(new Quaternionf(RotationAxis.POSITIVE_Z.rotationDegrees(rotation)));
-
-        RenderSystem.applyModelViewMatrix();
+        matrices.translate(x, y, 0.0F);
+        matrices.scale(scale / 100.0F, scale / 100.0F, 1.0F);
+        matrices.rotateAffine(new Quaternionf(RotationAxis.POSITIVE_Z.rotationDegrees(rotation)));
     }
 
-    private void postTransformation(final Matrix4fStack matrixStack) {
-        matrixStack.popMatrix();
-        RenderSystem.applyModelViewMatrix();
+    private void postTransformation(final DrawContext drawContext) {
+        drawContext.getMatrices().pop();
     }
 
     private void drawItemCooldownIndicator(
@@ -143,7 +142,7 @@ public final class CrosshairRenderManager {
         var offset = 3;
 
         for (final Item item : this.itemCooldownItems) {
-            var cooldown = player.getItemCooldownManager().getCooldownProgress(item, 0.0F);
+            var cooldown = player.getItemCooldownManager().getCooldownProgress(item.getDefaultStack(), 0.0F);
 
             if (cooldown == 0.0F)
                 continue;
@@ -181,13 +180,13 @@ public final class CrosshairRenderManager {
             var k = mc.getWindow().getScaledWidth() / 2 - 8;
 
             if (bl) {
-                drawContext.drawGuiTexture(CROSSHAIR_ATTACK_INDICATOR_FULL_TEXTURE, k, j, 16, 16);
+                drawContext.drawGuiTexture(RenderLayer::getCrosshair, CROSSHAIR_ATTACK_INDICATOR_FULL_TEXTURE, k, j, 16, 16);
             }
             else if (f < 1.0F) {
                 var l = (int)(f * 17.0F);
 
-                drawContext.drawGuiTexture(CROSSHAIR_ATTACK_INDICATOR_BACKGROUND_TEXTURE, k, j, 16, 4);
-                drawContext.drawGuiTexture(CROSSHAIR_ATTACK_INDICATOR_PROGRESS_TEXTURE, 16, 4, 0, 0, k, j, l, 4);
+                drawContext.drawGuiTexture(RenderLayer::getCrosshair, CROSSHAIR_ATTACK_INDICATOR_BACKGROUND_TEXTURE, k, j, 16, 4);
+                drawContext.drawGuiTexture(RenderLayer::getCrosshair, CROSSHAIR_ATTACK_INDICATOR_PROGRESS_TEXTURE, 16, 4, 0, 0, k, j, l, 4);
             }
         }
     }

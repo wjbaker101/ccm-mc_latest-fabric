@@ -19,15 +19,13 @@ public final class DebugStyle extends CrosshairStyle {
 
         var matrixStack = RenderSystem.getModelViewStack();
         matrixStack.pushMatrix();
+        matrixStack.translate(x, y, 0.0F);
         matrixStack.rotateX(-camera.getPitch() * 0.017453292F);
         matrixStack.rotateY(camera.getYaw() * 0.017453292F);
-        matrixStack.scale(-1, -1, -1);
-
-        RenderSystem.applyModelViewMatrix();
+        matrixStack.scale(-this.crosshair.scale.get() / 100F, -this.crosshair.scale.get() / 100F, -this.crosshair.scale.get() / 100F);
 
         RenderSystem.renderCrosshair(10);
 
         matrixStack.popMatrix();
-        RenderSystem.applyModelViewMatrix();
     }
 }

@@ -20,7 +20,7 @@ public final class CrossStyle extends CrosshairStyle {
         var isOutlineEnabled = this.crosshair.isOutlineEnabled.get();
         var baseColour = computedProperties.colour();
         var gap = computedProperties.gap();
-        var thickness = this.crosshair.thickness.get();
+        var thickness = this.crosshair.thickness.get() - 0.1F;
         var width = this.crosshair.width.get();
         var height  = this.crosshair.height.get();
         var isAdaptiveColourEnabled = this.crosshair.isAdaptiveColourEnabled.get();

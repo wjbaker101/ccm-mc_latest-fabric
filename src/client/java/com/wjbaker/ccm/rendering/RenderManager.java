@@ -7,8 +7,12 @@ import com.wjbaker.ccm.gui.types.GuiBounds;
 import com.wjbaker.ccm.gui.types.IDrawInsideWindowCallback;
 import com.wjbaker.ccm.rendering.types.RGBA;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.ShaderProgramKeys;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.opengl.GL11;
 
@@ -25,7 +29,7 @@ public final class RenderManager {
         matrixStack.push();
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+        RenderSystem.setShader(ShaderProgramKeys.POSITION_COLOR);
     }
 
     private void postRender(final MatrixStack matrixStack) {
@@ -44,7 +48,8 @@ public final class RenderManager {
         final RGBA colour,
         final boolean isBlendEnabled) {
 
-        var bufferBuilder = Tessellator.getInstance().begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
+        var tessellator = RenderSystem.renderThreadTesselator();
+        var bufferBuilder = tessellator.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
 
         this.preRender(matrixStack);
 
@@ -298,7 +303,6 @@ public final class RenderManager {
         var matrixStack = drawContext.getMatrices();
         matrixStack.push();
         matrixStack.scale(0.5F, 0.5F, 1.0F);
-        RenderSystem.applyModelViewMatrix();
 
         this.drawText(drawContext, text, x * 2, y * 2, colour, hasShadow);
         matrixStack.pop();
@@ -308,7 +312,6 @@ public final class RenderManager {
         var matrixStack = drawContext.getMatrices();
         matrixStack.push();
         matrixStack.scale(1.5F, 1.5F, 1.0F);
-        RenderSystem.applyModelViewMatrix();
 
         this.drawText(drawContext, text, (int)(x * 0.666F), (int)(y * 0.666F), colour, hasShadow);
         matrixStack.pop();

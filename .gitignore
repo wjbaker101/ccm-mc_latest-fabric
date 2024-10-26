@@ -24,13 +24,17 @@ bin/
 .classpath
 .project
 
+# macos
+
+*.DS_Store
+
 # fabric
 
 run/
 
-# more
+# java
 
-remappedSrc/
-old.src/
-gradle/
-logs/
+hs_err_*.log
+replay_*.log
+*.hprof
+*.jfr
