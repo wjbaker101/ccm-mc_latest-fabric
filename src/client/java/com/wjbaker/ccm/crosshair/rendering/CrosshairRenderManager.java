@@ -13,14 +13,12 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.option.AttackIndicator;
 import net.minecraft.client.render.DiffuseLighting;
-import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import org.joml.Quaternionf;
@@ -210,23 +208,14 @@ public final class CrosshairRenderManager {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         var indicatorItems = computedProperties.indicatorItems();
-        var immediate = mc.getBufferBuilders().getEntityVertexConsumers();
         var matrixStack = drawContext.getMatrices();
-        var itemRenderer = mc.getItemRenderer();
 
         DiffuseLighting.disableGuiDepthLighting();
 
         for (var indicatorItem : indicatorItems) {
-            matrixStack.push();
-            matrixStack.translate(drawX, drawY, (100.0F + 1));
-            matrixStack.scale(1.0F, -1.0F, 1.0F);
-            matrixStack.scale(8F, 8F, 8F);
-            var model = itemRenderer.getModel(indicatorItem.icon(), null, null, 0);
-
-            itemRenderer.renderItem(indicatorItem.icon(), ModelTransformationMode.GUI, false, matrixStack, immediate, 15728880, OverlayTexture.DEFAULT_UV, model);
-            immediate.draw();
-
-            matrixStack.pop();
+            matrixStack.scale(0.5F, 0.5F, 1.0F);
+            drawContext.drawItem(indicatorItem.icon(), drawX * 2 - 8, drawY * 2 - 8);
+            matrixStack.scale(2F, 2F, 1.0F);
 
             this.renderManager.drawSmallText(drawContext, indicatorItem.text(), drawX + 5, drawY, ModTheme.WHITE, true);
 
