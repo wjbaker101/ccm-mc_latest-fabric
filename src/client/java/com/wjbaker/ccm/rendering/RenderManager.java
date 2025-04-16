@@ -59,6 +59,8 @@ public final class RenderManager {
                 .vertex(matrixStack.peek(), points[i], points[i + 1], 0.0F)
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
         }
+
+        immediate.drawCurrentLayer();
     }
 
     public void drawFilledShape(final MatrixStack matrixStack, final float[] points, final RGBA colour) {
@@ -194,6 +196,8 @@ public final class RenderManager {
                 .vertex(matrixStack.peek(), x + (float)Math.cos(radians) * radius, y + (float)Math.sin(radians) * radius, 0.0F)
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
         }
+
+        immediate.drawCurrentLayer();
     }
 
     public void drawCircle(
