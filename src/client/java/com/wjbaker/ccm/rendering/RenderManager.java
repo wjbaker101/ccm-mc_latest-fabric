@@ -8,6 +8,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.opengl.GL11;
 
@@ -84,14 +85,16 @@ public final class RenderManager {
 //        }
 
         var bufferBuilders = MinecraftClient.getInstance().getBufferBuilders();
-        var vertexConsumer = bufferBuilders.getEntityVertexConsumers().getBuffer(RenderLayer.getGui());
+        var immediate = bufferBuilders.getEntityVertexConsumers();
+        var vertexConsumer = immediate.getBuffer(RenderLayer.getGui());
 
         for (var i = 0; i < points.length; i += 2) {
             vertexConsumer
                 .vertex(matrixStack.peek().getPositionMatrix(), points[i], points[i + 1], 0.0F)
-                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F);
+                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
         }
+
+        immediate.drawCurrentLayer();
     }
 
     public void drawLine(
@@ -220,7 +223,8 @@ public final class RenderManager {
         var ratio = (float)Math.PI / 180.F;
 
         var bufferBuilders = MinecraftClient.getInstance().getBufferBuilders();
-        var vertexConsumer = bufferBuilders.getEntityVertexConsumers().getBuffer(RenderLayer.getGui());
+        var immediate = bufferBuilders.getEntityVertexConsumers();
+        var vertexConsumer = immediate.getBuffer(RenderLayer.getGui());
 
         for (var i = 0; i <= 360; ++i) {
             var radians = (i - 90) * ratio;
@@ -233,6 +237,8 @@ public final class RenderManager {
                 .vertex(matrixStack.peek(), x + (float)Math.cos(radians) * outerRadius, y + (float)Math.sin(radians) * outerRadius, 0.0F)
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
         }
+
+        immediate.drawCurrentLayer();
     }
 
     public void drawImage(
