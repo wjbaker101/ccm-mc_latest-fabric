@@ -1,18 +1,13 @@
 package com.wjbaker.ccm.rendering;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.custom.CustomCrosshairDrawer;
 import com.wjbaker.ccm.gui.types.GuiBounds;
 import com.wjbaker.ccm.gui.types.IDrawInsideWindowCallback;
 import com.wjbaker.ccm.rendering.types.RGBA;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.ShaderProgramKeys;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.BufferRenderer;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormat;
-import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.render.DiffuseLighting;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.opengl.GL11;
 
@@ -25,17 +20,17 @@ public final class RenderManager {
             GL11.glDisable(property);
     }
 
-    private void preRender(final MatrixStack matrixStack) {
-        matrixStack.push();
-        RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.setShader(ShaderProgramKeys.POSITION_COLOR);
-    }
-
-    private void postRender(final MatrixStack matrixStack) {
-        RenderSystem.disableBlend();
-        matrixStack.pop();
-    }
+//    private void preRender(final MatrixStack matrixStack) {
+//        matrixStack.push();
+//        RenderSystem.enableBlend();
+//        RenderSystem.defaultBlendFunc();
+//        RenderSystem.setShader(ShaderProgramKeys.POSITION_COLOR);
+//    }
+//
+//    private void postRender(final MatrixStack matrixStack) {
+//        RenderSystem.disableBlend();
+//        matrixStack.pop();
+//    }
 
     public void drawLines(final MatrixStack matrixStack, float[] points, final float thickness, final RGBA colour) {
         this.drawLines(matrixStack, points, thickness, colour, false);
@@ -48,30 +43,22 @@ public final class RenderManager {
         final RGBA colour,
         final boolean isBlendEnabled) {
 
-        var tessellator = RenderSystem.renderThreadTesselator();
-        var bufferBuilder = tessellator.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
-
-        this.preRender(matrixStack);
-
         if (isBlendEnabled) {
-            RenderSystem.blendFuncSeparate(
-                GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR,
-                GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR,
-                GlStateManager.SrcFactor.ONE,
-                GlStateManager.DstFactor.ZERO);
+//            GlStateManager.glBlendFuncSeparate(
+//                GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR,
+//                GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR,
+//                GlStateManager.SrcFactor.ONE,
+//                GlStateManager.DstFactor.ZERO);
         }
 
-        for (int i = 0; i < points.length; i += 2) {
-            bufferBuilder
-                .vertex(matrixStack.peek().getPositionMatrix(), points[i], points[i + 1], 0.0F)
-                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F);
+        var immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
+        var vertexConsumer = immediate.getBuffer(RenderLayer.getDebugLineStrip(thickness));
+
+        for (var i = 0; i < points.length; i += 2) {
+            vertexConsumer
+                .vertex(matrixStack.peek(), points[i], points[i + 1], 0.0F)
+                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
         }
-
-        RenderSystem.lineWidth(thickness);
-        BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
-
-        this.postRender(matrixStack);
     }
 
     public void drawFilledShape(final MatrixStack matrixStack, final float[] points, final RGBA colour) {
@@ -86,27 +73,23 @@ public final class RenderManager {
 
         this.setGlProperty(GL11.GL_LINE_SMOOTH, false);
 
-        var bufferBuilder = Tessellator.getInstance().begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
+//        if (isBlendEnabled) {
+//            RenderSystem.blendFuncSeparate(
+//                GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR,
+//                GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR,
+//                GlStateManager.SrcFactor.ONE,
+//                GlStateManager.DstFactor.ZERO);
+//        }
 
-        this.preRender(matrixStack);
+        var bufferBuilders = MinecraftClient.getInstance().getBufferBuilders();
+        var vertexConsumer = bufferBuilders.getEntityVertexConsumers().getBuffer(RenderLayer.getGui());
 
-        if (isBlendEnabled) {
-            RenderSystem.blendFuncSeparate(
-                GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR,
-                GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR,
-                GlStateManager.SrcFactor.ONE,
-                GlStateManager.DstFactor.ZERO);
-        }
-
-        for (int i = 0; i < points.length; i += 2) {
-            bufferBuilder
+        for (var i = 0; i < points.length; i += 2) {
+            vertexConsumer
                 .vertex(matrixStack.peek().getPositionMatrix(), points[i], points[i + 1], 0.0F)
-                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
+                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
+                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F);
         }
-
-        BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
-
-        this.postRender(matrixStack);
     }
 
     public void drawLine(
@@ -130,10 +113,11 @@ public final class RenderManager {
         final RGBA colour) {
 
         this.drawLines(matrixStack, new float[] {
-            x1, y1, x2, y1,
-            x2, y1, x2, y2,
-            x1, y2, x2, y2,
-            x1, y1, x1, y2
+            x1, y1,
+            x2, y1,
+            x2, y2,
+            x1, y2,
+            x1, y1
         }, thickness, colour);
     }
 
@@ -198,27 +182,18 @@ public final class RenderManager {
 
         var startAngle = Math.max(0, Math.min(startAngleAt, endAngleAt));
         var endAngle = Math.min(360, Math.max(startAngleAt, endAngleAt));
-
-        RenderSystem.lineWidth(thickness);
-
         var ratio = (float)Math.PI / 180.F;
 
-        var bufferBuilder = Tessellator.getInstance().begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
+        var immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
+        var vertexConsumer = immediate.getBuffer(RenderLayer.getDebugLineStrip(thickness));
 
-        this.preRender(matrixStack);
-
-        for (int i = startAngle; i <= endAngle; ++i) {
+        for (var i = startAngle; i <= endAngle; ++i) {
             var radians = (i - 90) * ratio;
 
-            bufferBuilder
-                .vertex(matrixStack.peek().getPositionMatrix(), x + (float)Math.cos(radians) * radius, y + (float)Math.sin(radians) * radius, 0.0F)
-                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F);
+            vertexConsumer
+                .vertex(matrixStack.peek(), x + (float)Math.cos(radians) * radius, y + (float)Math.sin(radians) * radius, 0.0F)
+                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
         }
-
-        BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
-
-        this.postRender(matrixStack);
     }
 
     public void drawCircle(
@@ -238,31 +213,22 @@ public final class RenderManager {
         final int outerRadius,
         final RGBA colour) {
 
-        this.setGlProperty(GL11.GL_LINE_SMOOTH, true);
-
         var ratio = (float)Math.PI / 180.F;
 
-        var bufferBuilder = Tessellator.getInstance().begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.LINES);
+        var bufferBuilders = MinecraftClient.getInstance().getBufferBuilders();
+        var vertexConsumer = bufferBuilders.getEntityVertexConsumers().getBuffer(RenderLayer.getGui());
 
-        this.preRender(matrixStack);
-
-        for (int i = 0; i <= 360; ++i) {
+        for (var i = 0; i <= 360; ++i) {
             var radians = (i - 90) * ratio;
 
-            bufferBuilder
-                .vertex(matrixStack.peek().getPositionMatrix(), x + (float)Math.cos(radians) * innerRadius, y + (float)Math.sin(radians) * innerRadius, 0.0F)
-                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F);
+            vertexConsumer
+                .vertex(matrixStack.peek(), x + (float)Math.cos(radians) * innerRadius, y + (float)Math.sin(radians) * innerRadius, 0.0F)
+                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
 
-            bufferBuilder
-                .vertex(matrixStack.peek().getPositionMatrix(), x + (float)Math.cos(radians) * outerRadius, y + (float)Math.sin(radians) * outerRadius, 0.0F)
-                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-                .normal(matrixStack.peek(), 0.0F, 0.0F, 0.0F);
+            vertexConsumer
+                .vertex(matrixStack.peek(), x + (float)Math.cos(radians) * outerRadius, y + (float)Math.sin(radians) * outerRadius, 0.0F)
+                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
         }
-
-        BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
-
-        this.postRender(matrixStack);
     }
 
     public void drawImage(

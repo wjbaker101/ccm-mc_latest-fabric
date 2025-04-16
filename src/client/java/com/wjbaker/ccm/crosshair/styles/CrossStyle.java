@@ -1,6 +1,5 @@
 package com.wjbaker.ccm.crosshair.styles;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.computed.ComputedProperties;
 import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
@@ -15,8 +14,6 @@ public final class CrossStyle extends CrosshairStyle {
 
     @Override
     public void draw(final DrawContext drawContext, final int x, final int y, final ComputedProperties computedProperties) {
-        RenderSystem.enableBlend();
-
         var isOutlineEnabled = this.crosshair.isOutlineEnabled.get();
         var baseColour = computedProperties.colour();
         var gap = computedProperties.gap();
