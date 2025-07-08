@@ -42,10 +42,8 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
     public void draw(final DrawContext drawContext) {
         super.draw(drawContext);
 
-        var matrixStack = drawContext.getMatrices();
-
         this.renderManager.drawBorderedRectangle(
-            matrixStack,
+            drawContext,
             this.x, this.y,
             this.x + this.boxSize, this.y + this.boxSize,
             2.0F,
@@ -53,7 +51,7 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
             this.currentBackgroundColour);
 
         this.renderManager.drawFilledRectangle(
-            matrixStack,
+            drawContext,
             this.x + 2, this.y + 2,
             this.x + this.boxSize - 2, this.y + this.boxSize - 2,
             this.colour.get());

@@ -32,10 +32,8 @@ public final class ButtonGuiComponent extends GuiComponent {
     public void draw(final DrawContext drawContext) {
         super.draw(drawContext);
 
-        var matrixStack = drawContext.getMatrices();
-
         this.renderManager.drawBorderedRectangle(
-            matrixStack,
+            drawContext,
             this.x, this.y,
             this.x + this.width, this.y + this.height,
             2.0F,

@@ -50,10 +50,8 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
         if (this.contentHeight < this.height)
             return;
 
-        var matrixStack = drawContext.getMatrices();
-
         this.renderManager.drawBorderedRectangle(
-            matrixStack,
+            drawContext,
             this.x + this.width - this.scrollBarWidth, this.y + 1,
             this.x + this.width, this.y + this.height - 1,
             2.0F,
@@ -61,7 +59,7 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
             this.currentBackgroundColour);
 
         this.renderManager.drawBorderedRectangle(
-            matrixStack,
+            drawContext,
             this.x + this.width - this.scrollBarWidth, this.y + 1 + this.scrollBarPosition,
             this.x + this.width, this.y + this.scrollBarPosition + this.scrollBarSize,
             2.0F,
@@ -70,18 +68,18 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
 
         var thumbCentreX = this.x + this.width - (this.scrollBarWidth / 2.0F);
 
-        this.renderManager.drawLines(matrixStack, new float[] {
-            thumbCentreX - 2, this.y + this.scrollBarPosition + 6,
-            thumbCentreX, this.y + this.scrollBarPosition + 4,
-            thumbCentreX, this.y + this.scrollBarPosition + 4,
-            thumbCentreX + 2, this.y + this.scrollBarPosition + 6
+        this.renderManager.drawLines(drawContext, new Float[] {
+            thumbCentreX - 2, (float)this.y + this.scrollBarPosition + 6,
+            thumbCentreX, (float)this.y + this.scrollBarPosition + 4,
+            thumbCentreX, (float)this.y + this.scrollBarPosition + 4,
+            thumbCentreX + 2, (float)this.y + this.scrollBarPosition + 6
         }, 2.0F, ModTheme.WHITE);
 
-        this.renderManager.drawLines(matrixStack, new float[] {
-            thumbCentreX - 2, this.y + this.scrollBarPosition + this.scrollBarSize - 5,
-            thumbCentreX, this.y + this.scrollBarPosition + this.scrollBarSize - 3,
-            thumbCentreX, this.y + this.scrollBarPosition + this.scrollBarSize - 3,
-            thumbCentreX + 2, this.y + this.scrollBarPosition + this.scrollBarSize - 5
+        this.renderManager.drawLines(drawContext, new Float[] {
+            thumbCentreX - 2, (float)this.y + this.scrollBarPosition + this.scrollBarSize - 5,
+            thumbCentreX, (float)this.y + this.scrollBarPosition + this.scrollBarSize - 3,
+            thumbCentreX, (float)this.y + this.scrollBarPosition + this.scrollBarSize - 3,
+            thumbCentreX + 2, (float)this.y + this.scrollBarPosition + this.scrollBarSize - 5
         }, 2.0F, ModTheme.WHITE);
     }
 

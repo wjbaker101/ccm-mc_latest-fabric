@@ -56,14 +56,12 @@ public abstract class SliderGuiComponent extends GuiComponent {
     public void draw(final DrawContext drawContext) {
         super.draw(drawContext);
 
-        var matrixStack = drawContext.getMatrices();
-
         this.renderManager.drawText(drawContext, this.label, this.x, this.y, this.currentTextColour, false);
 
         var posY = this.y + 8 + this.titleSpacing;
 
         this.renderManager.drawBorderedRectangle(
-            matrixStack,
+            drawContext,
             this.x, posY + (this.thumbSize / 2.0F) - 2,
             this.x + this.width, posY + (this.thumbSize / 2.0F) - 1 + 3,
             2.0F,
@@ -71,7 +69,7 @@ public abstract class SliderGuiComponent extends GuiComponent {
             this.baseBackgroundColour);
 
         this.renderManager.drawBorderedRectangle(
-            matrixStack,
+            drawContext,
             this.x + this.thumbPosition, posY,
             this.x + this.thumbPosition + this.thumbSize, posY + this.thumbSize,
             2.0F,

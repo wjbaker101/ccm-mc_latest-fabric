@@ -1,7 +1,6 @@
 package com.wjbaker.ccm.crosshair.rendering;
 
 import com.google.common.collect.ImmutableSet;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.computed.ComputedProperties;
 import com.wjbaker.ccm.crosshair.styles.*;
@@ -9,18 +8,15 @@ import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import com.wjbaker.ccm.rendering.ModTheme;
 import com.wjbaker.ccm.rendering.RenderManager;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.option.AttackIndicator;
-import net.minecraft.client.render.DiffuseLighting;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.SpriteAtlasTexture;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.RotationAxis;
-import org.joml.Quaternionf;
+import org.joml.Matrix3x2fStack;
 
 import java.util.Set;
 
@@ -51,8 +47,6 @@ public final class CrosshairRenderManager {
             ? CrosshairStyle.Styles.DEBUG
             : crosshair.style.get();
 
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-
         var matrixStack = drawContext.getMatrices();
 
         var style = this.mapCrosshairStyle(matrixStack, calculatedStyle, crosshair);
@@ -60,10 +54,10 @@ public final class CrosshairRenderManager {
         var isDotEnabled = crosshair.isDotEnabled.get();
 
         if (isItemCooldownEnabled)
-            this.drawItemCooldownIndicator(matrixStack, crosshair, computedProperties, x, y);
+            this.drawItemCooldownIndicator(drawContext, crosshair, computedProperties, x, y);
 
         if (isDotEnabled && crosshair.style.get() != CrosshairStyle.Styles.VANILLA)
-            this.renderManager.drawCircle(matrixStack, x, y, 0.5F, 1.0F, crosshair.dotColour.get());
+            this.renderManager.drawCircle(drawContext, x, y, 0.5F, 1.0F, crosshair.dotColour.get());
 
         this.drawDefaultAttackIndicator(drawContext);
 
@@ -74,16 +68,13 @@ public final class CrosshairRenderManager {
 
         this.preTransformation(drawContext, crosshair, renderX, renderY);
 
-        var xx = calculatedStyle == CrosshairStyle.Styles.DEBUG ? renderX : 0;
-        var yy = calculatedStyle == CrosshairStyle.Styles.DEBUG ? renderY : 0;
-
-        style.draw(drawContext, xx, yy, computedProperties);
+        style.draw(drawContext, renderX, renderY, computedProperties);
 
         this.postTransformation(drawContext);
     }
 
     private CrosshairStyle mapCrosshairStyle(
-        final MatrixStack matrixStack,
+        final Matrix3x2fStack matrixStack,
         final CrosshairStyle.Styles style,
         final CustomCrosshair crosshair) {
 
@@ -105,23 +96,24 @@ public final class CrosshairRenderManager {
         final CustomCrosshair crosshair,
         final int x, final int y) {
 
-        drawContext.getMatrices().push();
-        var matrices = drawContext.getMatrices().peek().getPositionMatrix();
+        var matrices = drawContext.getMatrices();
+        matrices.pushMatrix();
 
         var rotation = crosshair.rotation.get();
         var scale = crosshair.scale.get();
 
-        matrices.translate(x, y, 0.0F);
-        matrices.scale(scale / 100.0F, scale / 100.0F, 1.0F);
-        matrices.rotateAffine(new Quaternionf(RotationAxis.POSITIVE_Z.rotationDegrees(rotation)));
+        matrices.translate(-x, -y);
+        matrices.scale(scale / 100.0F, scale / 100.0F);
+        matrices.rotateLocal(rotation);
+        matrices.translate(x, y);
     }
 
     private void postTransformation(final DrawContext drawContext) {
-        drawContext.getMatrices().pop();
+        drawContext.getMatrices().popMatrix();
     }
 
     private void drawItemCooldownIndicator(
-        final MatrixStack matrixStack,
+        final DrawContext drawContext,
         final CustomCrosshair crosshair,
         final ComputedProperties computedProperties,
         final int x, final int y) {
@@ -147,7 +139,7 @@ public final class CrosshairRenderManager {
             var progress = Math.round(360 - (360 * cooldown));
 
             this.renderManager.drawPartialCircle(
-                matrixStack,
+                drawContext,
                 x, y,
                 computedProperties.gap() + maxSize + offset,
                 0,
@@ -175,13 +167,13 @@ public final class CrosshairRenderManager {
             var k = mc.getWindow().getScaledWidth() / 2 - 8;
 
             if (bl) {
-                drawContext.drawGuiTexture(RenderLayer::getCrosshair, CROSSHAIR_ATTACK_INDICATOR_FULL_TEXTURE, k, j, 16, 16);
+                drawContext.drawGuiTexture(RenderPipelines.CROSSHAIR, CROSSHAIR_ATTACK_INDICATOR_FULL_TEXTURE, k, j, 16, 16);
             }
             else if (f < 1.0F) {
                 var l = (int)(f * 17.0F);
 
-                drawContext.drawGuiTexture(RenderLayer::getCrosshair, CROSSHAIR_ATTACK_INDICATOR_BACKGROUND_TEXTURE, k, j, 16, 4);
-                drawContext.drawGuiTexture(RenderLayer::getCrosshair, CROSSHAIR_ATTACK_INDICATOR_PROGRESS_TEXTURE, 16, 4, 0, 0, k, j, l, 4);
+                drawContext.drawGuiTexture(RenderPipelines.CROSSHAIR, CROSSHAIR_ATTACK_INDICATOR_BACKGROUND_TEXTURE, k, j, 16, 4);
+                drawContext.drawGuiTexture(RenderPipelines.CROSSHAIR, CROSSHAIR_ATTACK_INDICATOR_PROGRESS_TEXTURE, 16, 4, 0, 0, k, j, l, 4);
             }
         }
     }
@@ -199,23 +191,17 @@ public final class CrosshairRenderManager {
 
         mc.getTextureManager().getTexture(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).setFilter(false, false);
 
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-
         var indicatorItems = computedProperties.indicatorItems();
         var matrixStack = drawContext.getMatrices();
 
-        DiffuseLighting.disableGuiDepthLighting();
-
         for (var indicatorItem : indicatorItems) {
-            matrixStack.scale(0.5F, 0.5F, 1.0F);
+            matrixStack.scale(0.5F, 0.5F);
             drawContext.drawItem(indicatorItem.icon(), drawX * 2 - 8, drawY * 2 - 8);
-            matrixStack.scale(2F, 2F, 1.0F);
+            matrixStack.scale(2F, 2F);
 
             this.renderManager.drawSmallText(drawContext, indicatorItem.text(), drawX + 5, drawY, ModTheme.WHITE, true);
 
             drawX += 15;
         }
-
-        DiffuseLighting.enableGuiDepthLighting();
     }
 }

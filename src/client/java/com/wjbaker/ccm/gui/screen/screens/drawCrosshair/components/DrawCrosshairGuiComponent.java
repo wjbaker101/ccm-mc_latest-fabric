@@ -37,14 +37,12 @@ public final class DrawCrosshairGuiComponent extends GuiComponent {
     public void draw(final DrawContext drawContext) {
         super.draw(drawContext);
 
-        var matrixStack = drawContext.getMatrices();
-
         var gridCount = this.imageSize.get();
 
         for (int gridX = 0; gridX < gridCount; ++gridX) {
             for (int gridY = 0; gridY < gridCount; ++gridY) {
                 this.renderManager.drawFilledRectangle(
-                    matrixStack,
+                    drawContext,
                     this.x + GRID_SIZE * gridX,
                     this.y + GRID_SIZE * gridY,
                     this.x + GRID_SIZE * gridX + GRID_SIZE,
@@ -53,7 +51,7 @@ public final class DrawCrosshairGuiComponent extends GuiComponent {
 
                 if (this.customCrosshairDrawer.getAt(gridX, gridY) == 1) {
                     this.renderManager.drawFilledRectangle(
-                        matrixStack,
+                        drawContext,
                         this.x + GRID_SIZE * gridX,
                         this.y + GRID_SIZE * gridY,
                         this.x + GRID_SIZE * gridX + GRID_SIZE,

@@ -4,11 +4,11 @@ import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.computed.ComputedProperties;
 import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
+import org.joml.Matrix3x2fStack;
 
 public final class TriangleStyle extends CrosshairStyle {
 
-    public TriangleStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
+    public TriangleStyle(final Matrix3x2fStack matrixStack, final CustomCrosshair crosshair) {
         super(matrixStack, crosshair);
     }
 
@@ -20,13 +20,13 @@ public final class TriangleStyle extends CrosshairStyle {
         var colour = computedProperties.colour();
         var isAdaptiveColourEnabled = this.crosshair.isAdaptiveColourEnabled.get();
 
-        this.renderManager.drawLines(this.matrixStack, new float[] {
-            x, y - (height / 2.0F) - gap,
+        this.renderManager.drawLines(drawContext, new Float[] {
+            (float)x, y - (height / 2.0F) - gap,
             x + width / 2.0F + gap, y + (height / 2.0F) + gap,
             x + width / 2.0F + gap, y + (height / 2.0F) + gap,
             x - (width / 2.0F) - gap, y + (height / 2.0F) + gap,
             x - (width / 2.0F) - gap, y + (height / 2.0F) + gap,
-            x, y - (height / 2.0F) - gap
+            (float)x, y - (height / 2.0F) - gap
         }, 1.0F, colour, isAdaptiveColourEnabled);
     }
 }

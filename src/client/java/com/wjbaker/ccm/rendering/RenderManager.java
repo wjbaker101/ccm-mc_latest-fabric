@@ -6,11 +6,10 @@ import com.wjbaker.ccm.gui.types.IDrawInsideWindowCallback;
 import com.wjbaker.ccm.rendering.types.RGBA;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.DiffuseLighting;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.math.MatrixStack;
+import org.joml.Matrix3x2fStack;
 import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
 
 public final class RenderManager {
 
@@ -21,128 +20,79 @@ public final class RenderManager {
             GL11.glDisable(property);
     }
 
-//    private void preRender(final MatrixStack matrixStack) {
-//        matrixStack.push();
-//        RenderSystem.enableBlend();
-//        RenderSystem.defaultBlendFunc();
-//        RenderSystem.setShader(ShaderProgramKeys.POSITION_COLOR);
-//    }
-//
-//    private void postRender(final MatrixStack matrixStack) {
-//        RenderSystem.disableBlend();
-//        matrixStack.pop();
-//    }
-
-    public void drawLines(final MatrixStack matrixStack, float[] points, final float thickness, final RGBA colour) {
-        this.drawLines(matrixStack, points, thickness, colour, false);
+    public void drawLines(final DrawContext drawContext, Float[] points, final float thickness, final RGBA colour) {
+        this.drawLines(drawContext, points, thickness, colour, false);
     }
 
     public void drawLines(
-        final MatrixStack matrixStack,
-        float[] points,
+        final DrawContext drawContext,
+        Float[] points,
         final float thickness,
         final RGBA colour,
         final boolean isBlendEnabled) {
 
-        if (isBlendEnabled) {
-//            GlStateManager.glBlendFuncSeparate(
-//                GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR,
-//                GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR,
-//                GlStateManager.SrcFactor.ONE,
-//                GlStateManager.DstFactor.ZERO);
-        }
-
-        var immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-        var vertexConsumer = immediate.getBuffer(RenderLayer.getDebugLineStrip(thickness));
-
-        for (var i = 0; i < points.length; i += 2) {
-            vertexConsumer
-                .vertex(matrixStack.peek(), points[i], points[i + 1], 0.0F)
-                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
-        }
-
-        immediate.drawCurrentLayer();
+        drawContext.state.addSimpleElement(new ModLinesGuiElementRenderState(drawContext.getMatrices(), points, colour));
     }
 
-    public void drawFilledShape(final MatrixStack matrixStack, final float[] points, final RGBA colour) {
-        this.drawFilledShape(matrixStack, points, colour, false);
+    public void drawFilledShape(final DrawContext drawContext, final float[] points, final RGBA colour) {
+        this.drawFilledShape(drawContext, points, colour, false);
     }
 
     public void drawFilledShape(
-        final MatrixStack matrixStack,
+        final DrawContext drawContext,
         final float[] points,
         final RGBA colour,
         final boolean isBlendEnabled) {
 
-        this.setGlProperty(GL11.GL_LINE_SMOOTH, false);
-
-//        if (isBlendEnabled) {
-//            RenderSystem.blendFuncSeparate(
-//                GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR,
-//                GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR,
-//                GlStateManager.SrcFactor.ONE,
-//                GlStateManager.DstFactor.ZERO);
-//        }
-
-        var bufferBuilders = MinecraftClient.getInstance().getBufferBuilders();
-        var immediate = bufferBuilders.getEntityVertexConsumers();
-        var vertexConsumer = immediate.getBuffer(RenderLayer.getGui());
-
-        for (var i = 0; i < points.length; i += 2) {
-            vertexConsumer
-                .vertex(matrixStack.peek().getPositionMatrix(), points[i], points[i + 1], 0.0F)
-                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
-        }
-
-        immediate.drawCurrentLayer();
+         drawContext.state.addSimpleElement(new ModFilledGuiElementRenderState(drawContext.getMatrices(), points, colour));
     }
 
     public void drawLine(
-        final MatrixStack matrixStack,
+        final DrawContext drawContext,
         final float x1, final float y1,
         final float x2, final float y2,
         final float thickness,
         final RGBA colour) {
 
-        this.drawLines(matrixStack, new float[] {
+        this.drawLines(drawContext, new Float[] {
             x1, y1,
             x2, y2
         }, thickness, colour);
     }
 
     public void drawRectangle(
-        final MatrixStack matrixStack,
+        final DrawContext drawContext,
         final float x1, final float y1,
         final float x2, final float y2,
         final float thickness,
         final RGBA colour) {
 
-        this.drawLines(matrixStack, new float[] {
+        this.drawLines(drawContext, new Float[] {
             x1, y1,
             x2, y1,
             x2, y2,
             x1, y2,
-            x1, y1
+            x1, y1,
         }, thickness, colour);
     }
 
     public void drawFilledRectangle(
-        final MatrixStack matrixStack,
+        final DrawContext drawContext,
         final float x1, final float y1,
         final float x2, final float y2,
         final RGBA colour) {
 
-        this.drawFilledRectangle(matrixStack, x1, y1, x2, y2, colour, false);
+        this.drawFilledRectangle(drawContext, x1, y1, x2, y2, colour, false);
     }
 
     public void drawFilledRectangle(
-        final MatrixStack matrixStack,
+        final DrawContext drawContext,
         final float x1, final float y1,
         final float x2, final float y2,
         final RGBA colour,
         final boolean isBlend) {
 
-        this.drawFilledShape(matrixStack, new float[] {
+        this.drawFilledShape(drawContext, new float[] {
             x1, y1,
             x1, y2,
             x2, y2,
@@ -151,18 +101,18 @@ public final class RenderManager {
     }
 
     public void drawBorderedRectangle(
-        final MatrixStack matrixStack,
+        final DrawContext drawContext,
         final float x1, final float y1,
         final float x2, final float y2,
         final float borderThickness,
         final RGBA borderColour,
         final RGBA fillColour) {
 
-        this.drawBorderedRectangle(matrixStack, x1, y1, x2, y2, borderThickness, borderColour, fillColour, false);
+        this.drawBorderedRectangle(drawContext, x1, y1, x2, y2, borderThickness, borderColour, fillColour, false);
     }
 
     public void drawBorderedRectangle(
-        final MatrixStack matrixStack,
+        final DrawContext drawContext,
         final float x1, final float y1,
         final float x2, final float y2,
         final float borderThickness,
@@ -170,12 +120,12 @@ public final class RenderManager {
         final RGBA fillColour,
         final boolean isBlend) {
 
-        this.drawFilledRectangle(matrixStack, x1, y1, x2, y2, fillColour, isBlend);
-        this.drawRectangle(matrixStack, x1, y1, x2, y2, borderThickness, borderColour);
+        this.drawFilledRectangle(drawContext, x1, y1, x2, y2, fillColour, isBlend);
+        this.drawRectangle(drawContext, x1, y1, x2, y2, borderThickness, borderColour);
     }
 
     public void drawPartialCircle(
-        final MatrixStack matrixStack,
+        final DrawContext drawContext,
         final float x, final float y,
         final float radius,
         final int startAngleAt,
@@ -183,66 +133,64 @@ public final class RenderManager {
         final float thickness,
         final RGBA colour) {
 
-        this.setGlProperty(GL11.GL_LINE_SMOOTH, true);
-
         var startAngle = Math.max(0, Math.min(startAngleAt, endAngleAt));
         var endAngle = Math.min(360, Math.max(startAngleAt, endAngleAt));
         var ratio = (float)Math.PI / 180.F;
 
-        var immediate = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-        var vertexConsumer = immediate.getBuffer(RenderLayer.getDebugLineStrip(thickness));
-
+        var points = new ArrayList<Float>();
         for (var i = startAngle; i <= endAngle; ++i) {
             var radians = (i - 90) * ratio;
 
-            vertexConsumer
-                .vertex(matrixStack.peek(), x + (float)Math.cos(radians) * radius, y + (float)Math.sin(radians) * radius, 0.0F)
-                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
+            points.add(x + (float)Math.cos(radians) * radius);
+            points.add(y + (float)Math.sin(radians) * radius);
         }
 
-        immediate.drawCurrentLayer();
+        drawContext.state.addSimpleElement(new ModLinesGuiElementRenderState(drawContext.getMatrices(), points.toArray(new Float[0]), colour));
     }
 
     public void drawCircle(
-        final MatrixStack matrixStack,
+        final DrawContext drawContext,
         final float x, final float y,
         final float radius,
         final float thickness,
         final RGBA colour) {
 
-        this.drawPartialCircle(matrixStack, x, y, radius, 0, 360, thickness, colour);
+        this.drawPartialCircle(drawContext, x, y, radius, 0, 360, thickness, colour);
+        this.drawPartialCircle(drawContext, x, y, radius, 0, 360, thickness, colour);
     }
 
     public void drawTorus(
-        final MatrixStack matrixStack,
+        final Matrix3x2fStack matrixStack,
         final int x, final int y,
         final int innerRadius,
         final int outerRadius,
         final RGBA colour) {
 
-        var ratio = (float)Math.PI / 180.F;
-
-        var bufferBuilders = MinecraftClient.getInstance().getBufferBuilders();
-        var immediate = bufferBuilders.getEntityVertexConsumers();
-        var vertexConsumer = immediate.getBuffer(RenderLayer.getGui());
-
-        for (var i = 0; i <= 360; ++i) {
-            var radians = (i - 90) * ratio;
-
-            vertexConsumer
-                .vertex(matrixStack.peek(), x + (float)Math.cos(radians) * innerRadius, y + (float)Math.sin(radians) * innerRadius, 0.0F)
-                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
-
-            vertexConsumer
-                .vertex(matrixStack.peek(), x + (float)Math.cos(radians) * outerRadius, y + (float)Math.sin(radians) * outerRadius, 0.0F)
-                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
-        }
-
-        immediate.drawCurrentLayer();
+//        var ratio = (float)Math.PI / 180.F;
+//
+//        var bufferBuilders = MinecraftClient.getInstance().getBufferBuilders();
+//        var immediate = bufferBuilders.getEntityVertexConsumers();
+//        var vertexConsumer = immediate.getBuffer(RenderLayer.getDebugQuads());
+//
+//        for (var i = 0; i <= 360; ++i) {
+//            var radians = (i - 90) * ratio;
+//
+//            vertexConsumer
+//                .vertex(matrixStack, x + (float)Math.cos(radians) * innerRadius, y + (float)Math.sin(radians) * innerRadius, 0.0F)
+//                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
+//                .normal(1.0F, 0.0F, 0.0F);
+//
+//            vertexConsumer
+//                .vertex(matrixStack, x + (float)Math.cos(radians) * outerRadius, y + (float)Math.sin(radians) * outerRadius, 0.0F)
+//                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
+//                .normal(1.0F, 0.0F, 0.0F);
+//        }
+//
+//        immediate.drawCurrentLayer();
     }
 
     public void drawImage(
-        final MatrixStack matrixStack,
+        final DrawContext drawContext,
         final int x, final int y,
         final CustomCrosshairDrawer image,
         final RGBA colour,
@@ -260,7 +208,7 @@ public final class RenderManager {
                     var drawX = x + imageX - offsetX;
                     var drawY = y + imageY - offsetY;
 
-                    this.drawFilledRectangle(matrixStack, drawX, drawY, drawX + 1, drawY + 1, colour);
+                    this.drawFilledRectangle(drawContext, drawX, drawY, drawX + 1, drawY + 1, colour);
                 }
             }
         }
@@ -277,20 +225,20 @@ public final class RenderManager {
 
     public void drawSmallText(final DrawContext drawContext, final String text, final int x, final int y, final RGBA colour, final boolean hasShadow) {
         var matrixStack = drawContext.getMatrices();
-        matrixStack.push();
-        matrixStack.scale(0.5F, 0.5F, 1.0F);
+        matrixStack.pushMatrix();
+        matrixStack.scale(0.5F, 0.5F);
 
         this.drawText(drawContext, text, x * 2, y * 2, colour, hasShadow);
-        matrixStack.pop();
+        matrixStack.popMatrix();
     }
 
     public void drawBigText(final DrawContext drawContext, final String text, final int x, final int y, final RGBA colour, final boolean hasShadow) {
         var matrixStack = drawContext.getMatrices();
-        matrixStack.push();
-        matrixStack.scale(1.5F, 1.5F, 1.0F);
+        matrixStack.pushMatrix();
+        matrixStack.scale(1.5F, 1.5F);
 
         this.drawText(drawContext, text, (int)(x * 0.666F), (int)(y * 0.666F), colour, hasShadow);
-        matrixStack.pop();
+        matrixStack.popMatrix();
     }
 
     private int rgbaAsInt(final RGBA colour) {
@@ -308,10 +256,10 @@ public final class RenderManager {
         var scale = window.getScaleFactor();
 
         GL11.glScissor(
-            (int)Math.round(bounds.x() * scale),
-            (int)Math.round(window.getHeight() - (bounds.y() * scale) - (bounds.height() * scale)),
-            (int)Math.round(bounds.width() * scale),
-            (int)Math.round(bounds.height() * scale));
+            Math.round(bounds.x() * scale),
+            Math.round(window.getHeight() - (bounds.y() * scale) - (bounds.height() * scale)),
+            Math.round(bounds.width() * scale),
+            Math.round(bounds.height() * scale));
 
         callback.draw();
 

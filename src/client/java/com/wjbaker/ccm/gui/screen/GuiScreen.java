@@ -4,7 +4,6 @@ import com.wjbaker.ccm.CustomCrosshairMod;
 import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.component.components.ButtonGuiComponent;
 import com.wjbaker.ccm.gui.component.event.IOnClickEvent;
-import com.wjbaker.ccm.gui.types.GuiBounds;
 import com.wjbaker.ccm.helpers.Helper;
 import com.wjbaker.ccm.rendering.ModTheme;
 import com.wjbaker.ccm.rendering.RenderManager;
@@ -90,7 +89,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
     public void draw(final DrawContext drawContext) {
         var matrixStack = drawContext.getMatrices();
 
-        this.renderManager.drawFilledRectangle(matrixStack, 0, 0, this.width, this.height, ModTheme.BLACK.setOpacity(140));
+        this.renderManager.drawFilledRectangle(drawContext, 0, 0, this.width, this.height, ModTheme.BLACK.setOpacity(140));
 
         this.components.forEach(x -> x.draw(drawContext));
 
@@ -98,10 +97,8 @@ public abstract class GuiScreen extends GuiScreenAdapter {
     }
 
     private void drawHeader(final DrawContext drawContext) {
-        var matrixStack = drawContext.getMatrices();
-
-        this.renderManager.drawFilledRectangle(matrixStack, 0, 0, this.width, this.headerHeight, ModTheme.PRIMARY);
-        this.renderManager.drawLine(matrixStack, 0, this.headerHeight, this.width, this.headerHeight, 2.0F, ModTheme.DARK_GREY);
+        this.renderManager.drawFilledRectangle(drawContext, 0, 0, this.width, this.headerHeight, ModTheme.PRIMARY);
+        this.renderManager.drawLine(drawContext, 0, this.headerHeight, this.width, this.headerHeight, 2.0F, ModTheme.DARK_GREY);
 
         var titleWidth = this.renderManager.textWidth(CustomCrosshairMod.TITLE);
         var centreY = (this.headerHeight / 2) - (7 / 2);

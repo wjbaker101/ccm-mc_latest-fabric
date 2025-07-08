@@ -4,11 +4,11 @@ import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.computed.ComputedProperties;
 import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
+import org.joml.Matrix3x2fStack;
 
 public final class SquareStyle extends CrosshairStyle {
 
-    public SquareStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
+    public SquareStyle(final Matrix3x2fStack matrixStack, final CustomCrosshair crosshair) {
         super(matrixStack, crosshair);
     }
 
@@ -27,7 +27,7 @@ public final class SquareStyle extends CrosshairStyle {
 
             // Inner
             this.renderManager.drawRectangle(
-                this.matrixStack,
+                drawContext,
                 x - width - gap + 0.5F, y - height - gap + 0.5F,
                 x + width + gap - 0.5F, y + height + gap - 0.5F,
                 2.0F,
@@ -35,7 +35,7 @@ public final class SquareStyle extends CrosshairStyle {
 
             // Outer
             this.renderManager.drawRectangle(
-                this.matrixStack,
+                drawContext,
                 x - width - thickness - gap - 0.5F, y - height - thickness - gap - 0.5F,
                 x + width + thickness + gap + 0.5F, y + height + thickness + gap + 0.5F,
                 2.0F,
@@ -44,7 +44,7 @@ public final class SquareStyle extends CrosshairStyle {
 
         // Top
         this.renderManager.drawFilledRectangle(
-            this.matrixStack,
+            drawContext,
             x - width - thickness - gap, y - height - thickness - gap,
             x + width + thickness + gap, y - height - gap,
             colour,
@@ -52,7 +52,7 @@ public final class SquareStyle extends CrosshairStyle {
 
         // Bottom
         this.renderManager.drawFilledRectangle(
-            this.matrixStack,
+            drawContext,
             x - width - thickness - gap, y + height + gap,
             x + width + thickness + gap, y + height + thickness + gap,
             colour,
@@ -60,7 +60,7 @@ public final class SquareStyle extends CrosshairStyle {
 
         // Left
         this.renderManager.drawFilledRectangle(
-            this.matrixStack,
+            drawContext,
             x - width - thickness - gap, y - gap - height,
             x - width - gap, y + gap + height,
             colour,
@@ -68,7 +68,7 @@ public final class SquareStyle extends CrosshairStyle {
 
         // Right
         this.renderManager.drawFilledRectangle(
-            this.matrixStack,
+            drawContext,
             x + width + gap, y - gap - height,
             x + width + thickness + gap, y + gap + height,
             colour,

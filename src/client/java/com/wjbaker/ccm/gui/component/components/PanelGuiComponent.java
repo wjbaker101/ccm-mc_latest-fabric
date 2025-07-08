@@ -65,10 +65,8 @@ public class PanelGuiComponent extends GuiComponent {
 
     @Override
     public void draw(final DrawContext drawContext) {
-        var matrixStack = drawContext.getMatrices();
-
         this.renderManager.drawBorderedRectangle(
-            matrixStack,
+            drawContext,
             this.x, this.y,
             this.x + this.width, this.y + this.height,
             2.0F,

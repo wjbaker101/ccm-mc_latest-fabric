@@ -5,7 +5,7 @@ import com.wjbaker.ccm.crosshair.computed.ComputedProperties;
 import com.wjbaker.ccm.rendering.RenderManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
+import org.joml.Matrix3x2fStack;
 
 public abstract class CrosshairStyle {
 
@@ -22,11 +22,11 @@ public abstract class CrosshairStyle {
     }
 
     protected final CustomCrosshair crosshair;
-    protected final MatrixStack matrixStack;
+    protected final Matrix3x2fStack matrixStack;
     protected final RenderManager renderManager;
     protected final MinecraftClient mc;
 
-    public CrosshairStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
+    public CrosshairStyle(final Matrix3x2fStack matrixStack, final CustomCrosshair crosshair) {
         this.crosshair = crosshair;
         this.matrixStack = matrixStack;
         this.renderManager = new RenderManager();

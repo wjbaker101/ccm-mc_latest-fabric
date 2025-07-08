@@ -4,11 +4,11 @@ import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.computed.ComputedProperties;
 import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
+import org.joml.Matrix3x2fStack;
 
 public final class ArrowStyle extends CrosshairStyle {
 
-    public ArrowStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
+    public ArrowStyle(final Matrix3x2fStack matrixStack, final CustomCrosshair crosshair) {
         super(matrixStack, crosshair);
     }
 
@@ -19,9 +19,9 @@ public final class ArrowStyle extends CrosshairStyle {
         var thickness = this.crosshair.thickness.get();
         var isAdaptiveColourEnabled = this.crosshair.isAdaptiveColourEnabled.get();
 
-        this.renderManager.drawLines(this.matrixStack, new float[] {
-            x - width, y + height, x, y,
-            x, y, x + width, y + height
+        this.renderManager.drawLines(drawContext, new Float[] {
+            (float)x - width, (float)y + height, (float)x, (float)y,
+            (float)x, (float)y, (float)x + width, (float)y + height
         }, thickness, computedProperties.colour(), isAdaptiveColourEnabled);
     }
 }

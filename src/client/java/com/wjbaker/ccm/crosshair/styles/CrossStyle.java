@@ -4,11 +4,11 @@ import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.computed.ComputedProperties;
 import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
+import org.joml.Matrix3x2fStack;
 
 public final class CrossStyle extends CrosshairStyle {
 
-    public CrossStyle(final MatrixStack matrixStack, final CustomCrosshair crosshair) {
+    public CrossStyle(final Matrix3x2fStack matrixStack, final CustomCrosshair crosshair) {
         super(matrixStack, crosshair);
     }
 
@@ -34,18 +34,18 @@ public final class CrossStyle extends CrosshairStyle {
             var adjustedHeight = height + 1.0F;
             var adjustedGap = gap - 0.5F;
 
-            this.renderManager.drawBorderedRectangle(this.matrixStack, x - thickness, y - adjustedGap - adjustedHeight, x + thickness, y - adjustedGap, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
-            this.renderManager.drawBorderedRectangle(this.matrixStack, x - thickness, y + adjustedGap, x + thickness, y + adjustedGap + adjustedHeight, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
-            this.renderManager.drawBorderedRectangle(this.matrixStack, x - adjustedGap - adjustedWidth, y - thickness, x - adjustedGap, y + thickness, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
-            this.renderManager.drawBorderedRectangle(this.matrixStack, x + adjustedGap, y - thickness, x + adjustedGap + adjustedWidth, y + thickness, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawBorderedRectangle(drawContext, x - thickness, y - adjustedGap - adjustedHeight, x + thickness, y - adjustedGap, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawBorderedRectangle(drawContext, x - thickness, y + adjustedGap, x + thickness, y + adjustedGap + adjustedHeight, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawBorderedRectangle(drawContext, x - adjustedGap - adjustedWidth, y - thickness, x - adjustedGap, y + thickness, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawBorderedRectangle(drawContext, x + adjustedGap, y - thickness, x + adjustedGap + adjustedWidth, y + thickness, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
         }
         else {
             var adjustedThickness = thickness - 0.5F;
 
-            this.renderManager.drawFilledRectangle(this.matrixStack, x - adjustedThickness, y - gap - height, x + adjustedThickness, y - gap, baseColour, isAdaptiveColourEnabled);
-            this.renderManager.drawFilledRectangle(this.matrixStack, x - adjustedThickness, y + gap, x + adjustedThickness, y + gap + height, baseColour, isAdaptiveColourEnabled);
-            this.renderManager.drawFilledRectangle(this.matrixStack, x - gap - width, y - adjustedThickness, x - gap, y + adjustedThickness, baseColour, isAdaptiveColourEnabled);
-            this.renderManager.drawFilledRectangle(this.matrixStack, x + gap, y - adjustedThickness, x + gap + width, y + adjustedThickness, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawFilledRectangle(drawContext, x - adjustedThickness, y - gap - height, x + adjustedThickness, y - gap, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawFilledRectangle(drawContext, x - adjustedThickness, y + gap, x + adjustedThickness, y + gap + height, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawFilledRectangle(drawContext, x - gap - width, y - adjustedThickness, x - gap, y + adjustedThickness, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawFilledRectangle(drawContext, x + gap, y - adjustedThickness, x + gap + width, y + adjustedThickness, baseColour, isAdaptiveColourEnabled);
         }
     }
 }

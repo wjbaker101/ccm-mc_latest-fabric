@@ -24,8 +24,6 @@ public final class ColourPreviewGuiComponent extends GuiComponent {
     public void draw(final DrawContext drawContext) {
         super.draw(drawContext);
 
-        var matrixStack = drawContext.getMatrices();
-
-        this.renderManager.drawFilledRectangle(matrixStack, this.x, this.y, this.x + this.width, this.y + this.height, this.colour.get());
+        this.renderManager.drawFilledRectangle(drawContext, this.x, this.y, this.x + this.width, this.y + this.height, this.colour.get());
     }
 }

@@ -42,7 +42,7 @@ public final class CrosshairPreviewGuiComponent extends GuiComponent {
                     : ModTheme.DARK_GREY.setOpacity(140);
 
                 this.renderManager.drawFilledRectangle(
-                    matrixStack,
+                    drawContext,
                     this.x + gridSize * gridX,
                     this.y + gridSize * gridY,
                     this.x + gridSize * gridX + gridSize,
@@ -52,7 +52,7 @@ public final class CrosshairPreviewGuiComponent extends GuiComponent {
         }
 
         this.renderManager.drawRectangle(
-            matrixStack,
+            drawContext,
             this.x, this.y,
             this.x + this.width, this.y + this.height,
             2.0F,
