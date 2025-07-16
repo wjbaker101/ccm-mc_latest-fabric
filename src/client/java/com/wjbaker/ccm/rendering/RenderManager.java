@@ -6,6 +6,7 @@ import com.wjbaker.ccm.gui.types.IDrawInsideWindowCallback;
 import com.wjbaker.ccm.rendering.types.RGBA;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import org.joml.Matrix3x2f;
 import org.joml.Matrix3x2fStack;
 import org.lwjgl.opengl.GL11;
 
@@ -31,7 +32,7 @@ public final class RenderManager {
         final RGBA colour,
         final boolean isBlendEnabled) {
 
-        drawContext.state.addSimpleElement(new ModLinesGuiElementRenderState(drawContext.getMatrices(), points, colour));
+        drawContext.state.addSimpleElement(new ModLinesGuiElementRenderState(new Matrix3x2f(drawContext.getMatrices()), points, colour));
     }
 
     public void drawFilledShape(final DrawContext drawContext, final float[] points, final RGBA colour) {
@@ -44,7 +45,7 @@ public final class RenderManager {
         final RGBA colour,
         final boolean isBlendEnabled) {
 
-         drawContext.state.addSimpleElement(new ModFilledGuiElementRenderState(drawContext.getMatrices(), points, colour));
+         drawContext.state.addSimpleElement(new ModFilledGuiElementRenderState(new Matrix3x2f(drawContext.getMatrices()), points, colour));
     }
 
     public void drawLine(
@@ -145,7 +146,7 @@ public final class RenderManager {
             points.add(y + (float)Math.sin(radians) * radius);
         }
 
-        drawContext.state.addSimpleElement(new ModLinesGuiElementRenderState(drawContext.getMatrices(), points.toArray(new Float[0]), colour));
+        drawContext.state.addSimpleElement(new ModLinesGuiElementRenderState(new Matrix3x2f(drawContext.getMatrices()), points.toArray(new Float[0]), colour));
     }
 
     public void drawCircle(

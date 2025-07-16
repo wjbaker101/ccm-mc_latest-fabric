@@ -68,9 +68,9 @@ public final class CrosshairRenderManager {
 
         this.preTransformation(drawContext, crosshair, renderX, renderY);
 
-        style.draw(drawContext, renderX, renderY, computedProperties);
+        style.draw(drawContext, 0, 0, computedProperties);
 
-        this.postTransformation(drawContext);
+        this.postTransformation(drawContext, renderX, renderY);
     }
 
     private CrosshairStyle mapCrosshairStyle(
@@ -102,14 +102,15 @@ public final class CrosshairRenderManager {
         var rotation = crosshair.rotation.get();
         var scale = crosshair.scale.get();
 
-        matrices.translate(-x, -y);
         matrices.scale(scale / 100.0F, scale / 100.0F);
-        matrices.rotateLocal(rotation);
-        matrices.translate(x, y);
+        matrices.rotate(rotation);
+
+        matrices.translateLocal(x, y);
     }
 
-    private void postTransformation(final DrawContext drawContext) {
-        drawContext.getMatrices().popMatrix();
+    private void postTransformation(final DrawContext drawContext, final int x, final int y) {
+        var matrices = drawContext.getMatrices();
+        matrices.popMatrix();
     }
 
     private void drawItemCooldownIndicator(
