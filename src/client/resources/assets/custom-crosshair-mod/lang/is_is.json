@@ -1,6 +1,6 @@
 {
     "keybind.custom_crosshair_mod.open_edit_crosshair_gui": "Breyta Krosshár",
-    "gui.custom_crosshair_mod.mod_keybinds_category": "Sérsniðin Krosshárbreyting",
+    "key.category.custom_crosshair_mod.key_bindings": "Sérsniðin Krosshárbreyting",
     "custom_crosshair_mod.screen.support_on_paypal": "Stuðningur á PayPal!",
     "custom_crosshair_mod.screen.support_on_patreon": "Stuðningur á Patreon!",
     "custom_crosshair_mod.screen.new_version": "Ný Útgáfa í Boði!",

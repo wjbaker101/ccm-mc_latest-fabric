@@ -1,5 +1,5 @@
 {
-    "gui.custom_crosshair_mod.mod_keybinds_category": "Custom Crosshair Mod(自定义十字准星模组)",
+    "key.category.custom_crosshair_mod.key_bindings": "Custom Crosshair Mod(自定义十字准星模组)",
     "custom_crosshair_mod.screen.support_on_paypal": "在PayPal上支持！",
     "custom_crosshair_mod.screen.support_on_patreon": "在Patreon上支持!",
     "custom_crosshair_mod.screen.new_version": "有新版本可用!",

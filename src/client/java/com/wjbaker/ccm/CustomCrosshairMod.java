@@ -100,7 +100,7 @@ public final class CustomCrosshairMod implements ModInitializer {
             "keybind.custom_crosshair_mod.open_edit_crosshair_gui",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_GRAVE_ACCENT,
-            new KeyBinding.Category(Identifier.of("gui.custom_crosshair_mod.mod_keybinds_category")));
+            new KeyBinding.Category(Identifier.of("custom_crosshair_mod", "key_bindings")));
 
         KeyBindingHelper.registerKeyBinding(editCrosshair);
 
