@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
@@ -99,7 +100,7 @@ public final class CustomCrosshairMod implements ModInitializer {
             "keybind.custom_crosshair_mod.open_edit_crosshair_gui",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_GRAVE_ACCENT,
-            "gui.custom_crosshair_mod.mod_keybinds_category");
+            new KeyBinding.Category(Identifier.of("gui.custom_crosshair_mod.mod_keybinds_category")));
 
         KeyBindingHelper.registerKeyBinding(editCrosshair);
 

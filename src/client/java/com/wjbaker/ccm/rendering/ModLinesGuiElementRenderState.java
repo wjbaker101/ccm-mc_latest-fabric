@@ -21,15 +21,15 @@ public record ModLinesGuiElementRenderState(Matrix3x2f pose, Float[] points, RGB
         return RenderPipelines.DEBUG_LINE_STRIP;
     }
 
-    public void setupVertices(final VertexConsumer vertices, final float depth) {
+    public void setupVertices(final VertexConsumer vertices) {
         for (var i = 0; i < points.length; i += 2) {
             vertices
-                .vertex(this.pose, points[i], points[i + 1], depth)
+                .vertex(this.pose, points[i], points[i + 1])
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
         }
 
         vertices
-            .vertex(this.pose, points[points.length - 2], points[points.length - 1], depth)
+            .vertex(this.pose, points[points.length - 2], points[points.length - 1])
             .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
     }
 

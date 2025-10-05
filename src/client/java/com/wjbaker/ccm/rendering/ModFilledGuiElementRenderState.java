@@ -21,10 +21,10 @@ public record ModFilledGuiElementRenderState(Matrix3x2f pose, float[] points, RG
         return RenderPipelines.GUI;
     }
 
-    public void setupVertices(final VertexConsumer vertices, final float depth) {
+    public void setupVertices(final VertexConsumer vertices) {
         for (var i = 0; i < points.length; i += 2) {
             vertices
-                .vertex(this.pose, points[i], points[i + 1], depth)
+                .vertex(this.pose, points[i], points[i + 1])
                 .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity());
         }
     }
