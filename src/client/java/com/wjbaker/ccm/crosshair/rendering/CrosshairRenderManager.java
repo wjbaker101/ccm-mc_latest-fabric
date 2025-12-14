@@ -11,7 +11,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.option.AttackIndicator;
-import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -187,10 +186,6 @@ public final class CrosshairRenderManager {
 
         var drawX = x + crosshair.gap.get() + 5;
         var drawY = y + crosshair.gap.get() + 5;
-
-        var mc = MinecraftClient.getInstance();
-
-        mc.getTextureManager().getTexture(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).setFilter(false, false);
 
         var indicatorItems = computedProperties.indicatorItems();
         var matrixStack = drawContext.getMatrices();
