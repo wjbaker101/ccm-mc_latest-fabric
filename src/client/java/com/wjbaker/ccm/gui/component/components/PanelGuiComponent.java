@@ -5,7 +5,7 @@ import com.wjbaker.ccm.gui.component.type.PanelOrientation;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.gui.types.GuiBounds;
 import com.wjbaker.ccm.rendering.ModTheme;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 import java.util.ArrayList;
 
@@ -64,9 +64,9 @@ public class PanelGuiComponent extends GuiComponent {
     }
 
     @Override
-    public void draw(final DrawContext drawContext) {
+    public void draw(final GuiGraphicsExtractor graphics) {
         this.renderManager.drawBorderedRectangle(
-            drawContext,
+            graphics,
             this.x, this.y,
             this.x + this.width, this.y + this.height,
             2.0F,
@@ -79,13 +79,13 @@ public class PanelGuiComponent extends GuiComponent {
                 () -> this.components
                     .stream()
                     .filter(x -> !this.isComponentOutside(x))
-                    .forEach(x -> x.draw(drawContext)));
+                    .forEach(x -> x.draw(graphics)));
         }
         else {
             this.components
                 .stream()
                 .filter(x -> !this.isComponentOutside(x))
-                .forEach(x -> x.draw(drawContext));
+                .forEach(x -> x.draw(graphics));
         }
     }
 

@@ -7,7 +7,7 @@ import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.rendering.ModTheme;
 import com.wjbaker.ccm.rendering.types.RGBA;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public final class DrawCrosshairGuiComponent extends GuiComponent {
 
@@ -34,15 +34,15 @@ public final class DrawCrosshairGuiComponent extends GuiComponent {
     }
 
     @Override
-    public void draw(final DrawContext drawContext) {
-        super.draw(drawContext);
+    public void draw(final GuiGraphicsExtractor graphics) {
+        super.draw(graphics);
 
         var gridCount = this.imageSize.get();
 
         for (int gridX = 0; gridX < gridCount; ++gridX) {
             for (int gridY = 0; gridY < gridCount; ++gridY) {
                 this.renderManager.drawFilledRectangle(
-                    drawContext,
+                    graphics,
                     this.x + GRID_SIZE * gridX,
                     this.y + GRID_SIZE * gridY,
                     this.x + GRID_SIZE * gridX + GRID_SIZE,
@@ -51,7 +51,7 @@ public final class DrawCrosshairGuiComponent extends GuiComponent {
 
                 if (this.customCrosshairDrawer.getAt(gridX, gridY) == 1) {
                     this.renderManager.drawFilledRectangle(
-                        drawContext,
+                        graphics,
                         this.x + GRID_SIZE * gridX,
                         this.y + GRID_SIZE * gridY,
                         this.x + GRID_SIZE * gridX + GRID_SIZE,

@@ -2,31 +2,31 @@ package com.wjbaker.ccm.crosshair.computed.properties;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.rendering.types.RGBA;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.mob.Angerable;
-import net.minecraft.entity.mob.Monster;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.NeutralMob;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
 
 public abstract class ComputeColour {
 
-    private static final MinecraftClient mc = MinecraftClient.getInstance();
+    private static final Minecraft mc = Minecraft.getInstance();
 
     private ComputeColour() {}
 
     public static RGBA compute(final CustomCrosshair crosshair) {
-        var target = mc.targetedEntity;
+        var target = mc.crosshairPickEntity;
 
         var isHighlightPlayersEnabled = crosshair.isHighlightPlayersEnabled.get();
-        if (isHighlightPlayersEnabled && target instanceof PlayerEntity)
+        if (isHighlightPlayersEnabled && target instanceof Player)
             return crosshair.highlightPlayersColour.get();
 
         var isHighlightHostilesEnabled = crosshair.isHighlightHostilesEnabled.get();
-        if (isHighlightHostilesEnabled && (target instanceof Monster || target instanceof Angerable))
+        if (isHighlightHostilesEnabled && (target instanceof Monster || target instanceof NeutralMob))
             return crosshair.highlightHostilesColour.get();
 
         var isHighlightPassivesEnabled = crosshair.isHighlightPassivesEnabled.get();
-        if (isHighlightPassivesEnabled && target instanceof PassiveEntity)
+        if (isHighlightPassivesEnabled && target instanceof Animal)
             return crosshair.highlightPassivesColour.get();
 
         if (crosshair.isRainbowEnabled.get())

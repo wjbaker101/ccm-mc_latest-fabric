@@ -3,7 +3,7 @@ package com.wjbaker.ccm.crosshair.styles;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.computed.ComputedProperties;
 import com.wjbaker.ccm.crosshair.types.CrosshairStyle;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import org.joml.Matrix3x2fStack;
 
 public final class CrossStyle extends CrosshairStyle {
@@ -13,7 +13,7 @@ public final class CrossStyle extends CrosshairStyle {
     }
 
     @Override
-    public void draw(final DrawContext drawContext, final int x, final int y, final ComputedProperties computedProperties) {
+    public void draw(final GuiGraphicsExtractor graphics, final int x, final int y, final ComputedProperties computedProperties) {
         var isOutlineEnabled = this.crosshair.isOutlineEnabled.get();
         var baseColour = computedProperties.colour();
         var gap = computedProperties.gap();
@@ -34,18 +34,18 @@ public final class CrossStyle extends CrosshairStyle {
             var adjustedHeight = height + 1.0F;
             var adjustedGap = gap - 0.5F;
 
-            this.renderManager.drawBorderedRectangle(drawContext, x - thickness, y - adjustedGap - adjustedHeight, x + thickness, y - adjustedGap, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
-            this.renderManager.drawBorderedRectangle(drawContext, x - thickness, y + adjustedGap, x + thickness, y + adjustedGap + adjustedHeight, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
-            this.renderManager.drawBorderedRectangle(drawContext, x - adjustedGap - adjustedWidth, y - thickness, x - adjustedGap, y + thickness, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
-            this.renderManager.drawBorderedRectangle(drawContext, x + adjustedGap, y - thickness, x + adjustedGap + adjustedWidth, y + thickness, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawBorderedRectangle(graphics, x - thickness, y - adjustedGap - adjustedHeight, x + thickness, y - adjustedGap, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawBorderedRectangle(graphics, x - thickness, y + adjustedGap, x + thickness, y + adjustedGap + adjustedHeight, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawBorderedRectangle(graphics, x - adjustedGap - adjustedWidth, y - thickness, x - adjustedGap, y + thickness, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawBorderedRectangle(graphics, x + adjustedGap, y - thickness, x + adjustedGap + adjustedWidth, y + thickness, 2.0F, outlineColour, baseColour, isAdaptiveColourEnabled);
         }
         else {
             var adjustedThickness = thickness - 0.5F;
 
-            this.renderManager.drawFilledRectangle(drawContext, x - adjustedThickness, y - gap - height, x + adjustedThickness, y - gap, baseColour, isAdaptiveColourEnabled);
-            this.renderManager.drawFilledRectangle(drawContext, x - adjustedThickness, y + gap, x + adjustedThickness, y + gap + height, baseColour, isAdaptiveColourEnabled);
-            this.renderManager.drawFilledRectangle(drawContext, x - gap - width, y - adjustedThickness, x - gap, y + adjustedThickness, baseColour, isAdaptiveColourEnabled);
-            this.renderManager.drawFilledRectangle(drawContext, x + gap, y - adjustedThickness, x + gap + width, y + adjustedThickness, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawFilledRectangle(graphics, x - adjustedThickness, y - gap - height, x + adjustedThickness, y - gap, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawFilledRectangle(graphics, x - adjustedThickness, y + gap, x + adjustedThickness, y + gap + height, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawFilledRectangle(graphics, x - gap - width, y - adjustedThickness, x - gap, y + adjustedThickness, baseColour, isAdaptiveColourEnabled);
+            this.renderManager.drawFilledRectangle(graphics, x + gap, y - adjustedThickness, x + gap + width, y + adjustedThickness, baseColour, isAdaptiveColourEnabled);
         }
     }
 }

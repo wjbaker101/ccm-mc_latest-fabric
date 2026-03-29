@@ -3,14 +3,13 @@ package com.wjbaker.ccm.crosshair.types;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
 import com.wjbaker.ccm.crosshair.computed.ComputedProperties;
 import com.wjbaker.ccm.rendering.RenderManager;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import org.joml.Matrix3x2fStack;
 
 public abstract class CrosshairStyle {
 
     public enum Styles {
-
         VANILLA,
         CROSS,
         CIRCLE,
@@ -24,17 +23,17 @@ public abstract class CrosshairStyle {
     protected final CustomCrosshair crosshair;
     protected final Matrix3x2fStack matrixStack;
     protected final RenderManager renderManager;
-    protected final MinecraftClient mc;
+    protected final Minecraft mc;
 
     public CrosshairStyle(final Matrix3x2fStack matrixStack, final CustomCrosshair crosshair) {
         this.crosshair = crosshair;
         this.matrixStack = matrixStack;
         this.renderManager = new RenderManager();
-        this.mc = MinecraftClient.getInstance();
+        this.mc = Minecraft.getInstance();
     }
 
     public abstract void draw(
-        final DrawContext drawContext,
+        final GuiGraphicsExtractor graphics,
         final int x,
         final int y,
         final ComputedProperties computedProperties);

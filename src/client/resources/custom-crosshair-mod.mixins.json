@@ -2,11 +2,11 @@
     "required": true,
     "minVersion": "0.8",
     "package": "com.wjbaker.ccm.mixins",
-    "compatibilityLevel": "JAVA_21",
+    "compatibilityLevel": "JAVA_25",
     "mixins": [],
     "client": [
         "GameRendererMixin",
-        "InGameHudMixin"
+        "GuiMixin"
     ],
     "injectors": {
         "defaultRequire": 1

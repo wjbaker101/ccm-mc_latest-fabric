@@ -4,7 +4,7 @@ import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.component.event.IGuiComponentEvent;
 import com.wjbaker.ccm.gui.component.event.IOnClickEvent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +29,11 @@ public final class ButtonGuiComponent extends GuiComponent {
     }
 
     @Override
-    public void draw(final DrawContext drawContext) {
-        super.draw(drawContext);
+    public void draw(final GuiGraphicsExtractor graphics) {
+        super.draw(graphics);
 
         this.renderManager.drawBorderedRectangle(
-            drawContext,
+            graphics,
             this.x, this.y,
             this.x + this.width, this.y + this.height,
             2.0F,
@@ -43,7 +43,7 @@ public final class ButtonGuiComponent extends GuiComponent {
         var centreX = this.x + (this.width / 2) - (this.renderManager.textWidth(this.label) / 2);
         var centreY = this.y + (this.height / 2) - (7 / 2);
 
-        this.renderManager.drawText(drawContext, this.label, centreX, centreY, this.currentTextColour, false);
+        this.renderManager.drawText(graphics, this.label, centreX, centreY, this.currentTextColour, false);
     }
 
     @Override

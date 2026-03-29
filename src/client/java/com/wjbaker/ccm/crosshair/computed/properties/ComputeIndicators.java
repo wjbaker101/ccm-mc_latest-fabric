@@ -1,8 +1,8 @@
 package com.wjbaker.ccm.crosshair.computed.properties;
 
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public abstract class ComputeIndicators {
 
     public record IndicatorItem(String text, ItemStack icon) {}
 
-    private static final MinecraftClient mc = MinecraftClient.getInstance();
+    private static final Minecraft mc = Minecraft.getInstance();
 
     private ComputeIndicators() {}
 
@@ -28,14 +28,14 @@ public abstract class ComputeIndicators {
         if (!crosshair.isToolDamageEnabled.get())
             return;
 
-        if (mc.player == null || mc.player.getMainHandStack() == null)
+        if (mc.player == null || mc.player.getMainHandItem() == null)
             return;
 
-        var tool = mc.player.getMainHandStack();
-        if (!tool.isDamageable())
+        var tool = mc.player.getMainHandItem();
+        if (!tool.isDamageableItem())
             return;
 
-        var remainingDamage = tool.getMaxDamage() - tool.getDamage();
+        var remainingDamage = tool.getMaxDamage() - tool.getDamageValue();
         if (remainingDamage > 10)
             return;
 
@@ -46,16 +46,16 @@ public abstract class ComputeIndicators {
         if (!crosshair.isProjectileIndicatorEnabled.get())
             return;
 
-        if (mc.player == null || mc.player.getMainHandStack() == null)
+        if (mc.player == null || mc.player.getMainHandItem() == null)
             return;
 
-        var tool = mc.player.getMainHandStack();
+        var tool = mc.player.getMainHandItem();
 
-        var projectile = mc.player.getProjectileType(tool);
+        var projectile = mc.player.getProjectile(tool);
         if (projectile == ItemStack.EMPTY)
             return;
 
-        var count = mc.player.isInCreativeMode() ? "" : projectile.getCount();
+        var count = mc.player.isCreative() ? "" : projectile.getCount();
 
         indicators.add(new IndicatorItem("" + count, projectile));
     }

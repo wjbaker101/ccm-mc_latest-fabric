@@ -3,7 +3,7 @@ package com.wjbaker.ccm.gui.component.custom;
 import com.wjbaker.ccm.crosshair.properties.RgbaProperty;
 import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public final class ColourPreviewGuiComponent extends GuiComponent {
 
@@ -21,9 +21,9 @@ public final class ColourPreviewGuiComponent extends GuiComponent {
     }
 
     @Override
-    public void draw(final DrawContext drawContext) {
-        super.draw(drawContext);
+    public void draw(final GuiGraphicsExtractor graphics) {
+        super.draw(graphics);
 
-        this.renderManager.drawFilledRectangle(drawContext, this.x, this.y, this.x + this.width, this.y + this.height, this.colour.get());
+        this.renderManager.drawFilledRectangle(graphics, this.x, this.y, this.x + this.width, this.y + this.height, this.colour.get());
     }
 }

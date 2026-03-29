@@ -1,15 +1,15 @@
 package com.wjbaker.ccm.gui.screen;
 
-import net.minecraft.client.gui.Click;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.input.KeyInput;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.network.chat.Component;
 
 public abstract class GuiScreenAdapter extends Screen implements IGuiScreen {
 
     protected GuiScreenAdapter(final String title) {
-        super(Text.of(title));
+        super(Component.literal(title));
     }
 
     @Override
@@ -20,23 +20,23 @@ public abstract class GuiScreenAdapter extends Screen implements IGuiScreen {
 
     @Override
     public void close() {
-        super.close();
+        super.onClose();
     }
 
     @Override
-    public void render(final DrawContext drawContext, final int mouseX, final int mouseY, final float delta) {
-        super.render(drawContext, mouseX, mouseY, delta);
-        this.draw(drawContext);
+    public void extractRenderState(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY, final float delta) {
+        super.extractRenderState(graphics, mouseX, mouseY, delta);
+        this.draw(graphics);
     }
 
     @Override
-    public boolean mouseClicked(final Click click, final boolean doubled) {
+    public boolean mouseClicked(final MouseButtonEvent click, final boolean doubled) {
         this.onMouseDown((int)click.x(), (int)click.y(), click.button());
         return super.mouseClicked(click, doubled);
     }
 
     @Override
-    public boolean mouseReleased(final Click click) {
+    public boolean mouseReleased(final MouseButtonEvent click) {
         this.onMouseUp((int)click.x(), (int)click.y(), click.button());
         return super.mouseReleased(click);
     }
@@ -48,7 +48,7 @@ public abstract class GuiScreenAdapter extends Screen implements IGuiScreen {
     }
 
     @Override
-    public boolean mouseDragged(Click click, double offsetX, double offsetY) {
+    public boolean mouseDragged(final MouseButtonEvent click, double offsetX, double offsetY) {
         this.onMouseDrag((int)click.x(), (int)click.y(), (int)(click.x() + offsetX), (int)(click.y() + offsetY));
         return super.mouseDragged(click, offsetX, offsetY);
     }
@@ -64,14 +64,14 @@ public abstract class GuiScreenAdapter extends Screen implements IGuiScreen {
     }
 
     @Override
-    public boolean keyPressed(final KeyInput input) {
-        this.onKeyDown(input.getKeycode());
+    public boolean keyPressed(final KeyEvent input) {
+        this.onKeyDown(input.key());
         return super.keyPressed(input);
     }
 
     @Override
-    public boolean keyReleased(final KeyInput input) {
-        this.onKeyUp(input.getKeycode());
+    public boolean keyReleased(final KeyEvent input) {
+        this.onKeyUp(input.key());
         return super.keyReleased(input);
     }
 }

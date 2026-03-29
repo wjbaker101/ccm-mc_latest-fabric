@@ -7,9 +7,9 @@ import com.wjbaker.ccm.gui.component.event.IOnClickEvent;
 import com.wjbaker.ccm.helpers.Helper;
 import com.wjbaker.ccm.rendering.ModTheme;
 import com.wjbaker.ccm.rendering.RenderManager;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.resource.language.I18n;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.resources.language.I18n;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
 
         this.buttons = new ArrayList<>();
 
-        this.newVersionButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.translate("custom_crosshair_mod.screen.new_version"));
+        this.newVersionButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.get("custom_crosshair_mod.screen.new_version"));
         this.newVersionButton.setBaseBackgroundColour(ModTheme.TERTIARY);
         this.newVersionButton.setHoverBackgroundColour(ModTheme.TERTIARY_DARK);
         this.newVersionButton.setBaseTextColour(ModTheme.BLACK);
@@ -56,7 +56,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         if (!CustomCrosshairMod.INSTANCE.properties().isLatestVersion().get())
             this.buttons.add(this.newVersionButton);
 
-        this.patreonButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.translate("custom_crosshair_mod.screen.support_on_patreon"));
+        this.patreonButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.get("custom_crosshair_mod.screen.support_on_patreon"));
         this.patreonButton.setBaseBackgroundColour(ModTheme.SECONDARY);
         this.patreonButton.setHoverBackgroundColour(ModTheme.PRIMARY);
         this.patreonButton.setBaseTextColour(ModTheme.WHITE);
@@ -64,7 +64,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
         this.patreonButton.addEvent(IOnClickEvent.class, () -> Helper.openInBrowser(CustomCrosshairMod.PATREON_PAGE));
         this.buttons.add(this.patreonButton);
 
-        this.paypalButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.translate("custom_crosshair_mod.screen.support_on_paypal"));
+        this.paypalButton = new ButtonGuiComponent(this, -1, -1, 125, 25, I18n.get("custom_crosshair_mod.screen.support_on_paypal"));
         this.paypalButton.setBaseBackgroundColour(ModTheme.SECONDARY);
         this.paypalButton.setHoverBackgroundColour(ModTheme.PRIMARY);
         this.paypalButton.setBaseTextColour(ModTheme.WHITE);
@@ -86,27 +86,25 @@ public abstract class GuiScreen extends GuiScreenAdapter {
     }
 
     @Override
-    public void draw(final DrawContext drawContext) {
-        var matrixStack = drawContext.getMatrices();
+    public void draw(final GuiGraphicsExtractor graphics) {
+        this.renderManager.drawFilledRectangle(graphics, 0, 0, this.width, this.height, ModTheme.BLACK.setOpacity(140));
 
-        this.renderManager.drawFilledRectangle(drawContext, 0, 0, this.width, this.height, ModTheme.BLACK.setOpacity(140));
+        this.components.forEach(x -> x.draw(graphics));
 
-        this.components.forEach(x -> x.draw(drawContext));
-
-        this.drawHeader(drawContext);
+        this.drawHeader(graphics);
     }
 
-    private void drawHeader(final DrawContext drawContext) {
-        this.renderManager.drawFilledRectangle(drawContext, 0, 0, this.width, this.headerHeight, ModTheme.PRIMARY);
-        this.renderManager.drawLine(drawContext, 0, this.headerHeight, this.width, this.headerHeight, 2.0F, ModTheme.DARK_GREY);
+    private void drawHeader(final GuiGraphicsExtractor graphics) {
+        this.renderManager.drawFilledRectangle(graphics, 0, 0, this.width, this.headerHeight, ModTheme.PRIMARY);
+        this.renderManager.drawLine(graphics, 0, this.headerHeight, this.width, this.headerHeight, 2.0F, ModTheme.DARK_GREY);
 
         var titleWidth = this.renderManager.textWidth(CustomCrosshairMod.TITLE);
         var centreY = (this.headerHeight / 2) - (7 / 2);
 
-        this.renderManager.drawText(drawContext, CustomCrosshairMod.TITLE, 5, centreY, ModTheme.WHITE, true);
+        this.renderManager.drawText(graphics, CustomCrosshairMod.TITLE, 5, centreY, ModTheme.WHITE, true);
 
         this.renderManager.drawSmallText(
-            drawContext,
+            graphics,
             "v" + CustomCrosshairMod.VERSION,
             8 + titleWidth,
             (headerHeight / 2),
@@ -114,10 +112,10 @@ public abstract class GuiScreen extends GuiScreenAdapter {
             false);
 
         if (!CustomCrosshairMod.INSTANCE.properties().isLatestVersion().get())
-            this.newVersionButton.draw(drawContext);
+            this.newVersionButton.draw(graphics);
 
-        this.patreonButton.draw(drawContext);
-        this.paypalButton.draw(drawContext);
+        this.patreonButton.draw(graphics);
+        this.paypalButton.draw(graphics);
     }
 
     @Override
@@ -162,7 +160,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
     @Override
     public void onKeyDown(final int keyCode) {
         if (keyCode == 256 && this.parentGuiScreen != null)
-            MinecraftClient.getInstance().setScreen(this.parentGuiScreen);
+            Minecraft.getInstance().setScreen(this.parentGuiScreen);
     }
 
     @Override

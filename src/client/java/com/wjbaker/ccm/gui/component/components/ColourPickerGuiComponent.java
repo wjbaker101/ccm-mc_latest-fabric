@@ -7,8 +7,8 @@ import com.wjbaker.ccm.gui.component.type.IBindableGuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.gui.screen.screens.editColour.EditColourGuiScreen;
 import com.wjbaker.ccm.rendering.ModTheme;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public final class ColourPickerGuiComponent extends GuiComponent implements IBindableGuiComponent<RgbaProperty> {
 
@@ -39,11 +39,11 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
     }
 
     @Override
-    public void draw(final DrawContext drawContext) {
-        super.draw(drawContext);
+    public void draw(final GuiGraphicsExtractor graphics) {
+        super.draw(graphics);
 
         this.renderManager.drawBorderedRectangle(
-            drawContext,
+            graphics,
             this.x, this.y,
             this.x + this.boxSize, this.y + this.boxSize,
             2.0F,
@@ -51,13 +51,13 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
             this.currentBackgroundColour);
 
         this.renderManager.drawFilledRectangle(
-            drawContext,
+            graphics,
             this.x + 2, this.y + 2,
             this.x + this.boxSize - 2, this.y + this.boxSize - 2,
             this.colour.get());
 
         this.renderManager.drawText(
-            drawContext,
+            graphics,
             this.label,
             this.x + this.boxSize + this.labelSpacing,
             this.y + (this.boxSize / 2) - 3,
@@ -89,7 +89,7 @@ public final class ColourPickerGuiComponent extends GuiComponent implements IBin
         if (!this.isMouseDownInside)
             return;
 
-        MinecraftClient.getInstance().setScreen(new EditColourGuiScreen(this.crosshair, this.colour));
+        Minecraft.getInstance().setScreen(new EditColourGuiScreen(this.crosshair, this.colour));
 
         this.isMouseDownInside = false;
     }

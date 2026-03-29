@@ -1,16 +1,16 @@
 package com.wjbaker.ccm;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.wjbaker.ccm.config.ConfigManager;
 import com.wjbaker.ccm.config.GlobalProperties;
 import com.wjbaker.ccm.gui.screen.screens.editCrosshair.EditCrosshairGuiScreen;
 import com.wjbaker.ccm.helpers.Helper;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.Identifier;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
@@ -24,22 +24,22 @@ public final class CustomCrosshairMod implements ModInitializer {
     public static CustomCrosshairMod INSTANCE;
 
     public static final String TITLE = "Custom Crosshair Mod";
-    public static final String VERSION = "1.6.4-fabric";
-    public static final String MC_VERSION = "1.21.11-fabric";
+    public static final String VERSION = "1.6.5-fabric";
+    public static final String MC_VERSION = "26.1-fabric";
     public static final String CURSEFORGE_PAGE = "https://www.curseforge.com/projects/242995/";
     public static final String MC_FORUMS_PAGE = "https://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/2637819/";
     public static final String PATREON_PAGE = "https://www.patreon.com/bePatron?u=66431720";
-    public static final String PAYPAL_PAGE = "https://www.paypal.com/cgi-bin/webscr?return=https://www.curseforge.com/projects/242995&cn=Add+special+instructions+to+the+addon+author()&business=sparkless101%40gmail.com&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted&cancel_return=https://www.curseforge.com/projects/242995&lc=US&item_name=Custom+Crosshair+Mod+(from+curseforge.com)&cmd=_donations&rm=1&no_shipping=1&currency_code=USD";
+    public static final String PAYPAL_PAGE = "https://www.paypal.com/donate/?hosted_button_id=KSDHLTS64X5G2";
 
     private final Logger logger;
-    private final MinecraftClient mc;
+    private final Minecraft mc;
     private final GlobalProperties properties;
 
     private ConfigManager configManager;
 
     public CustomCrosshairMod() {
         this.logger = getLogger(CustomCrosshairMod.class);
-        this.mc = MinecraftClient.getInstance();
+        this.mc = Minecraft.getInstance();
         this.properties = new GlobalProperties();
     }
 
@@ -96,16 +96,16 @@ public final class CustomCrosshairMod implements ModInitializer {
     }
 
     private void loadKeyBindings() {
-        var editCrosshair = new KeyBinding(
+        var editCrosshair = new KeyMapping(
             "keybind.custom_crosshair_mod.open_edit_crosshair_gui",
-            InputUtil.Type.KEYSYM,
+            InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_GRAVE_ACCENT,
-            new KeyBinding.Category(Identifier.of("custom_crosshair_mod", "key_bindings")));
+            new KeyMapping.Category(Identifier.fromNamespaceAndPath("custom_crosshair_mod", "key_bindings")));
 
-        KeyBindingHelper.registerKeyBinding(editCrosshair);
+        KeyMappingHelper.registerKeyMapping(editCrosshair);
 
         ClientTickEvents.END_CLIENT_TICK.register(e -> {
-            if (this.mc.currentScreen == null && editCrosshair.isPressed())
+            if (this.mc.screen == null && editCrosshair.isDown())
                 this.mc.setScreen(new EditCrosshairGuiScreen(this.properties.getCrosshair()));
         });
     }

@@ -2,17 +2,17 @@ package com.wjbaker.ccm.crosshair.computed.properties;
 
 import com.google.common.collect.ImmutableSet;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.option.Perspective;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.client.CameraType;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import java.util.Set;
 
 public abstract class ComputeVisibility {
 
-    private static final MinecraftClient mc = MinecraftClient.getInstance();
+    private static final Minecraft mc = Minecraft.getInstance();
 
     private static final Set<Item> RANGED_WEAPONS = ImmutableSet.of(
         Items.BOW,
@@ -34,15 +34,15 @@ public abstract class ComputeVisibility {
         if (!crosshair.isVisibleDefault.get())
             return false;
 
-        if (!crosshair.isVisibleHiddenGui.get() && mc.options.hudHidden)
+        if (!crosshair.isVisibleHiddenGui.get() && mc.options.hideGui)
             return false;
 
-        var pov = mc.options.getPerspective();
-        var isThirdPerson = (pov == Perspective.THIRD_PERSON_BACK || pov == Perspective.THIRD_PERSON_FRONT);
+        var pov = mc.options.getCameraType();
+        var isThirdPerson = (pov == CameraType.THIRD_PERSON_BACK || pov == CameraType.THIRD_PERSON_FRONT);
         if (!crosshair.isVisibleThirdPerson.get() && isThirdPerson)
             return false;
 
-        if (!crosshair.isVisibleDebug.get() && mc.inGameHud.getDebugHud().shouldShowDebugHud())
+        if (!crosshair.isVisibleDebug.get() && mc.gui.getDebugOverlay().showDebugScreen())
             return false;
 
         if (!crosshair.isVisibleSpectator.get() && mc.player.isSpectator())
@@ -54,17 +54,17 @@ public abstract class ComputeVisibility {
         if (!crosshair.isVisibleHoldingThrowableItem.get() && isHoldingItem(mc.player, THROWABLE_ITEMS))
             return false;
 
-        if (!crosshair.isVisibleUsingSpyglass.get() && mc.player.isUsingSpyglass())
+        if (!crosshair.isVisibleUsingSpyglass.get() && mc.player.isScoping())
             return false;
 
         return true;
     }
 
-    private static boolean isHoldingItem(final ClientPlayerEntity player, final Set<Item> items) {
-        var mainHandItem = player.getMainHandStack();
+    private static boolean isHoldingItem(final LocalPlayer player, final Set<Item> items) {
+        var mainHandItem = player.getMainHandItem();
 
         var isMainHand = items.contains(mainHandItem.getItem());
-        var isOffhand = items.contains(player.getOffHandStack().getItem());
+        var isOffhand = items.contains(player.getOffhandItem().getItem());
 
         return isMainHand || (isOffhand && mainHandItem.isEmpty());
     }

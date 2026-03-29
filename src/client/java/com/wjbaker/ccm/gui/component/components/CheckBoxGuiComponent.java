@@ -5,7 +5,7 @@ import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.component.type.IBindableGuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.rendering.ModTheme;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public final class CheckBoxGuiComponent extends GuiComponent implements IBindableGuiComponent<BooleanProperty> {
 
@@ -39,11 +39,11 @@ public final class CheckBoxGuiComponent extends GuiComponent implements IBindabl
     }
 
     @Override
-    public void draw(final DrawContext drawContext) {
-        super.draw(drawContext);
+    public void draw(final GuiGraphicsExtractor graphics) {
+        super.draw(graphics);
 
         this.renderManager.drawBorderedRectangle(
-            drawContext,
+            graphics,
             this.x, this.y,
             this.x + this.boxSize, this.y + this.boxSize,
             2.0F,
@@ -54,14 +54,14 @@ public final class CheckBoxGuiComponent extends GuiComponent implements IBindabl
 
         if (this.isChecked.get()) {
             this.renderManager.drawFilledRectangle(
-                drawContext,
+                graphics,
                 this.x + inset, this.y + inset,
                 this.x + this.boxSize - inset, this.y + this.boxSize - inset,
                 ModTheme.SUCCESS);
         }
 
         this.renderManager.drawText(
-            drawContext,
+            graphics,
             this.label,
             this.x + this.boxSize + this.labelSpacing,
             this.y + (this.boxSize / 2) - 3,

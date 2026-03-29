@@ -2,7 +2,7 @@ package com.wjbaker.ccm.gui.component.components;
 
 import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public final class HeadingGuiComponent extends GuiComponent {
 
@@ -23,9 +23,9 @@ public final class HeadingGuiComponent extends GuiComponent {
     }
 
     @Override
-    public void draw(final DrawContext drawContext) {
-        super.draw(drawContext);
+    public void draw(final GuiGraphicsExtractor graphics) {
+        super.draw(graphics);
 
-        this.renderManager.drawBigText(drawContext, this.label, this.x, this.y, this.currentTextColour, true);
+        this.renderManager.drawBigText(graphics, this.label, this.x, this.y, this.currentTextColour, true);
     }
 }

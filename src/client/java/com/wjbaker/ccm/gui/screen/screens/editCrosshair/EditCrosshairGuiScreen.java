@@ -7,8 +7,8 @@ import com.wjbaker.ccm.gui.component.custom.CrosshairPreviewGuiComponent;
 import com.wjbaker.ccm.gui.component.event.IOnClickEvent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.gui.screen.screens.editCrosshair.components.*;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.resource.language.I18n;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.resources.language.I18n;
 
 public final class EditCrosshairGuiScreen extends GuiScreen {
 
@@ -33,7 +33,7 @@ public final class EditCrosshairGuiScreen extends GuiScreen {
             -1, -1,
             crosshair);
 
-        this.resetButton = new ButtonGuiComponent(this, -1, -1, 80, 15, I18n.translate("custom_crosshair_mod.screen.edit_crosshair.reset_settings"));
+        this.resetButton = new ButtonGuiComponent(this, -1, -1, 80, 15, I18n.get("custom_crosshair_mod.screen.edit_crosshair.reset_settings"));
         this.resetButton.addEvent(IOnClickEvent.class, () -> {
             crosshair.resetProperties();
             this.buildComponents();
@@ -95,11 +95,11 @@ public final class EditCrosshairGuiScreen extends GuiScreen {
     }
 
     @Override
-    public void draw(final DrawContext drawContext) {
-        super.draw(drawContext);
+    public void draw(final GuiGraphicsExtractor graphics) {
+        super.draw(graphics);
 
-        this.crosshairPreviewPanel.draw(drawContext);
-        this.resetButton.draw(drawContext);
+        this.crosshairPreviewPanel.draw(graphics);
+        this.resetButton.draw(graphics);
     }
 
     @Override

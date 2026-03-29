@@ -14,7 +14,7 @@ public abstract class Helper {
 
     public static void openInBrowser(final String url) {
         try {
-            Util.getOperatingSystem().open(url);
+            Util.getPlatform().openUri(url);
         }
         catch (final Exception ignored) {}
     }

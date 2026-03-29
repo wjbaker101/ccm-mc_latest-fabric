@@ -4,7 +4,7 @@ import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.screen.GuiScreen;
 import com.wjbaker.ccm.gui.types.GuiBounds;
 import com.wjbaker.ccm.rendering.ModTheme;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public final class ScrollPanelGuiComponent extends PanelGuiComponent {
 
@@ -44,14 +44,14 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
     }
 
     @Override
-    public void draw(final DrawContext drawContext) {
-        super.draw(drawContext);
+    public void draw(final GuiGraphicsExtractor graphics) {
+        super.draw(graphics);
 
         if (this.contentHeight < this.height)
             return;
 
         this.renderManager.drawBorderedRectangle(
-            drawContext,
+            graphics,
             this.x + this.width - this.scrollBarWidth, this.y + 1,
             this.x + this.width, this.y + this.height - 1,
             2.0F,
@@ -59,7 +59,7 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
             this.currentBackgroundColour);
 
         this.renderManager.drawBorderedRectangle(
-            drawContext,
+            graphics,
             this.x + this.width - this.scrollBarWidth, this.y + 1 + this.scrollBarPosition,
             this.x + this.width, this.y + this.scrollBarPosition + this.scrollBarSize,
             2.0F,
@@ -68,14 +68,14 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
 
         var thumbCentreX = this.x + this.width - (this.scrollBarWidth / 2.0F);
 
-        this.renderManager.drawLines(drawContext, new Float[] {
+        this.renderManager.drawLines(graphics, new Float[] {
             thumbCentreX - 2, (float)this.y + this.scrollBarPosition + 6,
             thumbCentreX, (float)this.y + this.scrollBarPosition + 4,
             thumbCentreX, (float)this.y + this.scrollBarPosition + 4,
             thumbCentreX + 2, (float)this.y + this.scrollBarPosition + 6
         }, 2.0F, ModTheme.WHITE);
 
-        this.renderManager.drawLines(drawContext, new Float[] {
+        this.renderManager.drawLines(graphics, new Float[] {
             thumbCentreX - 2, (float)this.y + this.scrollBarPosition + this.scrollBarSize - 5,
             thumbCentreX, (float)this.y + this.scrollBarPosition + this.scrollBarSize - 3,
             thumbCentreX, (float)this.y + this.scrollBarPosition + this.scrollBarSize - 3,

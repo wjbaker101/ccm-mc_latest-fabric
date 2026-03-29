@@ -2,17 +2,16 @@ package com.wjbaker.ccm.crosshair.computed.properties;
 
 import com.google.common.collect.ImmutableMap;
 import com.wjbaker.ccm.crosshair.CustomCrosshair;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.item.CrossbowItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.util.Hand;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import java.util.Map;
 
 public abstract class ComputeGap {
 
-    private static final MinecraftClient mc = MinecraftClient.getInstance();
+    private static final Minecraft mc = Minecraft.getInstance();
 
     private static final Map<Item, Float> ITEM_DURATIONS = ImmutableMap.of(
         Items.BOW, 20.0F,
@@ -30,8 +29,7 @@ public abstract class ComputeGap {
 
         var isSpectator = mc.player.isSpectator();
 
-        var isHoldingItem = !mc.player.getStackInHand(Hand.OFF_HAND).isEmpty()
-            || !mc.player.getStackInHand(Hand.MAIN_HAND).isEmpty();
+        var isHoldingItem = !mc.player.getOffhandItem().isEmpty() || !mc.player.getMainHandItem().isEmpty();
 
         var isDynamicBowEnabled = crosshair.isDynamicBowEnabled.get();
         var isDynamicAttackIndicatorEnabled = crosshair.isDynamicAttackIndicatorEnabled.get();
@@ -44,17 +42,18 @@ public abstract class ComputeGap {
 
         if (isDynamicBowEnabled && usageItemDuration != null) {
             if (mc.player.getActiveItem().getItem() == Items.CROSSBOW)
-                usageItemDuration = (float) CrossbowItem.getPullTime(mc.player.getActiveItem(), mc.player);
+                usageItemDuration = (float) CrossbowItem.getChargeDuration(mc.player.getActiveItem(), mc.player);
 
-            var progress = Math.min(usageItemDuration, mc.player.getItemUseTime());
+            var progress = Math.min(usageItemDuration, mc.player.getActiveItem().getUseDuration(mc.player) - mc.player.getUseItemRemainingTicks());
 
             return baseGap + Math.round((usageItemDuration - progress) * gapModifier);
         }
-        else if (isDynamicAttackIndicatorEnabled) {
-            var currentAttackUsage = mc.player.getAttackCooldownProgress(1.0F);
+
+        if (isDynamicAttackIndicatorEnabled) {
+            var currentAttackUsage = mc.player.getAttackStrengthScale(1.0F);
             var maxAttackUsage = 1.0F;
 
-            if (mc.player.getAttackCooldownProgressPerTick() > 5.0F && currentAttackUsage < maxAttackUsage)
+            if (mc.player.getCurrentItemAttackStrengthDelay() > 5.0F && currentAttackUsage < maxAttackUsage)
                 return baseGap + Math.round((maxAttackUsage - currentAttackUsage) * gapModifier * 20);
         }
 
