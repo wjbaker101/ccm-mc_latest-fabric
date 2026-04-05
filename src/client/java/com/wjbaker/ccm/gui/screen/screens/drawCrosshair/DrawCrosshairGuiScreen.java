@@ -37,7 +37,6 @@ public final class DrawCrosshairGuiScreen extends GuiScreen {
 
     @Override
     public void close() {
-        super.close();
         CustomCrosshairMod.INSTANCE.properties().getCustomCrosshairDrawer().saveImage();
     }
 }
