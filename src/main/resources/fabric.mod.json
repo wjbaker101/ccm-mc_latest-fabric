@@ -23,12 +23,15 @@
     },
 
     "mixins": [
-        "custom-crosshair-mod.mixins.json"
+        {
+            "config": "custom-crosshair-mod.mixins.json",
+            "environment": "client"
+        }
     ],
 
     "depends": {
-        "fabricloader": ">=0.18.4",
-        "minecraft": "~26.1",
+        "fabricloader": ">=0.19.3",
+        "minecraft": "~26.2",
         "java": ">=25",
         "fabric-api": "*"
     },

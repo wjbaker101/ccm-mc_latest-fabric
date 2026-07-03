@@ -24,8 +24,8 @@ public final class CustomCrosshairMod implements ModInitializer {
     public static CustomCrosshairMod INSTANCE;
 
     public static final String TITLE = "Custom Crosshair Mod";
-    public static final String VERSION = "1.6.6-fabric";
-    public static final String MC_VERSION = "26.1.2-fabric";
+    public static final String VERSION = "1.6.7-fabric";
+    public static final String MC_VERSION = "26.2-fabric";
     public static final String CURSEFORGE_PAGE = "https://www.curseforge.com/projects/242995/";
     public static final String MC_FORUMS_PAGE = "https://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/2637819/";
     public static final String PATREON_PAGE = "https://www.patreon.com/bePatron?u=66431720";
@@ -105,8 +105,8 @@ public final class CustomCrosshairMod implements ModInitializer {
         KeyMappingHelper.registerKeyMapping(editCrosshair);
 
         ClientTickEvents.END_CLIENT_TICK.register(e -> {
-            if (this.mc.screen == null && editCrosshair.isDown())
-                this.mc.setScreen(new EditCrosshairGuiScreen(this.properties.getCrosshair()));
+            if (this.mc.gui.screen() == null && editCrosshair.isDown())
+                this.mc.setScreenAndShow(new EditCrosshairGuiScreen(this.properties.getCrosshair()));
         });
     }
 

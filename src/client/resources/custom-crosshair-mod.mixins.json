@@ -1,12 +1,12 @@
 {
     "required": true,
-    "minVersion": "0.8",
     "package": "com.wjbaker.ccm.mixins",
     "compatibilityLevel": "JAVA_25",
     "mixins": [],
     "client": [
         "GameRendererMixin",
-        "GuiMixin"
+        "HudMixin",
+        "DebugCrosshairRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1

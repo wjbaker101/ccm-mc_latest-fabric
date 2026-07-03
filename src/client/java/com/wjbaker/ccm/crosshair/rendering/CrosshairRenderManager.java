@@ -44,7 +44,7 @@ public final class CrosshairRenderManager {
         if (!computedProperties.isVisible())
             return;
 
-        var calculatedStyle = Minecraft.getInstance().gui.getDebugOverlay().showDebugScreen() && crosshair.isKeepDebugEnabled.get()
+        var calculatedStyle = Minecraft.getInstance().gui.hud.getDebugOverlay().showDebugScreen() && crosshair.isKeepDebugEnabled.get()
             ? CrosshairStyle.Styles.DEBUG
             : crosshair.style.get();
 

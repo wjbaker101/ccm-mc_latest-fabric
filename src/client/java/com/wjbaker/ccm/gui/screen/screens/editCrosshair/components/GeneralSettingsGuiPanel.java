@@ -46,7 +46,7 @@ public final class GeneralSettingsGuiPanel extends PanelGuiComponent {
         isKeepDebugEnabledCheckbox.bind(crosshair.isKeepDebugEnabled);
 
         var drawCrosshairButton = new ButtonGuiComponent(this.parentGuiScreen, -1, -1, 90, 15, I18n.get("custom_crosshair_mod.screen.edit_crosshair.draw_crosshair"));
-        drawCrosshairButton.addEvent(IOnClickEvent.class, () -> Minecraft.getInstance().setScreen(new DrawCrosshairGuiScreen()));
+        drawCrosshairButton.addEvent(IOnClickEvent.class, () -> Minecraft.getInstance().setScreenAndShow(new DrawCrosshairGuiScreen()));
 
         this.addComponent(heading);
         this.addComponent(isModEnabledCheckbox);

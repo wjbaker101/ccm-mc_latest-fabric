@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 
 public abstract class Helper {
 
@@ -20,7 +20,7 @@ public abstract class Helper {
     }
 
     public static BufferedReader getUrl(final String request) throws IOException {
-        var url = new URL(request);
+        var url = URI.create(request).toURL();
 
         var connection = (HttpURLConnection)url.openConnection();
         connection.setRequestMethod("GET");

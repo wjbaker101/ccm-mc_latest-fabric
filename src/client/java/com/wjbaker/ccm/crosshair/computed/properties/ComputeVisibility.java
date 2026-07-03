@@ -34,7 +34,7 @@ public abstract class ComputeVisibility {
         if (!crosshair.isVisibleDefault.get())
             return false;
 
-        if (!crosshair.isVisibleHiddenGui.get() && mc.options.hideGui)
+        if (!crosshair.isVisibleHiddenGui.get() && mc.gui.hud.isHidden())
             return false;
 
         var pov = mc.options.getCameraType();
@@ -42,7 +42,7 @@ public abstract class ComputeVisibility {
         if (!crosshair.isVisibleThirdPerson.get() && isThirdPerson)
             return false;
 
-        if (!crosshair.isVisibleDebug.get() && mc.gui.getDebugOverlay().showDebugScreen())
+        if (!crosshair.isVisibleDebug.get() && mc.gui.hud.getDebugOverlay().showDebugScreen())
             return false;
 
         if (!crosshair.isVisibleSpectator.get() && mc.player.isSpectator())

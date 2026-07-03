@@ -160,7 +160,7 @@ public abstract class GuiScreen extends GuiScreenAdapter {
     @Override
     public void onKeyDown(final int keyCode) {
         if (keyCode == 256 && this.parentGuiScreen != null)
-            Minecraft.getInstance().setScreen(this.parentGuiScreen);
+            Minecraft.getInstance().setScreenAndShow(this.parentGuiScreen);
     }
 
     @Override

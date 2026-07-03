@@ -33,7 +33,7 @@ public class GameRendererMixin {
 
         var mc = Minecraft.getInstance();
 
-        if (mc.screen != null) {
+        if (mc.gui.screen() != null) {
             return;
         }
 

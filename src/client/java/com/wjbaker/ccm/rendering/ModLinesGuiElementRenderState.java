@@ -1,9 +1,9 @@
 package com.wjbaker.ccm.rendering;
 
+import com.mojang.blaze3d.PrimitiveTopology;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import com.wjbaker.ccm.rendering.types.RGBA;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,10 +19,13 @@ import org.joml.Matrix3x2f;
 @Environment(EnvType.CLIENT)
 public record ModLinesGuiElementRenderState(Matrix3x2f pose, Float[] points, RGBA colour) implements GuiElementRenderState {
 
-    private static final RenderPipeline DEBUG_LINES = RenderPipelines.register(RenderPipeline.builder(RenderPipelines.GUI_SNIPPET)
-        .withLocation(Identifier.fromNamespaceAndPath("custom-crosshair-mod", "pipeline/debug_lines"))
-        .withVertexFormat(DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.DEBUG_LINE_STRIP)
-        .build()
+    private static final RenderPipeline DEBUG_LINES = RenderPipelines.register(
+        RenderPipeline
+            .builder(RenderPipelines.GUI_SNIPPET)
+            .withLocation(Identifier.fromNamespaceAndPath("custom-crosshair-mod", "pipeline/debug_lines"))
+            .withVertexBinding(0, DefaultVertexFormat.POSITION_COLOR)
+            .withPrimitiveTopology(PrimitiveTopology.DEBUG_LINE_STRIP)
+            .build()
     );
 
     @Override
@@ -38,11 +41,6 @@ public record ModLinesGuiElementRenderState(Matrix3x2f pose, Float[] points, RGB
                 .setColor(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
                 .setLineWidth(2.0F);
         }
-
-        vertices
-            .addVertex(points[points.length - 2], points[points.length - 1], 1.0F)
-            .setColor(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-            .setLineWidth(2.0F);
     }
 
     @Override
@@ -51,25 +49,8 @@ public record ModLinesGuiElementRenderState(Matrix3x2f pose, Float[] points, RGB
     }
 
     @Override
-    public ScreenRectangle scissorArea() {
-        var minX = points[0];
-        var minY = points[1];
-        var maxX = points[0];
-        var maxY = points[1];
-
-        for (int i = 2; i < points.length; i++) {
-            if (i % 2 == 0) {
-                minX = Math.min(minX, points[i]);
-                maxX = Math.max(maxX, points[i]);
-            }
-            else {
-                minY = Math.min(minY, points[i]);
-                maxY = Math.max(maxY, points[i]);
-            }
-        }
-
-        var window = Minecraft.getInstance().getWindow();
-        return new ScreenRectangle(-minX.intValue(), -minY.intValue(), window.getGuiScaledWidth() + maxX.intValue(), window.getGuiScaledHeight() + maxY.intValue());
+    public @Nullable ScreenRectangle scissorArea() {
+        return null;
     }
 
     @Override
