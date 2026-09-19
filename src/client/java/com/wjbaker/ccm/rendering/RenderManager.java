@@ -159,36 +159,6 @@ public final class RenderManager {
         this.drawPartialCircle(graphics, x, y, radius, 0, 360, thickness, colour);
     }
 
-    public void drawTorus(
-        final Matrix3x2fStack matrixStack,
-        final int x, final int y,
-        final int innerRadius,
-        final int outerRadius,
-        final RGBA colour) {
-
-//        var ratio = (float)Math.PI / 180.F;
-//
-//        var bufferBuilders = Minecraft.getInstance().getBufferBuilders();
-//        var immediate = bufferBuilders.getEntityVertexConsumers();
-//        var vertexConsumer = immediate.getBuffer(RenderLayer.getDebugQuads());
-//
-//        for (var i = 0; i <= 360; ++i) {
-//            var radians = (i - 90) * ratio;
-//
-//            vertexConsumer
-//                .vertex(matrixStack, x + (float)Math.cos(radians) * innerRadius, y + (float)Math.sin(radians) * innerRadius, 0.0F)
-//                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-//                .normal(1.0F, 0.0F, 0.0F);
-//
-//            vertexConsumer
-//                .vertex(matrixStack, x + (float)Math.cos(radians) * outerRadius, y + (float)Math.sin(radians) * outerRadius, 0.0F)
-//                .color(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getOpacity())
-//                .normal(1.0F, 0.0F, 0.0F);
-//        }
-//
-//        immediate.drawCurrentLayer();
-    }
-
     public void drawImage(
         final GuiGraphicsExtractor graphics,
         final int x, final int y,
