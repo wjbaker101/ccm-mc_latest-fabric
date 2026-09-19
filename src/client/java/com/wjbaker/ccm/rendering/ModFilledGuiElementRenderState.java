@@ -1,7 +1,7 @@
 package com.wjbaker.ccm.rendering;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import com.wjbaker.ccm.rendering.types.RGBA;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

@@ -12,7 +12,6 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import org.apache.logging.log4j.Logger;
-import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -25,7 +24,7 @@ public final class CustomCrosshairMod implements ModInitializer {
 
     public static final String TITLE = "Custom Crosshair Mod";
     public static final String VERSION = "1.6.7-fabric";
-    public static final String MC_VERSION = "26.2-fabric";
+    public static final String MC_VERSION = "26.3-fabric";
     public static final String CURSEFORGE_PAGE = "https://www.curseforge.com/projects/242995/";
     public static final String MC_FORUMS_PAGE = "https://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/2637819/";
     public static final String PATREON_PAGE = "https://www.patreon.com/bePatron?u=66431720";
@@ -98,8 +97,8 @@ public final class CustomCrosshairMod implements ModInitializer {
     private void loadKeyBindings() {
         var editCrosshair = new KeyMapping(
             "keybind.custom_crosshair_mod.open_edit_crosshair_gui",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_GRAVE_ACCENT,
+            InputConstants.Type.KEYBOARD,
+            InputConstants.KEY_GRAVE,
             new KeyMapping.Category(Identifier.fromNamespaceAndPath("custom_crosshair_mod", "key_bindings")));
 
         KeyMappingHelper.registerKeyMapping(editCrosshair);

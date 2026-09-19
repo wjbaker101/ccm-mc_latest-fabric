@@ -1,6 +1,6 @@
 package com.wjbaker.ccm.helpers;
 
-import net.minecraft.util.Util;
+import com.mojang.blaze3d.Blaze3D;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public abstract class Helper {
 
     public static void openInBrowser(final String url) {
         try {
-            Util.getPlatform().openUri(url);
+            Blaze3D.openUri(URI.create(url));
         }
         catch (final Exception ignored) {}
     }
