@@ -1,5 +1,6 @@
 package com.wjbaker.ccm.gui.component.components;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.wjbaker.ccm.gui.component.GuiComponent;
 import com.wjbaker.ccm.gui.component.event.IGuiComponentEvent;
 import com.wjbaker.ccm.gui.component.event.IOnClickEvent;
@@ -57,8 +58,9 @@ public final class ButtonGuiComponent extends GuiComponent {
     public void onMouseUp(final int mouseX, final int mouseY, final int button) {
         super.onMouseUp(mouseX, mouseY, button);
 
-        if (button != 0 || !this.isInsideComponent(mouseX, mouseY) || !this.isMouseDownInside)
+        if (button != InputConstants.MOUSE_BUTTON_LEFT || !this.isInsideComponent(mouseX, mouseY) || !this.isMouseDownInside) {
             return;
+        }
 
         for (IGuiComponentEvent onClickEvent : this.events(IOnClickEvent.class)) {
             onClickEvent.invoke();
