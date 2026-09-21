@@ -1,25 +1,14 @@
 package com.wjbaker.ccm.rendering;
 
 import com.wjbaker.ccm.crosshair.custom.CustomCrosshairDrawer;
-import com.wjbaker.ccm.gui.types.GuiBounds;
-import com.wjbaker.ccm.gui.types.IDrawInsideWindowCallback;
 import com.wjbaker.ccm.rendering.types.RGBA;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import org.joml.Matrix3x2f;
-import org.joml.Matrix3x2fStack;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 
 public final class RenderManager {
-
-    private void setGlProperty(final int property, final boolean isEnabled) {
-        if (isEnabled)
-            GL11.glEnable(property);
-        else
-            GL11.glDisable(property);
-    }
 
     public void drawLines(final GuiGraphicsExtractor graphics, Float[] points, final float thickness, final RGBA colour) {
         this.drawLines(graphics, points, thickness, colour, false);
@@ -217,22 +206,5 @@ public final class RenderManager {
 
     public int textWidth(final String text) {
         return Minecraft.getInstance().font.width(text);
-    }
-
-    public void drawInsideBounds(final GuiBounds bounds, final IDrawInsideWindowCallback callback) {
-        this.setGlProperty(GL11.GL_SCISSOR_TEST, true);
-
-        var window = Minecraft.getInstance().getWindow();
-        var scale = window.getGuiScale();
-
-        GL11.glScissor(
-            Math.round(bounds.x() * scale),
-            Math.round(window.getHeight() - (bounds.y() * scale) - (bounds.height() * scale)),
-            Math.round(bounds.width() * scale),
-            Math.round(bounds.height() * scale));
-
-        callback.draw();
-
-        this.setGlProperty(GL11.GL_SCISSOR_TEST, false);
     }
 }

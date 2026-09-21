@@ -40,7 +40,6 @@ public final class ScrollPanelGuiComponent extends PanelGuiComponent {
 
         this.isBorderVisible = false;
         this.contentHeight = 0;
-        this.isScissoringEnabled = true;
     }
 
     @Override

@@ -16,7 +16,6 @@ public class PanelGuiComponent extends GuiComponent {
     private final PanelOrientation orientation;
 
     protected boolean isBorderVisible;
-    protected boolean isScissoringEnabled;
 
     public PanelGuiComponent(
         final GuiScreen parentGuiScreen,
@@ -43,7 +42,6 @@ public class PanelGuiComponent extends GuiComponent {
         this.orientation = orientation;
 
         this.isBorderVisible = true;
-        this.isScissoringEnabled = false;
     }
 
     public PanelGuiComponent(
@@ -73,20 +71,10 @@ public class PanelGuiComponent extends GuiComponent {
             this.isBorderVisible ? this.currentBorderColour : ModTheme.TRANSPARENT,
             this.currentBackgroundColour);
 
-        if (this.isScissoringEnabled) {
-            this.renderManager.drawInsideBounds(
-                new GuiBounds(this.x, this.y, this.width, this.height),
-                () -> this.components
-                    .stream()
-                    .filter(x -> !this.isComponentOutside(x))
-                    .forEach(x -> x.draw(graphics)));
-        }
-        else {
-            this.components
-                .stream()
-                .filter(x -> !this.isComponentOutside(x))
-                .forEach(x -> x.draw(graphics));
-        }
+        this.components
+            .stream()
+            .filter(x -> !this.isComponentOutside(x))
+            .forEach(x -> x.draw(graphics));
     }
 
     protected GuiBounds bounds() {
@@ -161,9 +149,5 @@ public class PanelGuiComponent extends GuiComponent {
         super.setPosition(x, y);
 
         this.pack();
-    }
-
-    public void setScissoringEnabled(final boolean isScissoringEnabled) {
-        this.isScissoringEnabled = isScissoringEnabled;
     }
 }
